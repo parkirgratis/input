@@ -6,13 +6,14 @@ import {fromLonLat} from 'https://cdn.skypack.dev/ol/proj.js';
 import {Icon, Style} from 'https://cdn.skypack.dev/ol/style.js';
 import {map,idmarker} from '../config/peta.js';
 
-export function insertMarker(name,long,lat,volume){
-    let marker = new Feature({
-        type: 'icon',
-        id : idmarker.id,
-        name : name,
-        volume : volume,
-        geometry: new Point(fromLonLat([long, lat])),
+export function insertMarker(namatempat,long,lat,lokasi,fasilitas){
+  let marker = new Feature({
+      type: 'icon',
+      id : idmarker.id,
+      namatempat : namatempat,
+      lokasi : lokasi,
+      fasilitas : fasilitas,
+      geometry: new Point(fromLonLat([long, lat])),
     });
     marker.setStyle(
         new Style({
@@ -58,8 +59,9 @@ export function insertMarkerCOG(x,y){
   let marker = new Feature({
       type: 'icon',
       id : idmarker.id,
-      name : 'Center of Grafity',
-      volume : '-',
+      namatempat : 'Center of Grafity',
+      lokasi  : '-',
+      fasilitas : '_',      
       geometry: new Point([x, y]),
   });
   marker.setStyle(

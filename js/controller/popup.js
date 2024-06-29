@@ -64,13 +64,10 @@ function popupGetMarker(evt, feature) {
     let ctnt = "volume : " + feature.get('volume');
     let loka = "lokasi : " + feature.get('lokasi'); 
     let fasi = "fasilitas : " + feature.get('fasilitas') + "<br>" + feature.get('geometry').flatCoordinates;
-    
     // Gabungkan konten menjadi satu string
     let content = ctnt + "<br>" + loka + "<br>" + fasi;
-    
     // Set konten popup
     setInner('popupinfo-content', content);
-    
     // Tampilkan popup pada posisi koordinat event
     popupinfo.setPosition(evt.coordinate);
 }

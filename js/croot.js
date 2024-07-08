@@ -30,15 +30,6 @@ fetch('https://asia-southeast2-fit-union-424704-a6.cloudfunctions.net/parkirgrat
 function createMapMarkers(markerCoords) {
     const markers = markerCoords.map(coord => createMarker(map, coord));
 
-    markers.forEach((marker, index) => {
-        marker.getElement().addEventListener('click', () => {
-            // Hapus popup pada marker
-            const popup = popups[index];
-            if (popup) {
-                popup.setPosition(null);
-                // Tambahkan kode untuk menghapus popup dari marker
-                map.removeOverlay(popup);
-            }
-        });
+    markers.forEach((marker, index) => {   
     });
 }

@@ -4,6 +4,7 @@ import VectorSource from 'https://cdn.skypack.dev/ol/source/Vector.js';
 import {Vector as VectorLayer} from 'https://cdn.skypack.dev/ol/layer.js';
 import {fromLonLat} from 'https://cdn.skypack.dev/ol/proj.js';
 import {Icon, Style} from 'https://cdn.skypack.dev/ol/style.js';
+import Overlay from 'https://cdn.skypack.dev/ol/Overlay.js';
 import {map,idmarker} from '../config/peta.js';
 
 export function insertMarker(namatempat,long,lat,lokasi,fasilitas){
@@ -83,4 +84,21 @@ export function insertMarkerCOG(x,y){
   source: vectorSource,
   });
   map.addLayer(vectorLayer);
+}
+
+export function createMarker(map, coordinates) {
+  const marker = new Overlay({
+    position: fromLonLat(coordinates),
+    positioning: 'center-center',
+    element: createMarkerElement(),
+    stopEvent: false
+  });
+  map.addOverlay(marker);
+  return marker;
+}
+
+function createMarkerElement() {
+  const element = document.createElement('div');
+  element.innerHTML = '<img src="img/marker.png" alt="Marker" style="width: 20px; height: 20px;">';
+  return element;
 }

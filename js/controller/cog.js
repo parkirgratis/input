@@ -1,7 +1,5 @@
-import {map,idmarker} from '../config/peta.js';
-import {insertMarkerCOG} from '../controller/marker.js';
+import {map} from '../config/peta.js';
 import {disposePopover} from '../controller/popup.js';
-import {hide} from 'https://cdn.jsdelivr.net/gh/jscroot/element@0.1.7/croot.js';
 
 export function getAllCoordinates(){
     let i=0;
@@ -26,5 +24,4 @@ export function getAllCoordinates(){
     });
     console.log(pointlist);
     disposePopover();
-    hide('hitungcogbutton');
 }

@@ -43,7 +43,6 @@ export function onSubmitMarkerClick() {
   uploadImage(); // Panggil fungsi uploadImage untuk mengunggah gambar
 
   postJSON("https://eoqc0wqfm9sjc6y.m.pipedream.net", "Token", "dsf9ygf87h98u479y98dj0fs89nfd7", data, function(result) {
-    afterSubmitCOG(result);
     addToDatabase(namatempat, long, lat, lokasi, fasilitas, gambar); // Tambahkan data ke database
   });
 
@@ -51,10 +50,6 @@ export function onSubmitMarkerClick() {
   textBlur('popup-closer');
   insertMarker(namatempat, long, lat, lokasi, fasilitas);
   idmarker.id = idmarker.id + 1;
-}
-
-function afterSubmitCOG(result){
-    console.log(result);
 }
 
 function popupInputMarker(evt) {

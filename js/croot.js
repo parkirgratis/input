@@ -1,13 +1,11 @@
 import {map} from './config/peta.js';
 import {onClosePopupClick,onDeleteMarkerClick,onSubmitMarkerClick,onMapClick,onMapPointerMove,disposePopover} from './controller/popup.js';
 import {onClick} from 'https://cdn.jsdelivr.net/gh/jscroot/element@0.1.7/croot.js';
-import {getAllCoordinates} from './controller/cog.js';
 import { createMarker } from './controller/marker.js';
 
 onClick('popup-closer',onClosePopupClick);
 onClick('insertmarkerbutton',onSubmitMarkerClick);
 onClick('hapusbutton',onDeleteMarkerClick);
-onClick('hitungcogbutton',getAllCoordinates);
 
 map.on('click', onMapClick);
 map.on('pointermove', onMapPointerMove);
@@ -24,8 +22,6 @@ fetch('https://asia-southeast2-fit-union-424704-a6.cloudfunctions.net/parkirgrat
         createMapMarkers(data.markers);
     })
     .catch(error => console.error('Gagal mengambil data marker:', error));
-
-
 
 function createMapMarkers(markerCoords) {
     const markers = markerCoords.map(coord => createMarker(map, coord));

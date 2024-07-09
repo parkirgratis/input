@@ -57,35 +57,6 @@ export function deleteMarker(idmarker){
     });
 }
 
-export function insertMarkerCOG(x,y){
-  let marker = new Feature({
-      type: 'icon',
-      id : idmarker.id,
-      namatempat : 'Center of Grafity',
-      lokasi  : '-',
-      fasilitas : '_',      
-      geometry: new Point([x, y]),
-  });
-  marker.setStyle(
-      new Style({
-        image: new Icon({
-          anchor: [0.5, 46],
-          anchorXUnits: 'fraction',
-          anchorYUnits: 'pixels',
-          src: 'img/icog.png',
-        }),
-      })
-    );
-  let vectorSource = new VectorSource({
-      features: [marker],
-  });
-  
-  let vectorLayer = new VectorLayer({
-  source: vectorSource,
-  });
-  map.addLayer(vectorLayer);
-}
-
 export function createMarker(map, coordinates) {
   const marker = new Overlay({
     position: fromLonLat(coordinates),

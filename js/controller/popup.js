@@ -19,18 +19,23 @@ export function onDeleteMarkerClick() {
 }
 
 export function onSubmitMarkerClick() {
-  let long = getValue('long');
-  let lat = getValue('lat');
+  let long = parseFloat(getValue('long')); // Konversi ke float
+  let lat = parseFloat(getValue('lat')); // Konversi ke float
   let namatempat = getValue('namatempat');
   let lokasi = getValue('lokasi');
   let fasilitas = getValue('fasilitas');
-  let volume = getValue('volume'); // Pastikan volume diambil dari input yang benar
-  let data = {long, lat, volume};
-  postJSON("https://eoqc0wqfm9sjc6y.m.pipedream.net","Token","dsf9ygf87h98u479y98dj0fs89nfd7",data,afterSubmitCOG);
+  let gambar = getValue('gambar'); // Tambahkan gambar jika ada
+  let data = { long, lat, namatempat, lokasi, fasilitas, gambar };
+
+  postJSON("https://eoqc0wqfm9sjc6y.m.pipedream.net", "Token", "dsf9ygf87h98u479y98dj0fs89nfd7", data, function(result) {
+    afterSubmitCOG(result);
+    addToDatabase(namatempat, long, lat, lokasi, fasilitas, gambar); // Tambahkan data ke database
+  });
+
   overlay.setPosition(undefined);
   textBlur('popup-closer');
-  insertMarker(namatempat,long,lat,volume,lokasi,fasilitas);
-  idmarker.id=idmarker.id+1;
+  insertMarker(namatempat, long, lat, getValue('volume'), lokasi, fasilitas);
+  idmarker.id = idmarker.id + 1;
 }
 
 function afterSubmitCOG(result){
@@ -99,3 +104,89 @@ export function onMapClick(evt) {
         popupGetMarker(evt,feature);
     }
   }
+
+function addToDatabase(namatempat, long, lat, lokasi, fasilitas, gambar) {
+  let dbData = { nama_tempat: namatempat, lon: long, lat: lat, lokasi: lokasi, fasilitas: fasilitas, gambar: gambar };
+
+  // Periksa apakah semua nilai tidak kosong atau null
+  if (!namatempat || !long || !lat || !lokasi || !fasilitas) {
+    alert('Semua field harus diisi!');
+    return;
+  }
+
+  // Periksa tipe data
+  if (typeof long !== 'number' || typeof lat !== 'number' || typeof namatempat !== 'string' || typeof lokasi !== 'string' || typeof fasilitas !== 'string' || (gambar && typeof gambar !== 'string')) {
+    alert('Tipe data tidak sesuai!');
+    return;
+  }
+
+  console.log("Mengirim data ke server:", dbData); // Tambahkan logging
+
+  fetch('https://asia-southeast2-fit-union-424704-a6.cloudfunctions.net/parkirgratisbackend/tempat-parkir', { 
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(dbData)
+  })
+  .then(response => {
+    console.log("Status respons:", response.status); // Tambahkan logging status respons
+    return response.json().then(data => {
+      console.log("Data respons:", data); // Tambahkan logging data respons
+      if (!response.ok) {
+        throw new Error(data.message || 'Terjadi kesalahan saat mengirim data');
+      }
+      return data;
+    });
+  })
+  .then(data => {
+    if (data.success) {
+      alert('Data berhasil disimpan!');
+      // Menambahkan koordinat ke database
+      tambahKoordinatKeDatabase([long, lat]);
+    } else {
+      alert('Gagal menyimpan data');
+    }
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    alert('Terjadi kesalahan saat mengirim data: ' + error.message);
+  });
+}
+
+function tambahKoordinatKeDatabase(coordinates) {
+  // Prepare coordinates data for koordinat endpoint
+  const coordData = {
+    markers: [
+      [coordinates[1], coordinates[0]]
+    ]
+  };
+
+  console.log("Mengirim koordinat ke server:", coordData); // Tambahkan logging
+
+  fetch('https://asia-southeast2-fit-union-424704-a6.cloudfunctions.net/parkirgratisbackend/koordinat', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(coordData)
+  })
+  .then(response => {
+    console.log("Status respons:", response.status); // Tambahkan logging status respons
+    return response.json().then(data => {
+      console.log("Data respons:", data); // Tambahkan logging data respons
+      if (!response.ok) {
+        throw new Error(data.message || 'Terjadi kesalahan saat mengirim data');
+      }
+      return data;
+    });
+  })
+  .then(data => {
+    console.log('Coordinates saved successfully:', data);
+    alert('Coordinates added successfully!');
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    alert('Failed to add place or save coordinates: ' + error.message);
+  });
+}

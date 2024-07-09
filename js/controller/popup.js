@@ -49,7 +49,7 @@ export function onSubmitMarkerClick() {
 
   overlay.setPosition(undefined);
   textBlur('popup-closer');
-  insertMarker(namatempat, long, lat, getValue('volume'), lokasi, fasilitas);
+  insertMarker(namatempat, long, lat, lokasi, fasilitas);
   idmarker.id = idmarker.id + 1;
 }
 
@@ -63,7 +63,8 @@ function popupInputMarker(evt) {
     let namatempat = getValue('namatempat');
     let lokasi = getValue('lokasi');
     let fasilitas = getValue('fasilitas');
-    let volume = getValue('volume'); // Pastikan volume diambil dari input yang benar
+    // Hapus referensi ke volume
+    // let volume = getValue('volume');
     let msg = clickpopup.replace("#LONG#", coordinate[0])
                         .replace("#LAT#", coordinate[1])
                         .replace('#X#', tile[0])
@@ -81,14 +82,12 @@ function popupGetMarker(evt, feature) {
     setInner('popupinfo-title', title);
     setValue('idmarker', feature.get('id'));
     
-    let ctnt = "volume : " + feature.get('volume');
+    // Hapus referensi ke volume
+    // let ctnt = "volume : " + feature.get('volume');
     let loka = "lokasi : " + feature.get('lokasi'); 
     let fasi = "fasilitas : " + feature.get('fasilitas') + "<br>" + feature.get('geometry').flatCoordinates;
-    // Gabungkan konten menjadi satu string
-    let content = ctnt + "<br>" + loka + "<br>" + fasi;
-    // Set konten popup
+    let content = loka + "<br>" + fasi;
     setInner('popupinfo-content', content);
-    // Tampilkan popup pada posisi koordinat event
     popupinfo.setPosition(evt.coordinate);
 }
 
@@ -118,7 +117,7 @@ export function onMapClick(evt) {
     }else{
         popupGetMarker(evt,feature);
     }
-  }
+}
 
 function addToDatabase(namatempat, long, lat, lokasi, fasilitas, gambar) {
   let dbData = { nama_tempat: namatempat, lon: long, lat: lat, lokasi: lokasi, fasilitas: fasilitas, gambar: gambar };
@@ -170,7 +169,6 @@ function addToDatabase(namatempat, long, lat, lokasi, fasilitas, gambar) {
 }
 
 function tambahKoordinatKeDatabase(coordinates) {
-  // Prepare coordinates data for koordinat endpoint
   const coordData = {
     markers: [
       [coordinates[1], coordinates[0]]
@@ -223,14 +221,12 @@ function uploadImage() {
   postFile(target_url, "imageInput", "img", renderToHtml)
 }
 
-// Fungsi untuk menangani respons unggahan
 function renderToHtml(result) {
   console.log(result);
-  setInner("isi", "https://parkirgratis.github.io/filegambar/" + result.response); // Mengatur isi elemen dengan ID isi menjadi URL yang menggabungkan hasil respons dari server
-  show("popup-input"); // Menampilkan kembali elemen dengan ID popup-input
+  setInner("isi", "https://parkirgratis.github.io/filegambar/" + result.response);
+  show("popup-input");
 }
 
-// Fungsi untuk menangani kesalahan unggahan
 function handleUploadError(error) {
   console.error(error);
   if (error.status === 409) {
@@ -238,5 +234,5 @@ function handleUploadError(error) {
   } else {
     alert("An error occurred during the upload. Please try again.");
   }
-  show("popup-input"); // Menampilkan kembali elemen popup-input
+  show("popup-input");
 }

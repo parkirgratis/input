@@ -3,9 +3,17 @@ import {toStringHDMS} from 'https://cdn.skypack.dev/ol/coordinate.js';
 import {overlay,map,popupinfo,idmarker} from '../config/peta.js';
 import {clickpopup} from '../template/popup.js';
 import {insertMarker,deleteMarker} from './marker.js';
-import {setInner,textBlur, getValue,setValue} from 'https://cdn.jsdelivr.net/gh/jscroot/element@0.1.7/croot.js';
+import {textBlur,setValue} from 'https://cdn.jsdelivr.net/gh/jscroot/element@0.1.7/croot.js';
 import { postJSON } from "https://cdn.jsdelivr.net/gh/jscroot/api@0.0.8/croot.js";
+import {
+  setInner,
+  show,
+  hide,
+  getValue,
+  getFileSize
+} from "https://cdn.jsdelivr.net/gh/jscroot/element@0.0.6/croot.js";
 
+import { postFile } from "https://cdn.jsdelivr.net/gh/jscroot/api@0.0.2/croot.js";
 
 export function onClosePopupClick() {
     overlay.setPosition(undefined);
@@ -24,8 +32,15 @@ export function onSubmitMarkerClick() {
   let namatempat = getValue('namatempat');
   let lokasi = getValue('lokasi');
   let fasilitas = getValue('fasilitas');
-  let gambar = getValue('gambar'); // Tambahkan gambar jika ada
+  let gambar = getValue('imageInput'); // Tambahkan gambar jika ada
   let data = { long, lat, namatempat, lokasi, fasilitas, gambar };
+
+  if (!gambar) {
+    alert("Please select an image file");
+    return;
+  }
+
+  uploadImage(); // Panggil fungsi uploadImage untuk mengunggah gambar
 
   postJSON("https://eoqc0wqfm9sjc6y.m.pipedream.net", "Token", "dsf9ygf87h98u479y98dj0fs89nfd7", data, function(result) {
     afterSubmitCOG(result);
@@ -189,4 +204,39 @@ function tambahKoordinatKeDatabase(coordinates) {
     console.error('Error:', error);
     alert('Failed to add place or save coordinates: ' + error.message);
   });
+}
+
+window.uploadImage = uploadImage;
+
+const target_url =
+  "https://asia-southeast2-fit-union-424704-a6.cloudfunctions.net/parkirgratisbackend/upload/img";
+
+function uploadImage() {
+  if (!getValue("imageInput")) {
+    alert("Please select an image file");
+    return;
+  }
+  hide("popup-input");
+  let besar = getFileSize("imageInput");
+  setInner("isi", besar);
+  
+  postFile(target_url, "imageInput", "img", renderToHtml)
+}
+
+// Fungsi untuk menangani respons unggahan
+function renderToHtml(result) {
+  console.log(result);
+  setInner("isi", "https://parkirgratis.github.io/filegambar/" + result.response); // Mengatur isi elemen dengan ID isi menjadi URL yang menggabungkan hasil respons dari server
+  show("popup-input"); // Menampilkan kembali elemen dengan ID popup-input
+}
+
+// Fungsi untuk menangani kesalahan unggahan
+function handleUploadError(error) {
+  console.error(error);
+  if (error.status === 409) {
+    alert("File already exists or there is a conflict. Please try again with a different file.");
+  } else {
+    alert("An error occurred during the upload. Please try again.");
+  }
+  show("popup-input"); // Menampilkan kembali elemen popup-input
 }

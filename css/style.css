@@ -70,3 +70,20 @@ body {
 .button-admin:hover {
   background-color: #ffffff;
 }
+
+.navbar {
+	position: absolute;
+	top: 0;
+	width: 100%;
+	background-color: rgba(255, 255, 255, 0.8); /* Latar belakang semi-transparan */
+	padding: 10px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Bayangan untuk efek elevasi */
+	z-index: 1000; /* Pastikan navbar berada di atas peta */
+}
+
+.navbar h1 {
+  text-align: center;
+	margin: 0;
+	font-size: 24px;
+	color: #333; /* Warna teks */
+}

@@ -4,7 +4,6 @@ import {overlay,map,popupinfo,idmarker} from '../config/peta.js';
 import {clickpopup} from '../template/popup.js';
 import {insertMarker,deleteMarker} from './marker.js';
 import {textBlur,setValue} from 'https://cdn.jsdelivr.net/gh/jscroot/element@0.1.7/croot.js';
-import { postJSON } from "https://cdn.jsdelivr.net/gh/jscroot/api@0.0.8/croot.js";
 import {
   setInner,
   show,
@@ -42,9 +41,7 @@ export function onSubmitMarkerClick() {
 
   uploadImage(); // Panggil fungsi uploadImage untuk mengunggah gambar
 
-  postJSON("https://eoqc0wqfm9sjc6y.m.pipedream.net", "Token", "dsf9ygf87h98u479y98dj0fs89nfd7", data, function(result) {
-    addToDatabase(namatempat, long, lat, lokasi, fasilitas, gambar); // Tambahkan data ke database
-  });
+  addToDatabase(namatempat, long, lat, lokasi, fasilitas, gambar); // Tambahkan data ke database
 
   overlay.setPosition(undefined);
   textBlur('popup-closer');

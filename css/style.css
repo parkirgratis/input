@@ -59,7 +59,7 @@ body {
 .button-admin {
   position: fixed;
   left: 10px;
-  bottom: 10px; 
+  bottom: 40px; 
   padding: -5px 1px;
   background-color: white;
   color: black;
@@ -68,6 +68,16 @@ body {
 }
 
 .button-admin:hover {
+  background-color: #ffffff;
+}
+
+.button-home {
+  position: fixed;
+  left: 10px;
+  bottom: 10px; 
+}
+
+.button-home:hover {
   background-color: #ffffff;
 }
 

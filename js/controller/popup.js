@@ -148,7 +148,7 @@ function addToDatabase(namatempat, long, lat, lokasi, fasilitas, gambar) {
       // Menambahkan koordinat ke database
       tambahKoordinatKeDatabase([long, lat]);
     } else {
-      alert('Gagal menyimpan data');
+      alert('Berhasil menyimpan data');
     }
   })
   .catch(error => {
@@ -157,10 +157,10 @@ function addToDatabase(namatempat, long, lat, lokasi, fasilitas, gambar) {
   });
 }
 
-function tambahKoordinatKeDatabase(coordinates) {
+function tambahKoordinatKeDatabase([long,lat]) {
   const coordData = {
     markers: [
-      [coordinates[1], coordinates[0]]
+      [long[1], lat[0]]
     ]
   };
 

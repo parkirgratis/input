@@ -73,9 +73,6 @@ function popupGetMarker(evt, feature) {
     let title = feature.get('id') + "#" + feature.get('namatempat');
     setInner('popupinfo-title', title);
     setValue('idmarker', feature.get('id'));
-    
-    // Hapus referensi ke volume
-    // let ctnt = "volume : " + feature.get('volume');
     let loka = "lokasi : " + feature.get('lokasi'); 
     let fasi = "fasilitas : " + feature.get('fasilitas') + "<br>" + feature.get('geometry').flatCoordinates;
     let content = loka + "<br>" + fasi;
@@ -126,7 +123,7 @@ function addToDatabase(namatempat, long, lat, lokasi, fasilitas, gambar) {
     return;
   }
 
-  console.log("Mengirim data ke server:", dbData); // Tambahkan logging
+  console.log("Mengirim data ke server:", dbData); // Tambahkan loggingkfq
 
   fetch('https://asia-southeast2-fit-union-424704-a6.cloudfunctions.net/parkirgratisbackend/tempat-parkir', { 
     method: 'POST',
@@ -178,15 +175,13 @@ function tambahKoordinatKeDatabase(coordinates) {
   })
   .then(response => {
     console.log("Status respons:", response.status); // Tambahkan logging status respons
-    return response.json().then(data => {
-      console.log("Data respons:", data); // Tambahkan logging data respons
-      if (!response.ok) {
-        throw new Error(data.message || 'Terjadi kesalahan saat mengirim data');
-      }
-      return data;
-    });
+    return response.json();
   })
   .then(data => {
+    console.log("Data respons:", data); // Tambahkan logging data respons
+    if (!data.success) {
+      throw new Error(data.message || 'Terjadi kesalahan saat mengirim data');
+    }
     console.log('Coordinates saved successfully:', data);
     alert('Coordinates added successfully!');
   })

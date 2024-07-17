@@ -43,6 +43,8 @@ export function onSubmitMarkerClick() {
 
   addToDatabase(namatempat, long, lat, lokasi, fasilitas, gambar); // Tambahkan data ke database
 
+  tambahKoordinatKeDatabase(long, lat);
+
   overlay.setPosition(undefined);
   textBlur('popup-closer');
   insertMarker(namatempat, long, lat, lokasi, fasilitas);
@@ -123,7 +125,7 @@ function addToDatabase(namatempat, long, lat, lokasi, fasilitas, gambar) {
     return;
   }
 
-  console.log("Mengirim data ke server:", dbData); // Tambahkan loggingkfq
+  console.log("Mengirim data ke server:", dbData); // Tambahkan logging
 
   fetch('https://asia-southeast2-fit-union-424704-a6.cloudfunctions.net/parkirgratisbackend/tempat-parkir', { 
     method: 'POST',
@@ -145,8 +147,6 @@ function addToDatabase(namatempat, long, lat, lokasi, fasilitas, gambar) {
   .then(data => {
     if (data.success) {
       alert('Data berhasil disimpan!');
-      // Menambahkan koordinat ke database
-      tambahKoordinatKeDatabase([long, lat]);
     } else {
       alert('Berhasil menyimpan data');
     }
@@ -157,10 +157,10 @@ function addToDatabase(namatempat, long, lat, lokasi, fasilitas, gambar) {
   });
 }
 
-function tambahKoordinatKeDatabase([long,lat]) {
+function tambahKoordinatKeDatabase(long, lat) {
   const coordData = {
     markers: [
-      [long[1], lat[0]]
+      [long, lat]
     ]
   };
 
@@ -175,19 +175,26 @@ function tambahKoordinatKeDatabase([long,lat]) {
   })
   .then(response => {
     console.log("Status respons:", response.status); // Tambahkan logging status respons
-    return response.json();
+    return response.json().then(data => {
+      console.log("Data respons:", data); // Tambahkan logging data respons
+      if (!response.ok) {
+        throw new Error(data.error || 'Terjadi kesalahan saat mengirim data');
+      }
+      return data;
+    });
   })
   .then(data => {
-    console.log("Data respons:", data); // Tambahkan logging data respons
-    if (!data.success) {
-      throw new Error(data.message || 'Terjadi kesalahan saat mengirim data');
+    if (data.message === 'Markers updated') {
+      console.log('Coordinates saved successfully:', data);
+      alert('Coordinates added successfully!');
+    } else {
+      console.error('Gagal menyimpan koordinat:', data); // Tambahkan logging error
+      alert('Gagal menyimpan koordinat');
     }
-    console.log('Coordinates saved successfully:', data);
-    alert('Coordinates added successfully!');
   })
   .catch(error => {
     console.error('Error:', error);
-    alert('Failed to add place or save coordinates: ' + error.message);
+    alert('Terjadi kesalahan saat mengirim data: ' + error.message);
   });
 }
 

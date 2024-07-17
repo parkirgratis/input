@@ -188,8 +188,7 @@ function tambahKoordinatKeDatabase(long, lat) {
       console.log('Coordinates saved successfully:', data);
       alert('Coordinates added successfully!');
     } else {
-      console.error('Gagal menyimpan koordinat:', data); // Tambahkan logging error
-      alert('Gagal menyimpan koordinat');
+    
     }
   })
   .catch(error => {

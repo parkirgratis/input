@@ -6,10 +6,12 @@
 	<title>Parkir Gratis Bandung </title>
 	<link rel="stylesheet" href="./css/style.css" type="text/css" />
 	<link rel="shortcut icon" type="image/x-icon" href="logo.ico" />
+	<script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-	<nav class="navbar">
-		<h1>Clik Map untuk menginput data</h1>
+	<nav class="navbar flex justify-center items-center">
+		<img src="img/marker.png" class="w-10" alt="">
+		<h1>Click Map untuk menginput data</h1>
 	</nav>
 	
 <div id='map'></div>
@@ -39,11 +41,11 @@
 			<button id="insertmarkerbutton" type="button">Input</button><br>
 		</div>
 	</div>
-	<a href="https://parkirgratis.github.io/login/login.html" class="button-admin">
-        <button type="button">Login Admin</button>
+	<a href="https://parkirgratis.github.io/login/login.html" class="button-admin mb-2">
+        <button type="button" class="px-3 py-1 text-white rounded-md bg-black hover:bg-sky-500">Login Admin</button>
     </a>
 	<a href="https://parkirgratis.github.io/index.html" class="button-home">
-        <button type="button">Home</button>
+        <button type="button" class="px-3 py-1 text-white rounded-md bg-black hover:bg-sky-500">Home</button>
     </a>
 	<div id="isi"></div>
 <script src="js/croot.js" type="module"></script>

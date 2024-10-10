@@ -59,14 +59,13 @@ body {
 .button-admin {
   position: fixed;
   left: 10px;
-  bottom: 40px; 
+  bottom: 70px; /* Menggeser ke atas */
   padding: -5px 10px;
-  background-color: rgb(44, 44, 44); /* Mengubah warna latar belakang */
-  color: #ffffff; /* Mengubah warna teks menjadi putih */
+  background-color: rgb(44, 44, 44);
+  color: #ffffff;
   border: none;
   cursor: pointer;
   transition: background-color 0.3s;
-  
 }
 
 .button-admin:hover {
@@ -76,10 +75,13 @@ body {
 .button-home {
   position: fixed;
   left: 10px;
-  bottom: 10px; 
+  bottom: 40px; /* Menggeser ke atas */
+  padding: -5px 10px;
+  background-color: rgb(44, 44, 44);
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
   transition: background-color 0.3s;
-  background-color: rgb(44, 44, 44); /* Menambahkan warna latar belakang */
-  color: #ffffff; /* Menambahkan warna teks */
 }
 
 .button-home:hover {
@@ -87,7 +89,7 @@ body {
 }
 
 .navbar {
-  position: fixed ;
+  position: fixed;
   top: 0;
   width: 100%;
   background-color: rgb(44, 44, 44); /* Menghapus alpha channel */
@@ -103,9 +105,31 @@ body {
   color: #ffffff;
 }
 
+/* Tambahkan styles untuk footer */
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  background-color: rgb(44, 44, 44);
+  color: #ffffff;
+  text-align: center;
+  padding: 1px; /* Mengurangi padding */
+  z-index: 1002;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+  font-size: 0.8em; /* Mengurangi ukuran font */
+  height: 30px; /* Menentukan tinggi tetap */
+  line-height: 20px; /* Menyesuaikan line-height */
+}
+
+.footer p {
+  margin: 0; /* Menghilangkan margin default paragraf */
+}
+
 /* Media Queries untuk Responsivitas */
 @media (max-width: 600px) {
-  .navbar h1 {
+  .navbar h1, .footer p {
     font-size: 1.2em;
   }
   #popup-input input, #popup-input button {

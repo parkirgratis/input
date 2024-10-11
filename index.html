@@ -9,12 +9,18 @@
 	<script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-	<nav class="navbar flex justify-center items-center">
-		<img src="img/marker.png" class="w-6 h-6 mr-2" alt="">
-		<h1>CLICK MAP UNTUK MENAMBAH DATA</h1>
+	<nav class="navbar flex justify-between items-center px-4 py-2">
+		<div class="flex items-center">
+			<img src="img/marker.png" class="w-6 h-6 mr-2" alt="">
+			<h1>CLICK MAP UNTUK MENAMBAH DATA</h1>
+		</div>
+		<!-- Menu Button -->
+		<div>
+			<img src="img/menubutton.webp" class="w-8 h-8 cursor-pointer" alt="Menu Button">
+		</div>
 	</nav>
 	
-<div id='map'></div>
+	<div id='map'></div>
 
 	<input type="hidden" id="idmarker" name="idmarker" value="">
 

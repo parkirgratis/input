@@ -89,14 +89,14 @@ body {
 }
 
 .navbar {
-  background-color: rgb(44, 44, 44);
+  background-color: #18181b;
   padding: 1rem;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1000;
-  border-bottom: 2px solid #f4623a;
+  border-bottom: 2px solid #1a27e0;
 }
 
 .navbar-container {
@@ -142,7 +142,7 @@ body {
 }
 
 .navbar-links:hover {
-  color: #f4623a;
+  color: #375cd8;
   background-color: rgba(244, 98, 58, 0.1);
 }
 
@@ -162,7 +162,7 @@ body {
     position: absolute;
     top: 100%;
     left: 0;
-    background-color: rgb(44, 44, 44);
+    background-color: rgb(0, 0, 0);
     padding: 1rem 0;
   }
 
@@ -208,25 +208,74 @@ body {
 }
 
 /* Tambahkan styles untuk footer */
-.footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  width: 100%;
-  background-color: rgb(44, 44, 44);
-  color: #ffffff;
-  text-align: center;
-  padding: 1px; /* Mengurangi padding */
-  z-index: 1002;
-  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
-  font-size: 0.8em; /* Mengurangi ukuran font */
-  height: 30px; /* Menentukan tinggi tetap */
-  line-height: 20px; /* Menyesuaikan line-height */
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #18181b; /* bg-zinc-950 */
+    z-index: 1000;
+    font-size: 0.8rem; /* Mengecilkan ukuran font secara umum */
 }
 
-.footer p {
-  margin: 0; /* Menghilangkan margin default paragraf */
+footer .bg-black\/5 {
+    background-color: rgba(0, 0, 0, 0.05);
+    padding: 0.5rem 0; /* Mengurangi padding vertikal */
+}
+
+footer img {
+    width: 30px; /* Mengecilkan ukuran logo */
+    margin-right: 0.3rem; /* Mengurangi margin */
+}
+
+footer p {
+    padding-bottom: 0.1rem;
+    border: 1px solid transparent; /* Mengurangi ketebalan border */
+    border-left-color: white;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    margin: 0; /* Menghilangkan margin */
+}
+
+footer a {
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    font-weight: 600;
+}
+
+footer a:first-of-type {
+    background-image: linear-gradient(to right, #6454F0, #6EE2F5);
+}
+
+footer a:last-of-type {
+    background-image: linear-gradient(to right, #06b6d4, #3b82f6);
+}
+
+footer .pb-3 {
+    padding-bottom: 0.3rem; /* Mengurangi padding bottom */
+}
+
+footer .pb-3 p {
+    font-size: 0.7rem; /* Mengecilkan ukuran font untuk teks hak cipta */
+    text-align: center;
+    margin: 0; /* Menghilangkan margin */
+}
+
+footer .pb-3 a span:hover {
+    color: #0ea5e9; /* text-sky-500 */
+}
+
+@media (min-width: 1024px) {
+    footer {
+        text-align: left;
+    }
+}
+
+@media (max-width: 1023px) {
+    footer {
+        text-align: center;
+    }
 }
 
 /* Media Queries untuk Responsivitas */

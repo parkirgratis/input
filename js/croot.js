@@ -3,6 +3,17 @@ import {onClosePopupClick,onDeleteMarkerClick,onSubmitMarkerClick,onMapClick,onM
 import {onClick} from 'https://cdn.jsdelivr.net/gh/jscroot/element@0.1.7/croot.js';
 import { createMarker } from './controller/marker.js';
 
+// Tambahkan kode ini di bagian atas file croot.js
+document.addEventListener('DOMContentLoaded', function() {
+    const mobileMenu = document.getElementById('mobile-menu');
+    const navbarMenu = document.querySelector('.navbar-menu');
+
+    mobileMenu.addEventListener('click', function() {
+        mobileMenu.classList.toggle('active');
+        navbarMenu.classList.toggle('active');
+    });
+});
+
 onClick('popup-closer',onClosePopupClick);
 onClick('insertmarkerbutton',onSubmitMarkerClick);
 onClick('hapusbutton',onDeleteMarkerClick);

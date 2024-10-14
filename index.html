@@ -9,18 +9,21 @@
 	<script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-	<nav class="navbar flex justify-between items-center px-4 py-2">
-		<div class="flex items-center">
-			<img src="img/marker.png" class="w-6 h-6 mr-2" alt="">
-			<h1 class="text-white">CLICK MAP UNTUK MENAMBAH DATA</h1>
-		</div>
-		<div class="flex items-center">
-			<a href="https://parkirgratis.github.io/index.html" class="mr-4">
-				<button type="button" class="px-3 py-1 text-white rounded-md bg-transparent border border-blue-500 hover:bg-blue-500 hover:text-white transition-colors duration-300">Home</button>
-			</a>
-			<a href="https://parkirgratis.github.io/login/login.html">
-				<button type="button" class="px-3 py-1 text-white rounded-md bg-transparent border border-blue-500 hover:bg-blue-500 hover:text-white transition-colors duration-300">Login Admin</button>
-			</a>
+	<nav class="navbar">
+		<div class="navbar-container">
+			<div class="navbar-logo">
+				<img src="img/marker.png" class="logo-img" alt="">
+				<h1 class="navbar-title">CLICK MAP UNTUK MENAMBAH DATA</h1>
+			</div>
+			<div class="navbar-toggle" id="mobile-menu">
+				<span class="bar"></span>
+				<span class="bar"></span>
+				<span class="bar"></span>
+			</div>
+			<ul class="navbar-menu">
+				<li><a href="https://parkirgratis.github.io/index.html" class="navbar-links">Home</a></li>
+				<li><a href="https://parkirgratis.github.io/login/login.html" class="navbar-links">Login Admin</a></li>
+			</ul>
 		</div>
 	</nav>
 	

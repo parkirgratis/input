@@ -96,6 +96,7 @@ body {
   left: 0;
   right: 0;
   z-index: 1000;
+  border-bottom: 2px solid #f4623a;
 }
 
 .navbar-container {
@@ -134,11 +135,15 @@ body {
   color: #fff;
   text-decoration: none;
   padding: 0.5rem 1rem;
-  transition: color 0.3s ease;
+  transition: all 0.3s ease;
+  border: 1px solid #ffffff;
+  border-radius: 4px;
+  margin-left: 10px;
 }
 
 .navbar-links:hover {
   color: #f4623a;
+  background-color: rgba(244, 98, 58, 0.1);
 }
 
 .navbar-toggle {
@@ -146,6 +151,10 @@ body {
 }
 
 @media screen and (max-width: 768px) {
+  .navbar {
+    border-bottom: none;
+  }
+
   .navbar-menu {
     display: none;
     flex-direction: column;
@@ -163,6 +172,8 @@ body {
 
   .navbar-links {
     padding: 0.5rem 1rem;
+    margin: 5px 0;
+    text-align: center;
   }
 
   .navbar-toggle {

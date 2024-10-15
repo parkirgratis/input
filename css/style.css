@@ -292,14 +292,15 @@ footer .pb-3 a span:hover {
 .sidebar {
   position: fixed;
   left: -300px;
-  top: 0;
+  top: 60px; /* Sesuaikan dengan tinggi navbar */
   width: 300px;
-  height: 100%;
+  height: calc(100% - 60px - 80px); /* Kurangi tinggi navbar dan footer */
   background-color: white;
   transition: 0.3s;
   padding: 20px;
   box-shadow: 2px 0 5px rgba(0,0,0,0.1);
   overflow-y: auto;
+  z-index: 999; /* Pastikan di atas peta tapi di bawah navbar */
 }
 
 .sidebar.active {
@@ -335,4 +336,11 @@ footer .pb-3 a span:hover {
 
 .sidebar button:hover {
   background-color: #2563eb;
+}
+
+@media screen and (max-width: 768px) {
+  .sidebar {
+    top: 50px; /* Sesuaikan dengan tinggi navbar mobile */
+    height: calc(100% - 50px - 60px); /* Sesuaikan dengan tinggi navbar dan footer mobile */
+  }
 }

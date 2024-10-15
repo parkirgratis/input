@@ -5,12 +5,36 @@ import { createMarker } from './controller/marker.js';
 
 // Tambahkan kode ini di bagian atas file croot.js
 document.addEventListener('DOMContentLoaded', function() {
-    const mobileMenu = document.getElementById('mobile-menu');
-    const navbarMenu = document.querySelector('.navbar-menu');
+    const map = document.getElementById('map');
+    const sidebar = document.getElementById('sidebar');
+    
+    map.addEventListener('click', function() {
+        if (sidebar.classList.contains('active')) {
+            sidebar.classList.remove('active');
+        } else {
+            sidebar.classList.add('active');
+        }
+    });
 
-    mobileMenu.addEventListener('click', function() {
-        mobileMenu.classList.toggle('active');
-        navbarMenu.classList.toggle('active');
+    // Tombol tutup sidebar
+    const closeButton = document.createElement('button');
+    closeButton.textContent = 'X';
+    closeButton.className = 'absolute top-2 right-2 bg-red-500 text-white px-2 py-1 rounded';
+    closeButton.addEventListener('click', function() {
+        sidebar.classList.remove('active');
+    });
+    sidebar.prepend(closeButton);
+
+    // Fungsi untuk menangani input data
+    document.getElementById('insertmarkerbutton').addEventListener('click', function() {
+        // Di sini Anda bisa menambahkan logika untuk menangani input data
+        console.log('Data diinput');
+        sidebar.classList.remove('active');
+    });
+
+    // Mencegah klik di dalam sidebar menutup sidebar
+    sidebar.addEventListener('click', function(event) {
+        event.stopPropagation();
     });
 });
 

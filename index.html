@@ -7,6 +7,7 @@
 	<link rel="stylesheet" href="./css/style.css" type="text/css" />
 	<link rel="shortcut icon" type="image/x-icon" href="logo.ico" />
 	<script src="https://cdn.tailwindcss.com"></script>
+	
 </head>
 <body>
 	<nav class="navbar">
@@ -30,7 +31,18 @@
 	
 	<div id='map'></div>
 
-	<input type="hidden" id="idmarker" name="idmarker" value="">
+	<div id="sidebar" class="sidebar">
+		<div class="sidebar-title">Input Tempat Parkir Gratis</div>
+		<div id="sidebar-content">
+			Nama Tempat : <input type="text" id="namatempat" name="namatempat" required><br>
+			Lokasi : <input type="text" id="lokasi" name="lokasi" required><br>
+			Fasilitas : <input type="text" id="fasilitas" name="fasilitas" required><br>
+			Gambar : <input type="file" id="imageInput" name="gambar" accept="image/*" required><br>
+			<input type="hidden" id="long" name="long" value="">
+			<input type="hidden" id="lat" name="lat" value="">
+			<button id="insertmarkerbutton" type="button">Input</button><br>
+		</div>
+	</div>
 
 	<div id="popupinfo" class="ol-popup">
 		<b id="popupinfo-title"></b>
@@ -57,7 +69,7 @@
 	</div>
 	<div id="isi"></div>
 	<script src="js/croot.js" type="module"></script>
-
+	
 	<!-- Footer -->
 	<footer class="bg-zinc-950 text-center lg:text-left">
 		<div class="bg-black/5 pt-3 text-lg flex justify-center items-center gap-2 text-white">

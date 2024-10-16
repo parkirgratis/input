@@ -125,46 +125,59 @@ body {
 }
 
 .navbar-menu {
-  display: flex;
-  flex-direction: row;
-  width: auto;
-  position: static;
-  background-color: transparent;
-  padding: 0;
+  display: none; /* Sembunyikan menu secara default */
+  flex-direction: column;
+  position: absolute;
+  top: 60px; /* Sesuaikan dengan tinggi navbar */
+  right: 10px; /* Jarak dari kanan */
+  background-color: #18181b;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+.navbar-menu.active {
+  display: flex; /* Tampilkan menu saat aktif */
 }
 
 .navbar-links {
   color: #fff;
   text-decoration: none;
-  padding: 0.5rem 1rem;
+  padding: 10px 15px; /* Tambahkan padding untuk jarak */
   transition: all 0.3s ease;
-  border: 1px solid #ffffff;
-  border-radius: 4px;
-  margin-left: 10px;
+  border: none; /* Hilangkan border */
+  margin: 0; /* Hilangkan margin */
 }
 
 .navbar-links:hover {
-  color: #375cd8;
   background-color: rgba(244, 98, 58, 0.1);
+  color: #375cd8;
 }
 
 .navbar-toggle {
-  display: none;
+  display: none; /* Default tidak terlihat pada desktop */
   flex-direction: column;
+  justify-content: space-around; /* Rapi dan terpusat */
+  align-items: center;
+  width: 30px; /* Lebar tombol */
+  height: 25px; /* Tinggi tombol */
   cursor: pointer;
+  background: transparent;
+  border: none;
+  padding: 0;
+  z-index: 1001; /* Pastikan di atas elemen lain */
 }
 
 .bar {
-  width: 25px;
+  width: 100%;
   height: 3px;
-  margin: 4px 0;
   background-color: #fff;
-  transition: 0.3s;
+  transition: all 0.3s ease;
 }
 
 @media screen and (max-width: 768px) {
   .navbar-toggle {
-    display: flex;
+    display: flex; /* Tampilkan tombol toggle pada perangkat mobile */
   }
 
   .navbar-menu {

@@ -49,3 +49,6 @@ export let map = new Map({
   view: defaultstartmap,
 });
 
+document.getElementById('closeSidebar').addEventListener('click', function() {
+  document.getElementById('sidebar').style.display = 'none';
+});

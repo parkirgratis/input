@@ -7,16 +7,17 @@ import { createMarker } from './controller/marker.js';
 document.addEventListener('DOMContentLoaded', function() {
     const map = document.getElementById('map');
     const sidebar = document.getElementById('sidebar');
-    
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    const navbarMenu = document.querySelector('.navbar-menu');
+
     map.addEventListener('click', function() {
-        if (sidebar.classList.contains('active')) {
-            sidebar.classList.remove('active');
-        } else {
-            sidebar.classList.add('active');
-        }
+        sidebar.classList.toggle('active');
     });
 
-    // Tombol tutup sidebar
+    mobileMenuToggle.addEventListener('click', function() {
+        navbarMenu.classList.toggle('active');
+    });
+
     const closeButton = document.createElement('button');
     closeButton.textContent = 'X';
     closeButton.className = 'absolute top-2 right-2 bg-red-500 text-white px-2 py-1 rounded';
@@ -25,23 +26,13 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     sidebar.prepend(closeButton);
 
-    // Fungsi untuk menangani input data
     document.getElementById('insertmarkerbutton').addEventListener('click', function() {
-        // Di sini Anda bisa menambahkan logika untuk menangani input data
         console.log('Data diinput');
         sidebar.classList.remove('active');
     });
 
-    // Mencegah klik di dalam sidebar menutup sidebar
     sidebar.addEventListener('click', function(event) {
         event.stopPropagation();
-    });
-
-    const mobileMenu = document.getElementById('mobile-menu');
-    const navbarMenu = document.querySelector('.navbar-menu');
-
-    mobileMenu.addEventListener('click', function() {
-        navbarMenu.classList.toggle('active');
     });
 });
 

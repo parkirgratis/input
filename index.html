@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Parkir Gratis Bandung </title>
+	<title>Parkir Gratis Bandung</title>
 	<link rel="stylesheet" href="./css/style.css" type="text/css" />
 	<link rel="shortcut icon" type="image/x-icon" href="logo.ico" />
 	<script src="https://cdn.tailwindcss.com"></script>
@@ -13,14 +13,14 @@
 	<nav class="navbar">
 		<div class="navbar-container">
 			<div class="navbar-logo">
-				<img src="img/marker.png" class="logo-img" alt="">
+				<img src="img/marker.png" class="logo-img" alt="Logo">
 				<h1 class="navbar-title">CLICK MAP UNTUK MENAMBAH DATA</h1>
 			</div>
-			<div class="navbar-toggle" id="mobile-menu">
+			<button id="mobile-menu-toggle" class="navbar-toggle">
 				<span class="bar"></span>
 				<span class="bar"></span>
 				<span class="bar"></span>
-			</div>
+			</button>
 			<ul class="navbar-menu">
 				<li><a href="https://parkirgratis.github.io/index.html" class="navbar-links">Home</a></li>
 				<li><a href="#" class="navbar-links" id="input-button">Masukan</a></li>
@@ -56,7 +56,8 @@
 	</div>
 
 	<div id="popup" class="ol-popup">
-		<b id="popup-title" class="text-white bg-blue-500 rounded-md px-2 py-1">Input Tempat Parkir Gratis</b><a href="#" id="popup-closer" class="ol-popup-closer"></a><br><br>
+		<b id="popup-title" class="text-white bg-blue-500 rounded-md px-2 py-1">Input Tempat Parkir Gratis</b>
+		<a href="#" id="popup-closer" class="ol-popup-closer"></a><br><br>
 		<div id="popup-content"></div><br>
 		<div id="popup-input">
 			Nama Tempat : <input type="text" id="namatempat" class="ring-2" name="namatempat" required><br><br>
@@ -74,7 +75,7 @@
 	<!-- Footer -->
 	<footer class="bg-zinc-950 text-center lg:text-left">
 		<div class="bg-black/5 pt-3 text-lg flex justify-center items-center gap-2 text-white">
-			<img src="img/logo.png" alt="" class="mr-2" width="40">
+			<img src="img/logo.png" alt="Logo" class="mr-2" width="40">
 			<p class="pb-1 border-2 border-transparent border-l-white px-3">Developed by 
 				<a class="pb-1 bg-clip-text text-transparent bg-gradient-to-r from-[#6454F0] to-[#6EE2F5] font-semibold" href="https://github.com/irgifauzi">Irgi</a> w/ 
 				<a class="pb-1 bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-blue-500 font-semibold" href="https://github.com/Revan232">Revan</a>

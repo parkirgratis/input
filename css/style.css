@@ -8,9 +8,10 @@ body {
 
 #map {
   position: absolute;
-  top: 0;
+  top: 60px; /* Sesuaikan dengan tinggi navbar */
   bottom: 0;
   width: 100%;
+  z-index: 0; /* Pastikan peta berada di bawah elemen lain */
 }
 
 .ol-popup {
@@ -95,7 +96,7 @@ body {
   top: 0;
   left: 0;
   right: 0;
-  z-index: 1000;
+  z-index: 1000; /* Pastikan navbar berada di atas elemen lain */
   border-bottom: 2px solid #1a27e0;
 }
 

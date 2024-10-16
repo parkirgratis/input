@@ -1,6 +1,6 @@
 import {map} from './config/peta.js';
 import {onClosePopupClick,onDeleteMarkerClick,onSubmitMarkerClick,onMapClick,onMapPointerMove,disposePopover} from './controller/popup.js';
-import {onClick} from 'https://cdn.jsdelivr.net/gh/jscroot/element@0.1.7/croot.js';
+import { onClick } from 'https://cdn.jsdelivr.net/gh/jscroot/element@0.1.7/croot.js';
 import { createMarker } from './controller/marker.js';
 
 // Tambahkan kode ini di bagian atas file croot.js
@@ -35,6 +35,13 @@ document.addEventListener('DOMContentLoaded', function() {
     // Mencegah klik di dalam sidebar menutup sidebar
     sidebar.addEventListener('click', function(event) {
         event.stopPropagation();
+    });
+
+    const mobileMenu = document.getElementById('mobile-menu');
+    const navbarMenu = document.querySelector('.navbar-menu');
+
+    mobileMenu.addEventListener('click', function() {
+        navbarMenu.classList.toggle('active');
     });
 });
 

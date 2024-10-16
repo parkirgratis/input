@@ -52,3 +52,8 @@ export let map = new Map({
 document.getElementById('closeSidebar').addEventListener('click', function() {
   document.getElementById('sidebar').style.display = 'none';
 });
+
+// Tambahkan event listener untuk menampilkan sidebar ketika peta diklik
+map.on('click', function() {
+  document.getElementById('sidebar').style.display = 'block';
+});

@@ -8,9 +8,10 @@ body {
 
 #map {
   position: absolute;
-  top: 0;
+  top: 60px; /* Sesuaikan dengan tinggi navbar */
   bottom: 0;
   width: 100%;
+  z-index: 0; /* Pastikan peta berada di bawah elemen lain */
 }
 
 .ol-popup {
@@ -59,54 +60,269 @@ body {
 .button-admin {
   position: fixed;
   left: 10px;
-  bottom: 40px; 
+  bottom: 70px; /* Menggeser ke atas */
   padding: -5px 10px;
-  background-color: white;
-  color: black;
+  background-color: rgb(44, 44, 44);
+  color: #ffffff;
   border: none;
   cursor: pointer;
   transition: background-color 0.3s;
 }
 
 .button-admin:hover {
-  background-color: #f0f0f0;
+  background-color: #3c3c3c; /* Mengubah warna hover */
 }
 
 .button-home {
   position: fixed;
   left: 10px;
-  bottom: 10px; 
+  bottom: 40px; /* Menggeser ke atas */
+  padding: -5px 10px;
+  background-color: rgb(44, 44, 44);
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
   transition: background-color 0.3s;
 }
 
 .button-home:hover {
-  background-color: #f0f0f0;
+  background-color: #3c3c3c; /* Mengubah warna hover */
 }
 
 .navbar {
-  position: fixed ;
+  background-color: #18181b;
+  padding: 1rem;
+  position: fixed;
   top: 0;
-  width: 100%;
-  background-color: rgba(255, 255, 255, 0.8);
-  padding: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
+  left: 0;
+  right: 0;
+  z-index: 1000; /* Pastikan navbar berada di atas elemen lain */
+  border-bottom: 2px solid #1a27e0;
 }
 
-.navbar h1 {
-  text-align: center;
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo-img {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
+
+.navbar-title {
+  color: #fff;
+  font-size: 1rem;
   margin: 0;
-  font-size: 24px;
-  color: #333;
+}
+
+.navbar-menu {
+  display: flex; /* Tampilkan menu secara default */
+  flex-direction: row;
+  position: static;
+  background-color: transparent;
+  padding: 0;
+  margin: 0;
+}
+
+.navbar-links {
+  color: #fff;
+  text-decoration: none;
+  padding: 10px 15px;
+  transition: all 0.3s ease;
+  border: none;
+  margin: 0;
+}
+
+.navbar-links:hover {
+  background-color: rgba(244, 98, 58, 0.1);
+  color: #375cd8;
+}
+
+.navbar-toggle {
+  display: none; /* Default tidak terlihat pada desktop */
+  flex-direction: column;
+  justify-content: space-around; /* Rapi dan terpusat */
+  align-items: center;
+  width: 30px; /* Lebar tombol */
+  height: 25px; /* Tinggi tombol */
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  padding: 0;
+  z-index: 1001; /* Pastikan di atas elemen lain */
+}
+
+.bar {
+  width: 100%;
+  height: 3px;
+  background-color: #fff;
+  transition: all 0.3s ease;
+}
+
+@media screen and (max-width: 768px) {
+  .navbar-toggle {
+    display: flex; /* Tampilkan tombol toggle pada perangkat mobile */
+  }
+
+  .navbar-menu {
+    display: none; /* Sembunyikan menu pada perangkat mobile */
+    flex-direction: column;
+    width: 100%;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    background-color: #18181b;
+  }
+
+  .navbar-menu.active {
+    display: flex; /* Tampilkan menu saat aktif */
+  }
+}
+
+/* Tambahkan styles untuk footer */
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #18181b; /* bg-zinc-950 */
+    z-index: 1000;
+    font-size: 0.8rem; /* Mengecilkan ukuran font secara umum */
+}
+
+footer .bg-black\/5 {
+    background-color: rgba(0, 0, 0, 0.05);
+    padding: 0.5rem 0; /* Mengurangi padding vertikal */
+}
+
+footer img {
+    width: 30px; /* Mengecilkan ukuran logo */
+    margin-right: 0.3rem; /* Mengurangi margin */
+}
+
+footer p {
+    padding-bottom: 0.1rem;
+    border: 1px solid transparent; /* Mengurangi ketebalan border */
+    border-left-color: white;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    margin: 0; /* Menghilangkan margin */
+}
+
+footer a {
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    font-weight: 600;
+}
+
+footer a:first-of-type {
+    background-image: linear-gradient(to right, #6454F0, #6EE2F5);
+}
+
+footer a:last-of-type {
+    background-image: linear-gradient(to right, #06b6d4, #3b82f6);
+}
+
+footer .pb-3 {
+    padding-bottom: 0.3rem; /* Mengurangi padding bottom */
+}
+
+footer .pb-3 p {
+    font-size: 0.7rem; /* Mengecilkan ukuran font untuk teks hak cipta */
+    text-align: center;
+    margin: 0; /* Menghilangkan margin */
+}
+
+footer .pb-3 a span:hover {
+    color: #0ea5e9; /* text-sky-500 */
+}
+
+@media (min-width: 1024px) {
+    footer {
+        text-align: left;
+    }
+}
+
+@media (max-width: 1023px) {
+    footer {
+        text-align: center;
+    }
 }
 
 /* Media Queries untuk Responsivitas */
 @media (max-width: 600px) {
-  .navbar h1 {
+  .navbar h1, .footer p {
     font-size: 1.2em;
   }
   #popup-input input, #popup-input button {
     width: 100%;
     margin-bottom: 10px;
   }
+}
+
+.sidebar {
+  position: fixed;
+  left: -300px;
+  top: 60px; /* Sesuaikan dengan tinggi navbar */
+  width: 300px;
+  height: calc(100% - 60px - 80px); /* Kurangi tinggi navbar dan footer */
+  background-color: white;
+  transition: 0.3s;
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+  overflow-y: auto;
+  z-index: 999; /* Pastikan di atas peta tapi di bawah navbar */
+}
+
+.sidebar.active {
+  left: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .sidebar {
+    top: 50px; /* Sesuaikan dengan tinggi navbar mobile */
+    height: calc(100% - 50px - 60px); /* Sesuaikan dengan tinggi navbar dan footer mobile */
+  }
+}
+
+.sidebar-title {
+  font-weight: bold;
+  background-color: #3b82f6;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  margin-bottom: 16px;
+}
+
+.sidebar input[type="text"],
+.sidebar input[type="file"] {
+  width: 100%;
+  padding: 4px;
+  margin-bottom: 8px;
+  border: 2px solid #e5e7eb;
+  border-radius: 4px;
+}
+
+.sidebar button {
+  background-color: #3b82f6;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.sidebar button:hover {
+  background-color: #2563eb;
 }

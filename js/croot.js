@@ -62,3 +62,14 @@ function createMapMarkers(markerCoords) {
     markers.forEach((marker, index) => {   
     });
 }
+
+    document.getElementById('dataSidebar').style.display = 'none';
+
+    document.getElementById('showDataButton').addEventListener('click', function(event) {
+        event.preventDefault();
+        document.getElementById('dataSidebar').style.display = 'block';
+    });
+
+    document.getElementById('closeDataSidebar').addEventListener('click', function() {
+        document.getElementById('dataSidebar').style.display = 'none';
+    });

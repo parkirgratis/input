@@ -7,7 +7,6 @@
 	<link rel="stylesheet" href="./css/style.css" type="text/css" />
 	<link rel="shortcut icon" type="image/x-icon" href="logo.ico" />
 	<script src="https://cdn.tailwindcss.com"></script>
-	
 </head>
 <body>
 	<nav class="navbar">
@@ -22,10 +21,34 @@
 				<span class="bar"></span>
 			</button>
 			<ul class="navbar-menu">
-				<li><a href="https://parkirgratis.if.co.id/" class="navbar-links">Home</a></li>
-				<li><a href="https://parkirgratis.if.co.id/saran/saran.html" class="navbar-links" id="input-button">Masukan</a></li>
-				<li><a href="https://parkirgratis.if.co.id/login/login.html" class="navbar-links">Login Admin</a></li>
-				<li><a href="#" class="navbar-links" id="showDataButton">Tampilkan Data</a></li>
+				<li><a href="https://parkirgratis.if.co.id/" class="navbar-links">HOME</a></li>
+		<button id="showFormButton">TAMBAH DATA</button>
+    <form id="placeForm" style="display: none;">
+        <div id="closeButton" onclick="document.getElementById('placeForm').style.display='none'">X</div>
+        <div>
+            <label for="placeName">Nama Tempat:</label>
+            <input type="text" id="placeName" name="placeName" required placeholder="Masukkan nama tempat parkir">
+        </div>
+        <div>
+            <label for="location">Lokasi:</label>
+            <input type="text" id="location" name="location" required placeholder="Masukkan alamat tempat parkir">
+        </div>
+        <div>
+            <label for="facilities">Fasilitas:</label>
+            <input type="text" id="facilities" name="facilities" required placeholder="Contoh: CCTV, Toilet, Security">
+        </div>
+        <div>
+            <label for="coordinates">Koordinat:</label>
+            <input type="text" id="coordinates" name="coordinates" placeholder="Lat, lon (-6.658880019518853, 108.06133727790305)" required>
+        </div>
+        <div id="inputfile">
+            <label for="imageInput">Gambar:</label>
+            <input type="file" id="imageInput" accept="image/*" placeholder="Unggah gambar tempat parkir">
+        </div>        
+        <button type="submit">Tambah Tempat</button><br> 
+    </form>
+				<li><a href="https://parkirgratis.if.co.id/login/login.html" class="navbar-links">LOGIN ADMIN</a></li>
+				<li><a href="#" class="navbar-links" id="showDataButton">TAMPILKAN DATA</a></li>
 			</ul>
 		</div>
 	</nav>

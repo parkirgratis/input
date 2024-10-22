@@ -34,6 +34,21 @@ document.addEventListener('DOMContentLoaded', function() {
     sidebar.addEventListener('click', function(event) {
         event.stopPropagation();
     });
+
+    const showDataButton = document.getElementById('showDataButton');
+    const dataSidebar = document.getElementById('dataSidebar');
+    const closeDataSidebar = document.getElementById('closeDataSidebar');
+
+    showDataButton.addEventListener('click', function(event) {
+        event.preventDefault();
+        console.log('Tombol TAMPILKAN DATA ditekan');
+        dataSidebar.style.display = 'block';
+    });
+
+    closeDataSidebar.addEventListener('click', function() {
+        console.log('Tombol Kembali ditekan');
+        dataSidebar.style.display = 'none';
+    });
 });
 
 onClick('popup-closer',onClosePopupClick);
@@ -65,16 +80,14 @@ function createMapMarkers(markerCoords) {
 
     document.getElementById('dataSidebar').style.display = 'none';
 
-    document.getElementById('showDataButton').addEventListener('click', function(event) {
-        event.preventDefault();
-        document.getElementById('dataSidebar').style.display = 'block';
+    document.getElementById('showFormButton').addEventListener('click', function() {
+        const form = document.getElementById('placeForm');
+        if (form.style.display === 'block') {
+            form.style.display = 'none';
+        } else {
+            form.style.display = 'block';
+        }
     });
-
-    document.getElementById('closeDataSidebar').addEventListener('click', function() {
-        document.getElementById('dataSidebar').style.display = 'none';
-    });
-    
-
 
     document.getElementById('placeForm').addEventListener('submit', function(event) {
     event.preventDefault();
@@ -143,14 +156,4 @@ function createMapMarkers(markerCoords) {
         console.error('Error:', error);
         alert('Failed to add place or save coordinates!');
     });
-});
-
-
-document.getElementById('showFormButton').addEventListener('click', function() {
-    const form = document.getElementById('placeForm');
-    if (form.style.display === 'block') {
-        form.style.display = 'none';
-    } else {
-        form.style.display = 'block';
-    }
 });

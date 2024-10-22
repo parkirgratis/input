@@ -273,7 +273,7 @@ footer .pb-3 a span:hover {
 
 .sidebar {
   position: fixed;
-  left: -300px;
+  left: 0; /* Pastikan ini untuk menampilkan sidebar */
   top: 60px; /* Sesuaikan dengan tinggi navbar */
   width: 300px;
   height: calc(100% - 60px - 80px); /* Kurangi tinggi navbar dan footer */
@@ -282,11 +282,12 @@ footer .pb-3 a span:hover {
   padding: 20px;
   box-shadow: 2px 0 5px rgba(0,0,0,0.1);
   overflow-y: auto;
-  z-index: 999; /* Pastikan di atas peta tapi di bawah navbar */
+  z-index: 1000; /* Pastikan di atas elemen lain */
+  display: none; /* Default tidak terlihat */
 }
 
 .sidebar.active {
-  left: 0;
+  display: block; /* Tampilkan ketika kelas 'active' ditambahkan */
 }
 
 @media screen and (max-width: 768px) {

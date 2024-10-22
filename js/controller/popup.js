@@ -103,10 +103,10 @@ export function onMapClick(evt) {
     overlay.setPosition(undefined);
     popupinfo.setPosition(undefined);
     if (!feature) {
-        popupInputMarker(evt);
+        // popupInputMarker(evt); // Komentari atau hapus baris ini
         return;
-    }else{
-        popupGetMarker(evt,feature);
+    } else {
+        popupGetMarker(evt, feature);
     }
 }
 

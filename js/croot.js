@@ -73,3 +73,7 @@ function createMapMarkers(markerCoords) {
     document.getElementById('closeDataSidebar').addEventListener('click', function() {
         document.getElementById('dataSidebar').style.display = 'none';
     });
+    
+
+
+    

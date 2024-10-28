@@ -18,13 +18,13 @@ document.addEventListener('DOMContentLoaded', function() {
         navbarMenu.classList.toggle('active');
     });
 
-    const closeButton = document.createElement('button');
-    closeButton.textContent = 'X';
-    closeButton.className = 'absolute top-2 right-2 bg-red-500 text-white px-2 py-1 rounded';
-    closeButton.addEventListener('click', function() {
-        sidebar.classList.remove('active');
-    });
-    sidebar.prepend(closeButton);
+    // const closeButton = document.createElement('button');
+    // closeButton.textContent = 'X';
+    // closeButton.className = 'absolute top-2 right-2 bg-red-500 text-white px-2 py-1 rounded';
+    // closeButton.addEventListener('click', function() {
+    //     sidebar.classList.remove('active');
+    // });
+    // sidebar.prepend(closeButton);
 
     // Tambahkan event listener untuk menangkap klik pada peta
     map.on('click', function(evt) {

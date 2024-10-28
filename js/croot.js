@@ -74,8 +74,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 <img src="${item.gambar || 'default.jpg'}" alt="${item.nama_tempat || 'Nama Tempat'}" class="w-16 h-16 object-cover rounded">
                 <div>
                     <h3 class="font-semibold">${item.nama_tempat || 'Nama Tempat'}</h3>
-                    <p>${item.kategori || 'Kategori'}</p>
-                    <p>${item.rating || '0'} ⭐ (${item.ulasan || '0'})</p>
+                    <p>${item.lokasi || 'Lokasi'}</p>
+                    <p>${item.fasilitas || 'Fasilitas'}</p>
                 </div>
                 <input type="checkbox" class="ml-auto">
             `;

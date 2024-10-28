@@ -1,8 +1,8 @@
 import {map} from './config/peta.js';
 import {onClosePopupClick,onDeleteMarkerClick,onSubmitMarkerClick,onMapClick,onMapPointerMove,disposePopover} from './controller/popup.js';
-import { onClick } from 'https://cdn.jsdelivr.net/gh/jscroot/element@0.1.7/croot.js';
+import { onClick, setValue } from 'https://cdn.jsdelivr.net/gh/jscroot/element@0.1.7/croot.js';
 import { createMarker } from './controller/marker.js';
-import { fromLonLat } from 'https://cdn.skypack.dev/ol/proj.js';
+import { fromLonLat, toLonLat } from 'https://cdn.skypack.dev/ol/proj.js';
 
 // Tambahkan kode ini di bagian atas file croot.js
 document.addEventListener('DOMContentLoaded', function() {
@@ -26,14 +26,31 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     sidebar.prepend(closeButton);
 
+    // Tambahkan event listener untuk menangkap klik pada peta
+    map.on('click', function(evt) {
+        // Dapatkan koordinat dari event klik
+        let tile = evt.coordinate;
+        let coordinate = toLonLat(tile); // Mengonversi koordinat ke lon dan lat
+
+        // Simpan koordinat ke elemen input
+        setValue('long', coordinate[0]); // Menyimpan longitude
+        setValue('lat', coordinate[1]);  // Menyimpan latitude
+
+        // Anda bisa menambahkan log atau notifikasi jika diperlukan
+        console.log('Koordinat disimpan:', coordinate);
+    });
+
     document.getElementById('insertmarkerbutton').addEventListener('click', function() {
+        console.log('Tombol insertmarkerbutton ditekan'); // Tambahkan log untuk memastikan event listener dipanggil
+
+        const lat = parseFloat(document.getElementById('lat').value);
+        const lon = parseFloat(document.getElementById('long').value);
+
         // Mengambil data dari input di sidebar
         const placeName = document.getElementById('namatempat').value;
         const location = document.getElementById('lokasi').value;
         const facilities = document.getElementById('fasilitas').value;
         const imageInput = document.getElementById('imageInputSidebar');
-        const lat = document.getElementById('lat').value;
-        const lon = document.getElementById('long').value;
 
         if (imageInput.files.length > 0) {
             const image = imageInput.files[0].name; // Mengambil hanya nama file
@@ -43,10 +60,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 nama_tempat: placeName,
                 lokasi: location,
                 fasilitas: facilities,
-                lat: parseFloat(lat),
-                lon: parseFloat(lon),
+                lat: lat,
+                lon: lon,
                 gambar: image
             };
+
+            console.log('Data yang akan dikirim:', data); // Tambahkan log untuk melihat data yang akan dikirim
 
             // Mengirim data ke server menggunakan fetch dengan body berformat JSON
             fetch('https://asia-southeast2-backend-438507.cloudfunctions.net/parkirgratisbackend/tempat-parkir', { 
@@ -61,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (data.success) {
                     alert('Data berhasil disimpan!');
                     // Menambahkan koordinat ke database
-                    tambahKoordinatKeDatabase([parseFloat(lat), parseFloat(lon)]);
+                    tambahKoordinatKeDatabase(lon, lat);
                 } else {
                     alert('Gagal menyimpan data');
                 }
@@ -74,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Prepare coordinates data for koordinat endpoint
             const coordData = {
                 markers: [
-                    [parseFloat(lon), parseFloat(lat)]
+                    [lon, lat]
                 ]
             };
 
@@ -145,7 +164,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <p>${item.lokasi || 'Lokasi'}</p>
                     <p>${item.fasilitas || 'Fasilitas'}</p>
                 </div>
-                <input type="checkbox" class="ml-auto">
+                
             `;
 
             itemElement.addEventListener('click', () => {

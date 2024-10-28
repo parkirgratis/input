@@ -41,11 +41,9 @@ export const popupinfo = new Overlay({
 });
 
 export let map = new Map({
-  overlays: [overlay,popupinfo],
+  overlays: [overlay, popupinfo],
   target: 'map',
-  layers: [
-    basemap
-  ],
+  layers: [basemap],
   view: defaultstartmap,
 });
 

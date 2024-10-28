@@ -2,15 +2,15 @@ import {map} from './config/peta.js';
 import {onClosePopupClick,onDeleteMarkerClick,onSubmitMarkerClick,onMapClick,onMapPointerMove,disposePopover} from './controller/popup.js';
 import { onClick } from 'https://cdn.jsdelivr.net/gh/jscroot/element@0.1.7/croot.js';
 import { createMarker } from './controller/marker.js';
+import { fromLonLat } from 'https://cdn.skypack.dev/ol/proj.js';
 
 // Tambahkan kode ini di bagian atas file croot.js
 document.addEventListener('DOMContentLoaded', function() {
-    const map = document.getElementById('map');
     const sidebar = document.getElementById('sidebar');
     const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
     const navbarMenu = document.querySelector('.navbar-menu');
 
-    map.addEventListener('click', function() {
+    map.getTargetElement().addEventListener('click', function() {
         sidebar.classList.toggle('active');
     });
 
@@ -77,10 +77,24 @@ document.addEventListener('DOMContentLoaded', function() {
                     <p>${item.lokasi || 'Lokasi'}</p>
                     <p>${item.fasilitas || 'Fasilitas'}</p>
                 </div>
-                
+                <input type="checkbox" class="ml-auto">
             `;
 
+            itemElement.addEventListener('click', () => {
+                focusOnMarker(item.lon, item.lat);
+            });
+
             dataSidebarContent.appendChild(itemElement);
+        });
+    }
+
+    function focusOnMarker(long, lat) {
+        const view = map.getView(); // Gunakan map yang diimpor
+        const coordinate = fromLonLat([long, lat]);
+        view.animate({
+            center: coordinate,
+            duration: 1000, // Durasi animasi dalam milidetik
+            zoom: 15 // Sesuaikan level zoom
         });
     }
 

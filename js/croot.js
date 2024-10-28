@@ -38,6 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const showDataButton = document.getElementById('showDataButton');
     const dataSidebar = document.getElementById('dataSidebar');
     const closeDataSidebar = document.getElementById('closeDataSidebar');
+    const dataSidebarContent = document.getElementById('dataSidebar-content');
 
     showDataButton.addEventListener('click', function(event) {
         event.preventDefault();
@@ -49,6 +50,43 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('Tombol Kembali ditekan');
         dataSidebar.style.display = 'none';
     });
+
+    function fetchDataAndRender() {
+        fetch('https://asia-southeast2-backend-438507.cloudfunctions.net/parkirgratisbackend/data/lokasi')
+            .then(response => response.json())
+            .then(data => {
+                // Pastikan data.lokasi adalah array
+                if (!Array.isArray(data)) {
+                    console.error('Data lokasi bukan array:', data);
+                    return;
+                }
+                renderDataToSidebar(data);
+            })
+            .catch(error => console.error('Gagal mengambil data lokasi:', error));
+    }
+
+    function renderDataToSidebar(lokasiData) {
+        dataSidebarContent.innerHTML = ''; // Kosongkan konten sebelumnya
+        lokasiData.forEach(item => {
+            const itemElement = document.createElement('div');
+            itemElement.className = 'lokasi-item flex items-center gap-2 p-2 border-b';
+
+            itemElement.innerHTML = `
+                <img src="${item.gambar}" alt="${item.nama_tempat}" class="w-16 h-16 object-cover rounded">
+                <div>
+                    <h3 class="font-semibold">${item.nama_tempat}</h3>
+                    <p>${item.kategori}</p>
+                    <p>${item.rating} ⭐ (${item.ulasan})</p>
+                </div>
+                <input type="checkbox" class="ml-auto">
+            `;
+
+            dataSidebarContent.appendChild(itemElement);
+        });
+    }
+
+    // Panggil fungsi untuk mengambil dan menampilkan data
+    fetchDataAndRender();
 });
 
 onClick('popup-closer',onClosePopupClick);

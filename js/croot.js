@@ -55,7 +55,6 @@ document.addEventListener('DOMContentLoaded', function() {
         fetch('https://asia-southeast2-backend-438507.cloudfunctions.net/parkirgratisbackend/data/lokasi')
             .then(response => response.json())
             .then(data => {
-                // Pastikan data.lokasi adalah array
                 if (!Array.isArray(data)) {
                     console.error('Data lokasi bukan array:', data);
                     return;
@@ -72,11 +71,11 @@ document.addEventListener('DOMContentLoaded', function() {
             itemElement.className = 'lokasi-item flex items-center gap-2 p-2 border-b';
 
             itemElement.innerHTML = `
-                <img src="${item.gambar}" alt="${item.nama_tempat}" class="w-16 h-16 object-cover rounded">
+                <img src="${item.gambar || 'default.jpg'}" alt="${item.nama_tempat || 'Nama Tempat'}" class="w-16 h-16 object-cover rounded">
                 <div>
-                    <h3 class="font-semibold">${item.nama_tempat}</h3>
-                    <p>${item.kategori}</p>
-                    <p>${item.rating} ⭐ (${item.ulasan})</p>
+                    <h3 class="font-semibold">${item.nama_tempat || 'Nama Tempat'}</h3>
+                    <p>${item.kategori || 'Kategori'}</p>
+                    <p>${item.rating || '0'} ⭐ (${item.ulasan || '0'})</p>
                 </div>
                 <input type="checkbox" class="ml-auto">
             `;

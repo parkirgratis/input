@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <p>${item.lokasi || 'Lokasi'}</p>
                     <p>${item.fasilitas || 'Fasilitas'}</p>
                 </div>
-                <input type="checkbox" class="ml-auto">
+                
             `;
 
             dataSidebarContent.appendChild(itemElement);
@@ -194,3 +194,4 @@ function createMapMarkers(markerCoords) {
         alert('Failed to add place or save coordinates!');
     });
 });
+

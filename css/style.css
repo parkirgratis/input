@@ -384,3 +384,10 @@ footer .pb-3 a span:hover {
   border: none;
   cursor: pointer;
 }
+
+.lokasi-item p {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px; /* Sesuaikan lebar sesuai kebutuhan */
+}

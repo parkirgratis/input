@@ -27,8 +27,76 @@ document.addEventListener('DOMContentLoaded', function() {
     sidebar.prepend(closeButton);
 
     document.getElementById('insertmarkerbutton').addEventListener('click', function() {
-        console.log('Data diinput');
-        sidebar.classList.remove('active');
+        // Mengambil data dari input di sidebar
+        const placeName = document.getElementById('namatempat').value;
+        const location = document.getElementById('lokasi').value;
+        const facilities = document.getElementById('fasilitas').value;
+        const imageInput = document.getElementById('imageInputSidebar');
+        const lat = document.getElementById('lat').value;
+        const lon = document.getElementById('long').value;
+
+        if (imageInput.files.length > 0) {
+            const image = imageInput.files[0].name; // Mengambil hanya nama file
+
+            // Membuat objek untuk dikirim sebagai JSON
+            const data = {
+                nama_tempat: placeName,
+                lokasi: location,
+                fasilitas: facilities,
+                lat: parseFloat(lat),
+                lon: parseFloat(lon),
+                gambar: image
+            };
+
+            // Mengirim data ke server menggunakan fetch dengan body berformat JSON
+            fetch('https://asia-southeast2-backend-438507.cloudfunctions.net/parkirgratisbackend/tempat-parkir', { 
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Data berhasil disimpan!');
+                    // Menambahkan koordinat ke database
+                    tambahKoordinatKeDatabase([parseFloat(lat), parseFloat(lon)]);
+                } else {
+                    alert('Gagal menyimpan data');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Terjadi kesalahan saat mengirim data.');
+            });
+
+            // Prepare coordinates data for koordinat endpoint
+            const coordData = {
+                markers: [
+                    [parseFloat(lon), parseFloat(lat)]
+                ]
+            };
+
+            fetch('https://asia-southeast2-backend-438507.cloudfunctions.net/parkirgratisbackend/koordinat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(coordData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Coordinates saved successfully:', data);
+                alert('Coordinates added successfully!');
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Failed to add place or save coordinates!');
+            });
+        } else {
+            alert("Please select an image file");
+        }
     });
 
     sidebar.addEventListener('click', function(event) {
@@ -140,72 +208,5 @@ function createMapMarkers(markerCoords) {
         }
     });
 
-    document.getElementById('placeForm').addEventListener('submit', function(event) {
-    event.preventDefault();
-    uploadImage();
-
-    // Mengambil data dari form
-    const placeName = document.getElementById('placeName').value;
-    const location = document.getElementById('location').value;
-    const facilities = document.getElementById('facilities').value;
-    const coordinates = document.getElementById('coordinates').value.split(',').map(Number);
-    const image = document.getElementById('imageInput').files[0].name; // Mengambil hanya nama file
-
-    // Membuat objek untuk dikirim sebagai JSON
-    const data = {
-        nama_tempat: placeName,
-        lokasi: location,
-        fasilitas: facilities,
-        lat: coordinates[0],
-        lon: coordinates[1],
-        gambar: image
-    };
-
-    // Mengirim data ke server menggunakan fetch dengan body berformat JSON
-    fetch('https://asia-southeast2-backend-438507.cloudfunctions.net/parkirgratisbackend/tempat-parkir', { 
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            alert('Data berhasil disimpan!');
-            // Menambahkan koordinat ke database
-            tambahKoordinatKeDatabase(coordinates);
-        } else {
-            alert('Berhasil Menyimpan Data');
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('Terjadi kesalahan saat mengirim data.');
-    });
-
-    // Prepare coordinates data for koordinat endpoint
-    const coordData = {
-        markers: [
-            [coordinates[1], coordinates[0]]
-        ]
-    };
-
-    fetch('https://asia-southeast2-backend-438507.cloudfunctions.net/parkirgratisbackend/koordinat', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(coordData)
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log('Coordinates saved successfully:', data);
-        alert('Coordinates added successfully!');
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('Failed to add place or save coordinates!');
-    });
-});
+    console.log(imageInput.files);
 

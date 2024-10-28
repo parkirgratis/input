@@ -18,13 +18,10 @@ document.addEventListener('DOMContentLoaded', function() {
         navbarMenu.classList.toggle('active');
     });
 
-    // const closeButton = document.createElement('button');
-    // closeButton.textContent = 'X';
-    // closeButton.className = 'absolute top-2 right-2 bg-red-500 text-white px-2 py-1 rounded';
-    // closeButton.addEventListener('click', function() {
-    //     sidebar.classList.remove('active');
-    // });
-    // sidebar.prepend(closeButton);
+    // Pastikan sidebar tidak menutup ketika diklik
+    sidebar.addEventListener('click', function(event) {
+        event.stopPropagation();
+    });
 
     // Tambahkan event listener untuk menangkap klik pada peta
     map.on('click', function(evt) {
@@ -116,10 +113,6 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             alert("Please select an image file");
         }
-    });
-
-    sidebar.addEventListener('click', function(event) {
-        event.stopPropagation();
     });
 
     const showDataButton = document.getElementById('showDataButton');

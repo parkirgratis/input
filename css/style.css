@@ -24,7 +24,6 @@ body {
   border: 1px solid #cccccc;
   bottom: 12px;
   left: -50px;
-  min-width: 280px;
 }
 .ol-popup:after, .ol-popup:before {
   top: 100%;
@@ -292,8 +291,22 @@ footer .pb-3 a span:hover {
 
 @media screen and (max-width: 768px) {
   .sidebar {
-    top: 50px; /* Sesuaikan dengan tinggi navbar mobile */
-    height: calc(100% - 50px - 60px); /* Sesuaikan dengan tinggi navbar dan footer mobile */
+    position: fixed;
+    top: 60px; /* Sesuaikan dengan tinggi navbar */
+    width: 100%;
+    height: calc(100% - 60px); /* Kurangi tinggi navbar */
+    background-color: white;
+    z-index: 1000;
+    overflow-y: auto; /* Aktifkan scroll vertikal */
+    display: none;
+  }
+
+  .sidebar.active {
+    display: block;
+  }
+
+  footer {
+    display: none; /* Sembunyikan footer pada mode mobile */
   }
 }
 

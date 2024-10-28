@@ -89,12 +89,12 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function focusOnMarker(long, lat) {
-        const view = map.getView(); // Gunakan map yang diimpor
+        const view = map.getView(); 
         const coordinate = fromLonLat([long, lat]);
         view.animate({
             center: coordinate,
-            duration: 1000, // Durasi animasi dalam milidetik
-            zoom: 15 // Sesuaikan level zoom
+            duration: 1000,
+            zoom: 18 
         });
     }
 

@@ -29,6 +29,35 @@ function enableSwipeUp(element) {
     });
 }
 
+function enableSwipeDownToHide(element) {
+    let startY, currentY, isDragging = false, swipeCount = 0;
+
+    element.addEventListener('touchstart', (e) => {
+        startY = e.touches[0].clientY;
+        isDragging = true;
+    });
+
+    element.addEventListener('touchmove', (e) => {
+        if (!isDragging) return;
+        currentY = e.touches[0].clientY;
+        const translateY = Math.max(0, currentY - startY);
+        element.style.transform = `translateY(${translateY}px)`;
+    });
+
+    element.addEventListener('touchend', () => {
+        isDragging = false;
+        if (currentY - startY > 50) {
+            swipeCount++;
+            if (swipeCount >= 2) {
+                element.style.display = 'none';
+                swipeCount = 0; // Reset swipe count
+            }
+        } else {
+            element.style.transform = 'translateY(0)';
+        }
+    });
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     const sidebar = document.getElementById('sidebar');
     const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
@@ -207,6 +236,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (sidebar) enableSwipeUp(sidebar);
     if (dataSidebar) enableSwipeUp(dataSidebar);
+    if (sidebar) enableSwipeDownToHide(sidebar);
+    if (dataSidebar) enableSwipeDownToHide(dataSidebar);
 });
 
 onClick('popup-closer',onClosePopupClick);
@@ -248,4 +279,4 @@ function createMapMarkers(markerCoords) {
     });
 
     console.log(imageInput.files);
-
+;

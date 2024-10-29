@@ -22,7 +22,7 @@ export function insertMarker(namatempat,long,lat,lokasi,fasilitas){
             anchor: [0.5, 46],
             anchorXUnits: 'fraction',
             anchorYUnits: 'pixels',
-            src: 'img/marker.png',
+            src: '../../img/marker.png',
             scale: 0.05 
           }),
         })

@@ -4,7 +4,31 @@ import { onClick, setValue } from 'https://cdn.jsdelivr.net/gh/jscroot/element@0
 import { createMarker } from './controller/marker.js';
 import { fromLonLat, toLonLat } from 'https://cdn.skypack.dev/ol/proj.js';
 
-// Tambahkan kode ini di bagian atas file croot.js
+function enableSwipeUp(element) {
+    let startY, currentY, isDragging = false;
+
+    element.addEventListener('touchstart', (e) => {
+        startY = e.touches[0].clientY;
+        isDragging = true;
+    });
+
+    element.addEventListener('touchmove', (e) => {
+        if (!isDragging) return;
+        currentY = e.touches[0].clientY;
+        const translateY = Math.max(0, currentY - startY);
+        element.style.transform = `translateY(${translateY}px)`;
+    });
+
+    element.addEventListener('touchend', () => {
+        isDragging = false;
+        if (currentY - startY < -50) {
+            element.classList.add('active');
+        } else {
+            element.style.transform = 'translateY(50%)';
+        }
+    });
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     const sidebar = document.getElementById('sidebar');
     const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
@@ -180,6 +204,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Panggil fungsi untuk mengambil dan menampilkan data
     fetchDataAndRender();
+
+    if (sidebar) enableSwipeUp(sidebar);
+    if (dataSidebar) enableSwipeUp(dataSidebar);
 });
 
 onClick('popup-closer',onClosePopupClick);

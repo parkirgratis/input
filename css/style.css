@@ -292,17 +292,20 @@ footer .pb-3 a span:hover {
 @media screen and (max-width: 768px) {
   .sidebar {
     position: fixed;
-    top: 60px; /* Sesuaikan dengan tinggi navbar */
+    bottom: 0;
+    left: 0;
     width: 100%;
-    height: calc(100% - 60px); /* Kurangi tinggi navbar */
+    height: 50%;
     background-color: white;
     z-index: 1000;
-    overflow-y: auto; /* Aktifkan scroll vertikal */
-    display: none;
+    overflow-y: auto;
+    transform: translateY(50%);
+    transition: transform 0.3s ease, height 0.3s ease;
   }
 
   .sidebar.active {
-    display: block;
+    transform: translateY(0);
+    height: 100%; /* Memperbesar ukuran saat aktif */
   }
 
   footer {

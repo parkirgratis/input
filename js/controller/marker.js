@@ -73,3 +73,47 @@ function createMarkerElement() {
   element.innerHTML = '<img src="../../img/marker.png" alt="Marker" style="width: 20px; height: 20px;">';
   return element;
 }
+
+// Fungsi untuk menambahkan marker pada lokasi pengguna
+export function addUserLocationMarker() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const userCoordinates = [position.coords.longitude, position.coords.latitude];
+        const userMarker = new Feature({
+          geometry: new Point(fromLonLat(userCoordinates)),
+        });
+        userMarker.setStyle(
+          new Style({
+            image: new Icon({
+              anchor: [0.5, 1],
+              src: '../../img/MarkerUser.png',
+              scale: 0.02
+            }),
+          })
+        );
+
+        const vectorSource = new VectorSource({
+          features: [userMarker],
+        });
+
+        const vectorLayer = new VectorLayer({
+          source: vectorSource,
+        });
+
+        map.addLayer(vectorLayer);
+        map.getView().setCenter(fromLonLat(userCoordinates));
+        map.getView().setZoom(17); 
+      },
+      (error) => {
+        console.error('Error mendapatkan lokasi pengguna:', error);
+        alert('Tidak dapat mengakses lokasi Anda. Pastikan izin lokasi diaktifkan.');
+      }
+    );
+  } else {
+    alert('Geolocation tidak didukung oleh browser ini.');
+  }
+}
+
+// Panggil fungsi ini saat halaman dimuat
+document.addEventListener('DOMContentLoaded', addUserLocationMarker);

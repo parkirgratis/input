@@ -64,7 +64,7 @@ function centerMapOnUserLocation() {
         const userCoordinates = [position.coords.longitude, position.coords.latitude];
         const view = map.getView();
         view.setCenter(fromLonLat(userCoordinates));
-        view.setZoom(15);
+        view.setZoom(17);
       },
       (error) => {
         console.error('Error mendapatkan lokasi pengguna:', error);

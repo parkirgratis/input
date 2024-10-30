@@ -269,14 +269,15 @@ function createMapMarkers(markerCoords) {
 
     document.getElementById('dataSidebar').style.display = 'none';
 
-    document.getElementById('showFormButton').addEventListener('click', function() {
-        const form = document.getElementById('placeForm');
-        if (form.style.display === 'block') {
-            form.style.display = 'none';
-        } else {
-            form.style.display = 'block';
-        }
-    });
+    // document.getElementById('showFormButton').addEventListener('click', function() {
+    //     const form = document.getElementById('placeForm');
+    //     if (form.style.display === 'block') {
+    //         form.style.display = 'none';
+    //     } else {
+    //         form.style.display = 'block';
+    //     }
+    // });
 
+    const imageInput = document.getElementById('imageInputSidebar');
     console.log(imageInput.files);
 ;

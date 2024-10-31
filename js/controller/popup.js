@@ -1,16 +1,9 @@
 import {toLonLat} from 'https://cdn.skypack.dev/ol/proj.js';
 import {toStringHDMS} from 'https://cdn.skypack.dev/ol/coordinate.js';
-import {overlay,map,popupinfo,idmarker} from '../config/peta.js';
+import {overlay,map,popupinfo} from '../config/peta.js';
 import {clickpopup} from '../template/popup.js';
-import {insertMarker,deleteMarker} from '../controller/marker.js';
 import {textBlur,setValue} from 'https://cdn.jsdelivr.net/gh/jscroot/element@0.1.7/croot.js';
-import {
-  setInner,
-  show,
-  hide,
-  getValue,
-  getFileSize
-} from "https://cdn.jsdelivr.net/gh/jscroot/element@0.0.6/croot.js";
+import {setInner,getValue} from "https://cdn.jsdelivr.net/gh/jscroot/element@0.0.6/croot.js";
 
 export function onClosePopupClick() {
     overlay.setPosition(undefined);
@@ -23,40 +16,40 @@ export function onDeleteMarkerClick() {
     deleteMarker(idmarker);
 }
 
-export function onSubmitMarkerClick() {
+  export function onSubmitMarkerClick() {
   let long = parseFloat(getValue('long')); // Konversi ke float
   let lat = parseFloat(getValue('lat')); // Konversi ke float
   let namatempat = getValue('namatempat');
   let lokasi = getValue('lokasi');
   let fasilitas = getValue('fasilitas');
-  // let gambar = getValue('imageInput'); // Tambahkan gambar jika ada
-  // let data = { long, lat, namatempat, lokasi, fasilitas, gambar };
+  let gambar = getValue('imageInput'); // Tambahkan gambar jika ada
+  let data = { long, lat, namatempat, lokasi, fasilitas, gambar };
 
-//   if (!gambar) {
-//     alert("Please select an image file");
-//     return;
-//   }
+  if (!gambar) {
+    alert("Please select an image file");
+    return;
+  }
 
-//   uploadImage(); // Panggil fungsi uploadImage untuk mengunggah gambar
+  uploadImage(); // Panggil fungsi uploadImage untuk mengunggah gambar
 
-//   addToDatabase(namatempat, long, lat, lokasi, fasilitas, gambar); // Tambahkan data ke database
+  addToDatabase(namatempat, long, lat, lokasi, fasilitas, gambar); // Tambahkan data ke database
 
-//   tambahKoordinatKeDatabase(long, lat);
+  tambahKoordinatKeDatabase(long, lat);
 
-//   overlay.setPosition(undefined);
-//   textBlur('popup-closer');
-//   insertMarker(namatempat, long, lat, lokasi, fasilitas);
-//   idmarker.id = idmarker.id + 1;
+  overlay.setPosition(undefined);
+  textBlur('popup-closer');
+  insertMarker(namatempat, long, lat, lokasi, fasilitas);
+  idmarker.id = idmarker.id + 1;
 }
 
 function popupInputMarker(evt) {
     let tile = evt.coordinate;
     let coordinate = toLonLat(tile);
-    let namatempat = getValue('namatempat');
-    let lokasi = getValue('lokasi');
-    let fasilitas = getValue('fasilitas');
-    // Hapus referensi ke volume
-    // let volume = getValue('volume');
+    // let namatempat = getValue('namatempat');
+    // let lokasi = getValue('lokasi');
+    // let fasilitas = getValue('fasilitas');
+    // // Hapus referensi ke volume
+    // // let volume = getValue('volume');
     let msg = clickpopup.replace("#LONG#", coordinate[0])
                         .replace("#LAT#", coordinate[1])
                         .replace('#X#', tile[0])

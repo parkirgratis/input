@@ -11,9 +11,6 @@ export function getAllCoordinates(){
           {
             let node = {
                 id : feature.get('id'),
-                namatempat : feature.get('namatempat'),
-                lokasi : feature.get('lokasi'),
-                fasilitas : feature.get('fasilitas'),
                 xy : feature.get('geometry').flatCoordinates,
             }
             pointlist.push(node);

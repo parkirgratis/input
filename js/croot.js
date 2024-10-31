@@ -1,5 +1,5 @@
 import {map} from './config/peta.js';
-import {onClosePopupClick,onDeleteMarkerClick,onSubmitMarkerClick,onMapClick,onMapPointerMove,disposePopover} from './controller/popup.js';
+// import {onClosePopupClick,onDeleteMarkerClick,onMapClick,onMapPointerMove,disposePopover} from './controller/popup.js';
 import { onClick, setValue } from 'https://cdn.jsdelivr.net/gh/jscroot/element@0.1.7/croot.js';
 import { createMarker } from './controller/marker.js';
 import { fromLonLat, toLonLat } from 'https://cdn.skypack.dev/ol/proj.js';
@@ -250,13 +250,13 @@ document.addEventListener('DOMContentLoaded', function() {
     if (dataSidebar) enableSwipeDownToHide(dataSidebar);
 });
 
-onClick('popup-closer',onClosePopupClick);
-onClick('insertmarkerbutton',onSubmitMarkerClick);
-onClick('hapusbutton',onDeleteMarkerClick);
+// onClick('popup-closer',onClosePopupClick);
+// onClick('insertmarkerbutton',onSubmitMarkerClick);
+// onClick('hapusbutton',onDeleteMarkerClick);
 
-map.on('click', onMapClick);
-map.on('pointermove', onMapPointerMove);
-map.on('movestart', disposePopover);
+// map.on('click', onMapClick);
+// map.on('pointermove', onMapPointerMove);
+// map.on('movestart', disposePopover);
 
 fetch('https://asia-southeast2-backend-438507.cloudfunctions.net/parkirgratisbackend/data/marker')
     .then(response => response.json())
@@ -277,7 +277,7 @@ function createMapMarkers(markerCoords) {
     });
 }
 
-    document.getElementById('dataSidebar').style.display = 'none';
+    
 
     // document.getElementById('showFormButton').addEventListener('click', function() {
     //     const form = document.getElementById('placeForm');
@@ -320,14 +320,17 @@ function renderToHtml(result) {
     show("imageInputSidebar");
 }
 
-// Fungsi untuk menangani kesalahan unggahan
-function handleUploadError(error) {
-    console.error(error);
-    if (error.status === 409) {
-        alert("File already exists or there is a conflict. Please try again with a different file.");
-    } else {
-        alert("An error occurred during the upload. Please try again.");
-    }
-    show("imageInputSidebar");
-}
-;
+
+// // Fungsi untuk menangani kesalahan unggahan
+// function handleUploadError(error) {
+//     console.error(error);
+//     if (error.status === 409) {
+//         alert("File already exists or there is a conflict. Please try again with a different file.");
+//     } else {
+//         alert("An error occurred during the upload. Please try again.");
+//     }
+//     show("imageInputSidebar");
+// }
+// ;
+
+document.getElementById('dataSidebar').style.display = 'none';

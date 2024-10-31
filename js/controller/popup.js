@@ -12,8 +12,6 @@ import {
   getFileSize
 } from "https://cdn.jsdelivr.net/gh/jscroot/element@0.0.6/croot.js";
 
-import { postFile } from "https://cdn.jsdelivr.net/gh/jscroot/api@0.0.2/croot.js";
-
 export function onClosePopupClick() {
     overlay.setPosition(undefined);
     textBlur('popup-closer');
@@ -125,36 +123,36 @@ export function onMapClick(evt) {
 //     return;
 //   }
 
- console.log("Mengirim data ke server:", dbData); // Tambahkan logging
+//  console.log("Mengirim data ke server:", dbData); // Tambahkan logging
 
-  fetch('https://asia-southeast2-backend-438507.cloudfunctions.net/parkirgratisbackend/tempat-parkir', { 
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(dbData)
-  })
-  .then(response => {
-    console.log("Status respons:", response.status); // Tambahkan logging status respons
-    return response.json().then(data => {
-      console.log("Data respons:", data); // Tambahkan logging data respons
-      if (!response.ok) {
-        throw new Error(data.message || 'Terjadi kesalahan saat mengirim data');
-      }
-      return data;
-    });
-  })
-  .then(data => {
-    if (data.success) {
-      alert('Data berhasil disimpan!');
-    } else {
-      alert('Berhasil menyimpan data');
-    }
-  })
-  .catch(error => {
-    console.error('Error:', error);
-    alert('Terjadi kesalahan saat mengirim data: ' + error.message);
-  });
+  // fetch('https://asia-southeast2-backend-438507.cloudfunctions.net/parkirgratisbackend/tempat-parkir', { 
+  //   method: 'POST',
+  //   headers: {
+  //       'Content-Type': 'application/json'
+  //   },
+  //   body: JSON.stringify(dbData)
+  // })
+  // .then(response => {
+  //   console.log("Status respons:", response.status); // Tambahkan logging status respons
+  //   return response.json().then(data => {
+  //     console.log("Data respons:", data); // Tambahkan logging data respons
+  //     if (!response.ok) {
+  //       throw new Error(data.message || 'Terjadi kesalahan saat mengirim data');
+  //     }
+  //     return data;
+  //   });
+  // })
+  // .then(data => {
+  //   if (data.success) {
+  //     alert('Data berhasil disimpan!');
+  //   } else {
+  //     alert('Berhasil menyimpan data');
+  //   }
+  // })
+  // .catch(error => {
+  //   console.error('Error:', error);
+  //   alert('Terjadi kesalahan saat mengirim data: ' + error.message);
+  // });
 //}
 
 
@@ -167,67 +165,67 @@ export function onMapClick(evt) {
 
 //   console.log("Mengirim koordinat ke server:", coordData); // Tambahkan logging
 
-  fetch('https://asia-southeast2-backend-438507.cloudfunctions.net/parkirgratisbackend/koordinat', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(coordData)
-  })
-  .then(response => {
-    console.log("Status respons:", response.status); // Tambahkan logging status respons
-    return response.json().then(data => {
-      console.log("Data respons:", data); // Tambahkan logging data respons
-      if (!response.ok) {
-        throw new Error(data.error || 'Terjadi kesalahan saat mengirim data');
-      }
-      return data;
-    });
-  })
-  .then(data => {
-    if (data.message === 'Markers updated') {
-      console.log('Coordinates saved successfully:', data);
-      alert('Coordinates added successfully!');
-    } else {
+//   fetch('https://asia-southeast2-backend-438507.cloudfunctions.net/parkirgratisbackend/koordinat', {
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/json'
+//     },
+//     body: JSON.stringify(coordData)
+//   })
+//   .then(response => {
+//     console.log("Status respons:", response.status); // Tambahkan logging status respons
+//     return response.json().then(data => {
+//       console.log("Data respons:", data); // Tambahkan logging data respons
+//       if (!response.ok) {
+//         throw new Error(data.error || 'Terjadi kesalahan saat mengirim data');
+//       }
+//       return data;
+//     });
+//   })
+//   .then(data => {
+//     if (data.message === 'Markers updated') {
+//       console.log('Coordinates saved successfully:', data);
+//       alert('Coordinates added successfully!');
+//     } else {
 
     
-   }
-  })
-  .catch(error => {
-    console.error('Error:', error);
-    alert('Terjadi kesalahan saat mengirim data: ' + error.message);
-  });
-//}
+//    }
+//   })
+//   .catch(error => {
+//     console.error('Error:', error);
+//     alert('Terjadi kesalahan saat mengirim data: ' + error.message);
+//   });
+// //}
 
-window.uploadImage = uploadImage;
+// window.uploadImage = uploadImage;
 
-const target_url =
-  "https://asia-southeast2-backend-438507.cloudfunctions.net/parkirgratisbackend/upload/img";
+// const target_url =
+//   "https://asia-southeast2-backend-438507.cloudfunctions.net/parkirgratisbackend/upload/img";
 
-function uploadImage() {
-  if (!getValue("imageInput")) {
-    alert("Please select an image file");
-    return;
-  }x
-  hide("popup-input");
-  let besar = getFileSize("imageInput");
-  setInner("isi", besar);
+// function uploadImage() {
+//   if (!getValue("imageInput")) {
+//     alert("Please select an image file");
+//     return;
+//   }x
+//   hide("popup-input");
+//   let besar = getFileSize("imageInput");
+//   setInner("isi", besar);
   
-  postFile(target_url, "imageInput", "img", renderToHtml)
-}
+//   postFile(target_url, "imageInput", "img", renderToHtml)
+// }
 
-function renderToHtml(result) {
-  console.log(result);
-  setInner("isi", "https://parkirgratis.github.io/filegambar/" + result.response);
-  show("popup-input");
-}
+// function renderToHtml(result) {
+//   console.log(result);
+//   setInner("isi", "https://parkirgratis.github.io/filegambar/" + result.response);
+//   show("popup-input");
+// }
 
-function handleUploadError(error) {
-  console.error(error);
-  if (error.status === 409) {
-    alert("File already exists or there is a conflict. Please try again with a different file.");
-  } else {
-    alert("An error occurred during the upload. Please try again.");
-  }
-  show("popup-input");
-}
+// function handleUploadError(error) {
+//   console.error(error);
+//   if (error.status === 409) {
+//     alert("File already exists or there is a conflict. Please try again with a different file.");
+//   } else {
+//     alert("An error occurred during the upload. Please try again.");
+//   }
+//   show("popup-input");
+// }

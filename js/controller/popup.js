@@ -125,37 +125,38 @@ export function onMapClick(evt) {
 //     return;
 //   }
 
-//   console.log("Mengirim data ke server:", dbData); // Tambahkan logging
+ console.log("Mengirim data ke server:", dbData); // Tambahkan logging
 
-//   fetch('https://asia-southeast2-fit-union-424704-a6.cloudfunctions.net/parkirgratisbackend/tempat-parkir', { 
-//     method: 'POST',
-//     headers: {
-//         'Content-Type': 'application/json'
-//     },
-//     body: JSON.stringify(dbData)
-//   })
-//   .then(response => {
-//     console.log("Status respons:", response.status); // Tambahkan logging status respons
-//     return response.json().then(data => {
-//       console.log("Data respons:", data); // Tambahkan logging data respons
-//       if (!response.ok) {
-//         throw new Error(data.message || 'Terjadi kesalahan saat mengirim data');
-//       }
-//       return data;
-//     });
-//   })
-//   .then(data => {
-//     if (data.success) {
-//       alert('Data berhasil disimpan!');
-//     } else {
-//       alert('Berhasil menyimpan data');
-//     }
-//   })
-//   .catch(error => {
-//     console.error('Error:', error);
-//     alert('Terjadi kesalahan saat mengirim data: ' + error.message);
-//   });
-// }
+  fetch('https://asia-southeast2-backend-438507.cloudfunctions.net/parkirgratisbackend/tempat-parkir', { 
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(dbData)
+  })
+  .then(response => {
+    console.log("Status respons:", response.status); // Tambahkan logging status respons
+    return response.json().then(data => {
+      console.log("Data respons:", data); // Tambahkan logging data respons
+      if (!response.ok) {
+        throw new Error(data.message || 'Terjadi kesalahan saat mengirim data');
+      }
+      return data;
+    });
+  })
+  .then(data => {
+    if (data.success) {
+      alert('Data berhasil disimpan!');
+    } else {
+      alert('Berhasil menyimpan data');
+    }
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    alert('Terjadi kesalahan saat mengirim data: ' + error.message);
+  });
+//}
+
 
 // function tambahKoordinatKeDatabase(long, lat) {
 //   const coordData = {
@@ -166,41 +167,42 @@ export function onMapClick(evt) {
 
 //   console.log("Mengirim koordinat ke server:", coordData); // Tambahkan logging
 
-//   fetch('https://asia-southeast2-fit-union-424704-a6.cloudfunctions.net/parkirgratisbackend/koordinat', {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json'
-//     },
-//     body: JSON.stringify(coordData)
-//   })
-//   .then(response => {
-//     console.log("Status respons:", response.status); // Tambahkan logging status respons
-//     return response.json().then(data => {
-//       console.log("Data respons:", data); // Tambahkan logging data respons
-//       if (!response.ok) {
-//         throw new Error(data.error || 'Terjadi kesalahan saat mengirim data');
-//       }
-//       return data;
-//     });
-//   })
-//   .then(data => {
-//     if (data.message === 'Markers updated') {
-//       console.log('Coordinates saved successfully:', data);
-//       alert('Coordinates added successfully!');
-//     } else {
+  fetch('https://asia-southeast2-backend-438507.cloudfunctions.net/parkirgratisbackend/koordinat', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(coordData)
+  })
+  .then(response => {
+    console.log("Status respons:", response.status); // Tambahkan logging status respons
+    return response.json().then(data => {
+      console.log("Data respons:", data); // Tambahkan logging data respons
+      if (!response.ok) {
+        throw new Error(data.error || 'Terjadi kesalahan saat mengirim data');
+      }
+      return data;
+    });
+  })
+  .then(data => {
+    if (data.message === 'Markers updated') {
+      console.log('Coordinates saved successfully:', data);
+      alert('Coordinates added successfully!');
+    } else {
+
     
-//     }
-//   })
-//   .catch(error => {
-//     console.error('Error:', error);
-//     alert('Terjadi kesalahan saat mengirim data: ' + error.message);
-//   });
-// }
+   }
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    alert('Terjadi kesalahan saat mengirim data: ' + error.message);
+  });
+//}
 
 window.uploadImage = uploadImage;
 
 const target_url =
-  "https://asia-southeast2-fit-union-424704-a6.cloudfunctions.net/parkirgratisbackend/upload/img";
+  "https://asia-southeast2-backend-438507.cloudfunctions.net/parkirgratisbackend/upload/img";
 
 function uploadImage() {
   if (!getValue("imageInput")) {

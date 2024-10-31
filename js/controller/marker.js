@@ -6,6 +6,11 @@ import {fromLonLat} from 'https://cdn.skypack.dev/ol/proj.js';
 import {Icon, Style} from 'https://cdn.skypack.dev/ol/style.js';
 import Overlay from 'https://cdn.skypack.dev/ol/Overlay.js';
 import {map,idmarker} from '../config/peta.js';
+import Swal from "https://cdn.jsdelivr.net/npm/sweetalert2@11/src/sweetalert2.js";
+import { addCSS } from "https://cdn.jsdelivr.net/gh/jscroot/lib@0.0.9/element.js";
+
+addCSS("https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.css");
+
 
 export function insertMarker(namatempat,long,lat,lokasi,fasilitas){
   let marker = new Feature({
@@ -107,11 +112,19 @@ export function addUserLocationMarker() {
       },
       (error) => {
         console.error('Error mendapatkan lokasi pengguna:', error);
-        alert('Tidak dapat mengakses lokasi Anda. Pastikan izin lokasi diaktifkan.');
+        Swal.fire({
+          icon: "warning",
+          title: "Gagal mengakses lokasi",
+          text: "Tidak dapat mengakses lokasi Anda. Pastikan izin lokasi diaktifkan."
+        });
       }
     );
   } else {
-    alert('Geolocation tidak didukung oleh browser ini.');
+    Swal.fire({
+      icon: "warning",
+      title: "Geolocation tidak didukung",
+      text: "Geolocation tidak didukung oleh browser ini."
+    });
   }
 }
 

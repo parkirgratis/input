@@ -3,6 +3,15 @@ import {onClosePopupClick,onDeleteMarkerClick,onSubmitMarkerClick,onMapClick,onM
 import { onClick, setValue } from 'https://cdn.jsdelivr.net/gh/jscroot/element@0.1.7/croot.js';
 import { createMarker } from './controller/marker.js';
 import { fromLonLat, toLonLat } from 'https://cdn.skypack.dev/ol/proj.js';
+import {
+    setInner,
+    show,
+    hide,
+    getValue,
+    getFileSize
+  } from "https://cdn.jsdelivr.net/gh/jscroot/element@0.0.6/croot.js";
+  
+  import { postFile } from "https://cdn.jsdelivr.net/gh/jscroot/api@0.0.2/croot.js";
 
 function enableSwipeUp(element) {
     let startY, currentY, isDragging = false;
@@ -91,7 +100,8 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     document.getElementById('insertmarkerbutton').addEventListener('click', function() {
-        console.log('Tombol insertmarkerbutton ditekan'); // Tambahkan log untuk memastikan event listener dipanggil
+        console.log('Tombol insertmarkerbutton ditekan'); 
+        uploadImage(); // Memanggil fungsi uploadImage
 
         const lat = parseFloat(document.getElementById('lat').value);
         const lon = parseFloat(document.getElementById('long').value);
@@ -248,7 +258,7 @@ map.on('click', onMapClick);
 map.on('pointermove', onMapPointerMove);
 map.on('movestart', disposePopover);
 
-fetch('https://asia-southeast2-fit-union-424704-a6.cloudfunctions.net/parkirgratisbackend/data/marker')
+fetch('https://asia-southeast2-backend-438507.cloudfunctions.net/parkirgratisbackend/data/marker')
     .then(response => response.json())
     .then(data => {
         if (!Array.isArray(data.markers)) {
@@ -278,6 +288,46 @@ function createMapMarkers(markerCoords) {
     //     }
     // });
 
+    // const imageInput = document.getElementById('imageInputSidebar');
+    // console.log(imageInput.files);
+
+window.uploadImage = uploadImage;
+
+const target_url = "https://asia-southeast2-backend-438507.cloudfunctions.net/parkirgratisbackend/upload/img";
+
+function uploadImage() {
     const imageInput = document.getElementById('imageInputSidebar');
-    console.log(imageInput.files);
+    if (!imageInput || imageInput.files.length === 0) {
+        alert("Please select an image file");
+        return;
+    }
+    const inputFileElement = document.getElementById('imageInputSidebar');
+    if (inputFileElement) {
+        hide("imageInputSidebar");
+    } else {
+        console.error("Element with ID 'imageInputSidebar' not found");
+    }
+    let besar = getFileSize("imageInputSidebar");
+    setInner("isi", besar);
+    
+    postFile(target_url, "imageInputSidebar", "img", renderToHtml);
+}
+
+// Fungsi untuk menangani respons unggahan
+function renderToHtml(result) {
+    console.log(result);
+    setInner("isi", "https://parkirgratis.github.io/filegambar/" + result.response);
+    show("imageInputSidebar");
+}
+
+// Fungsi untuk menangani kesalahan unggahan
+function handleUploadError(error) {
+    console.error(error);
+    if (error.status === 409) {
+        alert("File already exists or there is a conflict. Please try again with a different file.");
+    } else {
+        alert("An error occurred during the upload. Please try again.");
+    }
+    show("imageInputSidebar");
+}
 ;

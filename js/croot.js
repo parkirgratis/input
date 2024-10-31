@@ -248,7 +248,7 @@ map.on('click', onMapClick);
 map.on('pointermove', onMapPointerMove);
 map.on('movestart', disposePopover);
 
-fetch('https://asia-southeast2-fit-union-424704-a6.cloudfunctions.net/parkirgratisbackend/data/marker')
+fetch('https://asia-southeast2-backend-438507.cloudfunctions.net/parkirgratisbackend/data/marker')
     .then(response => response.json())
     .then(data => {
         if (!Array.isArray(data.markers)) {

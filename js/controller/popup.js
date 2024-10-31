@@ -127,7 +127,7 @@ function addToDatabase(namatempat, long, lat, lokasi, fasilitas, gambar) {
 
   console.log("Mengirim data ke server:", dbData); // Tambahkan logging
 
-  fetch('https://asia-southeast2-fit-union-424704-a6.cloudfunctions.net/parkirgratisbackend/tempat-parkir', { 
+  fetch('https://asia-southeast2-backend-438507.cloudfunctions.net/parkirgratisbackend/tempat-parkir', { 
     method: 'POST',
     headers: {
         'Content-Type': 'application/json'
@@ -166,7 +166,7 @@ function tambahKoordinatKeDatabase(long, lat) {
 
   console.log("Mengirim koordinat ke server:", coordData); // Tambahkan logging
 
-  fetch('https://asia-southeast2-fit-union-424704-a6.cloudfunctions.net/parkirgratisbackend/koordinat', {
+  fetch('https://asia-southeast2-backend-438507.cloudfunctions.net/parkirgratisbackend/koordinat', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -200,7 +200,7 @@ function tambahKoordinatKeDatabase(long, lat) {
 window.uploadImage = uploadImage;
 
 const target_url =
-  "https://asia-southeast2-fit-union-424704-a6.cloudfunctions.net/parkirgratisbackend/upload/img";
+  "https://asia-southeast2-backend-438507.cloudfunctions.net/parkirgratisbackend/upload/img";
 
 function uploadImage() {
   if (!getValue("imageInput")) {

@@ -128,7 +128,7 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log('Data yang akan dikirim:', data); // Tambahkan log untuk melihat data yang akan dikirim
 
             // Mengirim data ke server menggunakan fetch dengan body berformat JSON
-            fetch('https://asia-southeast2-backend-438507.cloudfunctions.net/parkirgratisbackend/tempat-parkir', { 
+            fetch('https://asia-southeast2-awangga.cloudfunctions.net/parkirgratis/tempat-parkir', { 
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -157,7 +157,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 ]
             };
 
-            fetch('https://asia-southeast2-backend-438507.cloudfunctions.net/parkirgratisbackend/koordinat', {
+            fetch('https://asia-southeast2-awangga.cloudfunctions.net/parkirgratis/koordinat', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -195,7 +195,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     function fetchDataAndRender() {
-        fetch('https://asia-southeast2-backend-438507.cloudfunctions.net/parkirgratisbackend/data/lokasi')
+        fetch('https://asia-southeast2-awangga.cloudfunctions.net/parkirgratis/data/lokasi')
             .then(response => response.json())
             .then(data => {
                 if (!Array.isArray(data)) {
@@ -258,7 +258,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // map.on('pointermove', onMapPointerMove);
 // map.on('movestart', disposePopover);
 
-fetch('https://asia-southeast2-backend-438507.cloudfunctions.net/parkirgratisbackend/data/marker')
+fetch('https://asia-southeast2-awangga.cloudfunctions.net/parkirgratis/data/marker')
     .then(response => response.json())
     .then(data => {
         if (!Array.isArray(data.markers)) {
@@ -293,7 +293,7 @@ function createMapMarkers(markerCoords) {
 
 window.uploadImage = uploadImage;
 
-const target_url = "https://asia-southeast2-backend-438507.cloudfunctions.net/parkirgratisbackend/upload/img";
+const target_url = "https://asia-southeast2-awangga.cloudfunctions.net/parkirgratis/upload/img";
 
 function uploadImage() {
     const imageInput = document.getElementById('imageInputSidebar');

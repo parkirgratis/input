@@ -7,13 +7,16 @@
 	<link rel="stylesheet" href="./css/style.css" type="text/css" />
 	<link rel="shortcut icon" type="image/x-icon" href="logo.ico" />
 	<script src="https://cdn.tailwindcss.com"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
 	<nav class="navbar bg-black/40">
 		<div class="navbar-container">
-			<div class="navbar-logo">
-				<img src="../img/logo.png" class="logo-img" alt="Logo Baru">
-				<h1 class="navbar-title">TEKAN MAP UNTUK MENAMBAH DATA</h1>
+			<div class="navbar-logo" style="display: flex; align-items: center;">
+				<a href="https://parkirgratis.if.co.id/index.html" style="display: flex; align-items: center;">
+					<img src="../img/logo.png" width="50" height="24" style="margin-right: 10px;">  
+					<h1 class="navbar-title">TEKAN MAP UNTUK MENAMBAH DATA</h1>
+				</a>  
 			</div>
 			<button id="mobile-menu-toggle" class="navbar-toggle" aria-label="Toggle navigation">
 				<span class="bar"></span>
@@ -121,6 +124,16 @@
 			<!-- Konten data akan ditampilkan di sini -->
 		</div>
 		<button id="closeDataSidebar">Kembali</button>
+	</div>
+
+	<div id="dataPopup" class="data-popup">
+		<div id="dataPopup-content" class="p-4">
+			<h3 class="text-lg font-bold mb-2">Nama Tempat</h3>
+			<p class="text-sm text-gray-600 mb-1">Lokasi: Lokasi Tempat</p>
+			<p class="text-sm text-gray-600 mb-3">Fasilitas: Fasilitas Tempat</p>
+			<img src="" alt="Gambar Tempat" class="w-full h-auto rounded mb-3">
+			<!-- <button id="closeDataPopup" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Tutup</button> -->
+		</div>
 	</div>
 </body>
 </html>

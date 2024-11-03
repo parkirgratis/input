@@ -92,7 +92,7 @@ body {
   position: fixed;
   top: 0;
   width: 100%;
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: #1a202c; /* Warna lebih gelap untuk navbar */
   padding: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   z-index: 1000;
@@ -142,8 +142,7 @@ body {
 }
 
 .navbar-links:hover {
-  background-color: rgba(244, 98, 58, 0.1);
-  color: #375cd8;
+  color: #63b3ed; /* Warna teks hover */
   border-radius: 5px;
 }
 
@@ -216,22 +215,22 @@ body {
 
 .sidebar {
   position: fixed;
-  left: 0; /* Pastikan ini untuk menampilkan sidebar */
+  left: 0;
   top: 100px; /* Sesuaikan dengan tinggi navbar */
-  bottom: 100 0;
   width: 300px;
-  height: calc(100% - 60px - 80px); /* Kurangi tinggi navbar dan footer */
-  background-color: white;
-  transition: 0.3s;
-  padding: 20px;
-  box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+  height: calc(100% - 100px);
+  background-color: #ffffff; /* Warna latar belakang yang lebih cerah */
+  z-index: 1000;
   overflow-y: auto;
-  z-index: 1000; /* Pastikan di atas elemen lain */
-  display: none; /* Default tidak terlihat */
+  box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+  padding: 20px; /* Tambahkan padding */
+  border-right: 1px solid #e2e8f0; /* Tambahkan border */
+  transition: transform 0.3s ease, opacity 0.3s ease; /* Tambahkan transisi */
 }
 
 .sidebar.active {
-  display: block; /* Tampilkan ketika kelas 'active' ditambahkan */
+  transform: translateX(0);
+  opacity: 1;
 }
 
 @media screen and (max-width: 768px) {
@@ -260,9 +259,9 @@ body {
 
 .sidebar-title {
   font-weight: bold;
-  background-color: #3b82f6;
+  background-color: #3182ce; /* Warna biru yang lebih cerah */
   color: white;
-  padding: 4px 8px;
+  padding: 8px 12px; /* Tambahkan padding */
   border-radius: 4px;
   margin-bottom: 16px;
 }
@@ -270,23 +269,30 @@ body {
 .sidebar input[type="text"],
 .sidebar input[type="file"] {
   width: 100%;
-  padding: 4px;
-  margin-bottom: 8px;
+  padding: 8px; /* Tambahkan padding */
+  margin-bottom: 12px; /* Tambahkan margin */
   border: 2px solid #e5e7eb;
   border-radius: 4px;
+  transition: border-color 0.3s ease; /* Tambahkan transisi */
+}
+
+.sidebar input[type="text"]:focus,
+.sidebar input[type="file"]:focus {
+  border-color: #3182ce; /* Warna border saat fokus */
 }
 
 .sidebar button {
-  background-color: #3b82f6;
+  background-color: #3182ce; /* Warna tombol yang lebih cerah */
   color: white;
-  padding: 8px 16px;
+  padding: 10px 20px; /* Tambahkan padding */
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  transition: background-color 0.3s ease; /* Tambahkan transisi */
 }
 
 .sidebar button:hover {
-  background-color: #2563eb;
+  background-color: #2b6cb0; /* Warna hover tombol */
 }
 
 
@@ -381,4 +387,62 @@ body {
         top: 60px; /* Sesuaikan dengan tinggi navbar */
         /* Pastikan tidak menutupi navbar */
     }
+}
+
+.data-popup {
+  position: fixed;
+  left: 300px; /* Sesuaikan dengan lebar sidebar */
+  top: 100px;
+  width: 300px;
+  height: calc(100% - 100px);
+  background-color: #f7fafc;
+  box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+  padding: 20px;
+  z-index: 1000;
+  overflow-y: auto;
+  display: none;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  transform: translateX(100%);
+  opacity: 0;
+}
+
+.data-popup.active {
+  display: block;
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.data-popup {
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.navbar-toggle .bar {
+    transition: all 0.3s ease;
+}
+
+.data-popup {
+    background-color: #f7fafc; /* Warna latar belakang yang lebih lembut */
+    border-radius: 8px; /* Sudut yang lebih membulat */
+}
+
+.data-popup-content {
+    padding: 16px;
+}
+
+.data-popup h3 {
+    color: #2d3748; /* Warna teks yang lebih gelap */
+}
+
+.data-popup img {
+    border-radius: 8px; /* Sudut gambar yang lebih membulat */
+}
+
+.lokasi-item:hover {
+    background-color: #edf2f7; /* Warna latar belakang hover */
+    cursor: pointer;
+}
+
+button:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(66, 153, 225, 0.6); /* Efek fokus */
 }

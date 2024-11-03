@@ -232,11 +232,32 @@ document.addEventListener('DOMContentLoaded', function() {
 
             itemElement.addEventListener('click', () => {
                 focusOnMarker(item.lon, item.lat);
+                showDataPopup(item);
             });
 
             dataSidebarContent.appendChild(itemElement);
         });
     }
+
+    function showDataPopup(item) {
+        const dataPopup = document.getElementById('dataPopup');
+        const dataPopupContent = document.getElementById('dataPopup-content');
+
+        dataPopupContent.innerHTML = `
+            <h3 class="text-lg font-bold mb-2">${item.nama_tempat}</h3>
+            <p class="text-sm text-gray-600 mb-1">Lokasi: ${item.lokasi}</p>
+            <p class="text-sm text-gray-600 mb-3">Fasilitas: ${item.fasilitas}</p>
+            <img src="${item.gambar || 'default.jpg'}" alt="${item.nama_tempat}" class="w-full h-auto rounded mb-3">
+            <!-- <button id="closeDataPopup" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Tutup</button> -->
+        `;
+
+        dataPopup.classList.add('active');
+    }
+
+    // document.getElementById('closeDataPopup').addEventListener('click', function() {
+    //     const dataPopup = document.getElementById('dataPopup');
+    //     dataPopup.classList.remove('active');
+    // });
 
     function focusOnMarker(long, lat) {
         const view = map.getView(); 
@@ -371,3 +392,8 @@ function sortDataByProximity(data, userLat, userLon) {
         return distanceA - distanceB;
     });
 }
+
+document.getElementById('map').addEventListener('click', function() {
+    const dataPopup = document.getElementById('dataPopup');
+    dataPopup.classList.remove('active');
+});

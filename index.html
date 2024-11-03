@@ -9,10 +9,10 @@
 	<script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-	<nav class="navbar">
+	<nav class="navbar bg-black/40">
 		<div class="navbar-container">
 			<div class="navbar-logo">
-				<img src="img/marker.png" class="logo-img" alt="Logo">
+				<img src="../img/logo.png" class="logo-img" alt="Logo Baru">
 				<h1 class="navbar-title">TEKAN MAP UNTUK MENAMBAH DATA</h1>
 			</div>
 			<button id="mobile-menu-toggle" class="navbar-toggle" aria-label="Toggle navigation">
@@ -21,9 +21,52 @@
 				<span class="bar"></span>
 			</button>
 			<ul class="navbar-menu">
-				<li><a href="https://parkirgratis.if.co.id/" class="navbar-links">HOME</a></li>
-				<li><a href="https://parkirgratis.if.co.id/pages/login/login.html" class="navbar-links">LOGIN ADMIN</a></li>
-				<li><a href="#" class="navbar-links" id="showDataButton">TAMPILKAN DATA</a></li>
+				<li>
+					<a href="https://parkirgratis.if.co.id/" class="navbar-links">
+						<button class="px-2 py-1 nav-title border-2 border-transparent border-b-white shadow-transparent hover:border-b-[#4DA6FF] hover:border-x-[#4DA6FF] transition px-2 text-white text-sm flex items-center ml-auto hover:shadow-lg hover:shadow-[#4D4DFF]/50">
+							<span>
+								<!-- <img src="../img/home.png" alt="Home" width="15px">&nbsp; -->
+								HOME
+							</span>
+						</button>
+					</a>
+				</li>
+				<li>
+					<a href="#" class="navbar-links" id="showDataButton">
+						<button class="px-2 py-1 nav-title border-2 border-transparent border-b-white shadow-transparent hover:border-b-[#4DA6FF] hover:border-x-[#4DA6FF] transition px-2 text-white text-sm flex items-center ml-auto hover:shadow-lg hover:shadow-[#4D4DFF]/50">
+							<span>
+								<!-- <img src="" alt="Tampilkan Data" width="15px">&nbsp; -->
+								TAMPILKAN DATA
+							</span>
+						</button>
+					</a>
+				</li>
+				<li>
+					<a href="https://parkirgratis.if.co.id/aboutus/aboutus.html" class="navbar-links">
+						<button class="px-2 py-1 nav-title border-2 border-transparent border-b-white shadow-transparent hover:border-b-[#4DA6FF] hover:border-x-[#4DA6FF] transition px-2 text-white text-sm flex items-center ml-auto hover:shadow-lg hover:shadow-[#4D4DFF]/50">
+							<span>
+								<!-- <img src="../img/about.png" alt="About Us" width="15px">&nbsp; -->
+								ABOUT US
+							</span>
+						</button>
+					</a>
+				</li>
+				<li></li>
+					<a href="https://parkirgratis.if.co.id/pages/login/login.html" class="navbar-links">
+						<button class="border-2 border-transparent border-l-white shadow-transparent hover:border-l-[#4DA6FF] hover:border-b-[#4DA6FF] transition px-2 text-white text-sm flex items-center justify-center hover:shadow-xl hover:shadow-[#4D4DFF]/50">
+							<span>
+								<img src="https://icons.veryicon.com/png/o/miscellaneous/two-color-icon-library/user-286.png" class="rounded-full" alt="" width="40px">
+							</span>
+							<div class="flex flex-wrap -m-2">
+								<div class="w-auto p-2">
+									<h2 class="text-sm text-center px-2 hidden md:block title">Apakah Anda admin?</h2>
+									<p class="text-sm font-semibold text-center text-sky-500 px-2 hidden md:block nav-title">Login Here</p>
+									<p class="text-sm text-center px-2 md:hidden nav-title">LOGIN</p>
+								</div>
+							</div>
+						</button>
+					</a>
+				</li>
 			</ul>
 		</div>
 	</nav>
@@ -48,7 +91,7 @@
 		<b id="popupinfo-title"></b>
 		<div id="popupinfo-content"></div>
 		<div id="popupinfo-delete">
-			<input type="hidden" id="idmarker" name="idmarker" value="">
+			<!-- <input type="hidden" id="idmarker" name="idmarker" value=""> -->
 			<button id="hapusbutton" type="button">Hapus</button><br>
 		</div>
 		
@@ -71,20 +114,6 @@
 	<div id="isi"></div>
 	<script src="js/croot.js" type="module"></script>
 	
-	<!-- Footer -->
-	<footer class="bg-zinc-950 text-center lg:text-left">
-		<div class="bg-black/5 pt-3 text-lg flex justify-center items-center gap-2 text-white">
-			<img src="img/logo.png" alt="Logo" class="mr-2" width="40">
-			<p class="pb-1 border-2 border-transparent border-l-white px-3">Developed by 
-				<a class="pb-1 bg-clip-text text-transparent bg-gradient-to-r from-[#6454F0] to-[#6EE2F5] font-semibold" href="https://github.com/irgifauzi">Irgi</a> w/ 
-				<a class="pb-1 bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-blue-500 font-semibold" href="https://github.com/Revan232">Revan</a>
-			</p>
-		</div>
-		<div class="pb-3">
-			<p class="text-white text-center text-sm"><a href="https://parkirgratis.if.co.id/aboutus/aboutus.html"><span class="hover:text-sky-500">Tentang Kami</span></a> | 2024 Semua Hak Dilindungi</p>
-		</div>
-	</footer>
-
 	
 	<div id="dataSidebar" class="sidebar" style="display: none;">
 		<div class="sidebar-title">Data Tempat Parkir</div>

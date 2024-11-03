@@ -92,7 +92,7 @@ body {
   position: fixed;
   top: 0;
   width: 100%;
-  background-color: #1a202c; /* Warna lebih gelap untuk navbar */
+  background-color: rgba(0, 0, 0, 0.5); /* Warna abu-abu transparan */
   padding: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   z-index: 1000;
@@ -285,6 +285,7 @@ body {
   background-color: #3182ce; /* Warna tombol yang lebih cerah */
   color: white;
   padding: 10px 20px; /* Tambahkan padding */
+  margin: 10px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -391,10 +392,10 @@ body {
 
 .data-popup {
   position: fixed;
-  left: 300px; /* Sesuaikan dengan lebar sidebar */
+  left: 320px; /* Sesuaikan dengan lebar sidebar */
   top: 100px;
-  width: 300px;
-  height: calc(100% - 100px);
+  width: 300px; /* Ubah lebar sesuai kebutuhan */
+  height: calc(100% - 100px); /* Ubah tinggi sesuai kebutuhan */
   background-color: #f7fafc;
   box-shadow: -2px 0 5px rgba(0,0,0,0.1);
   padding: 20px;
@@ -421,20 +422,64 @@ body {
 }
 
 .data-popup {
-    background-color: #f7fafc; /* Warna latar belakang yang lebih lembut */
-    border-radius: 8px; /* Sudut yang lebih membulat */
+    background-color: #ffffff; /* Warna latar belakang yang lebih cerah */
+    border-radius: 12px; /* Sudut lebih membulat */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Efek bayangan untuk tampilan elevasi */
+    padding: 20px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    transform: scale(0.95); /* Sedikit lebih kecil untuk animasi masuk */
+    opacity: 0;
 }
 
+.data-popup.active {
+    transform: scale(1); /* Animasi scale untuk transisi */
+    opacity: 1;
+}
+
+/* Konten di dalam data-popup */
 .data-popup-content {
-    padding: 16px;
+    padding: 20px;
+    background-color: #f7fafc;
+    border-radius: 10px;
+    border: 1px solid #e2e8f0; /* Garis lembut untuk detail */
 }
 
+/* Judul data-popup dengan gaya menarik */
 .data-popup h3 {
-    color: #2d3748; /* Warna teks yang lebih gelap */
+    color: #2b6cb0; /* Warna teks biru gelap */
+    font-size: 1.25rem;
+    margin-bottom: 12px;
+    border-bottom: 2px solid #63b3ed; /* Garis bawah berwarna */
+    padding-bottom: 8px;
 }
 
+/* Gaya gambar dalam data-popup */
 .data-popup img {
-    border-radius: 8px; /* Sudut gambar yang lebih membulat */
+    border-radius: 10px; /* Sudut gambar lebih membulat */
+    max-width: 100%;
+    margin-top: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Bayangan untuk gambar */
+    transition: transform 0.3s ease;
+}
+
+.data-popup img:hover {
+    transform: scale(1.05); /* Sedikit zoom saat di-hover */
+}
+
+/* Tambahkan efek hover pada tombol atau elemen interaktif */
+button:focus,
+.data-popup-content button:hover {
+    background-color: #3182ce;
+    color: white;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(66, 153, 225, 0.6);
+}
+
+/* Style teks dan paragraf */
+.data-popup p {
+    color: #4a5568;
+    line-height: 1.6;
+    margin-top: 8px;
 }
 
 .lokasi-item:hover {

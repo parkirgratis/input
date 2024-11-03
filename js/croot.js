@@ -202,7 +202,14 @@ document.addEventListener('DOMContentLoaded', function() {
                     console.error('Data lokasi bukan array:', data);
                     return;
                 }
-                renderDataToSidebar(data);
+                
+                // Dapatkan lokasi pengguna dan urutkan data berdasarkan jarak
+                getUserLocation((position) => {
+                    const userLat = position.coords.latitude;
+                    const userLon = position.coords.longitude;
+                    const sortedData = sortDataByProximity(data, userLat, userLon);
+                    renderDataToSidebar(sortedData);
+                });
             })
             .catch(error => console.error('Gagal mengambil data lokasi:', error));
     }
@@ -334,3 +341,33 @@ function renderToHtml(result) {
 // ;
 
 document.getElementById('dataSidebar').style.display = 'none';
+
+function getUserLocation(callback) {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(callback, (error) => {
+            console.error('Gagal mendapatkan lokasi pengguna:', error);
+        });
+    } else {
+        console.error('Geolokasi tidak didukung oleh browser ini.');
+    }
+}
+
+function calculateDistance(lat1, lon1, lat2, lon2) {
+    const R = 6371; // Radius bumi dalam kilometer
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const a = 
+        0.5 - Math.cos(dLat)/2 + 
+        Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
+        (1 - Math.cos(dLon)) / 2;
+
+    return R * 2 * Math.asin(Math.sqrt(a));
+}
+
+function sortDataByProximity(data, userLat, userLon) {
+    return data.sort((a, b) => {
+        const distanceA = calculateDistance(userLat, userLon, a.lat, a.lon);
+        const distanceB = calculateDistance(userLat, userLon, b.lat, b.lon);
+        return distanceA - distanceB;
+    });
+}

@@ -69,6 +69,7 @@ function enableSwipeDownToHide(element) {
 
 document.addEventListener('DOMContentLoaded', function() {
     const sidebar = document.getElementById('sidebar');
+    const dataPopup = document.getElementById('dataPopup');
     const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
     const navbarMenu = document.querySelector('.navbar-menu');
 
@@ -240,7 +241,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function showDataPopup(item) {
-        const dataPopup = document.getElementById('dataPopup');
         const dataPopupContent = document.getElementById('dataPopup-content');
 
         dataPopupContent.innerHTML = `
@@ -248,10 +248,10 @@ document.addEventListener('DOMContentLoaded', function() {
             <p class="text-sm text-gray-600 mb-1">Lokasi: ${item.lokasi}</p>
             <p class="text-sm text-gray-600 mb-3">Fasilitas: ${item.fasilitas}</p>
             <img src="${item.gambar || 'default.jpg'}" alt="${item.nama_tempat}" class="w-full h-auto rounded mb-3">
-            <!-- <button id="closeDataPopup" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Tutup</button> -->
         `;
 
         dataPopup.classList.add('active');
+        dataSidebar.style.display = 'none';
     }
 
     // document.getElementById('closeDataPopup').addEventListener('click', function() {
@@ -274,8 +274,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (sidebar) enableSwipeUp(sidebar);
     if (dataSidebar) enableSwipeUp(dataSidebar);
+    if (dataPopup) enableSwipeUp(dataPopup);
     if (sidebar) enableSwipeDownToHide(sidebar);
     if (dataSidebar) enableSwipeDownToHide(dataSidebar);
+    if (dataPopup) enableSwipeDownToHide(dataPopup);
 });
 
 // onClick('popup-closer',onClosePopupClick);

@@ -396,11 +396,11 @@ body {
   position: fixed;
   left: 320px; /* Sesuaikan dengan lebar sidebar */
   top: 100px;
-  width: 300px; /* Ubah lebar sesuai kebutuhan */
-  height: calc(100% - 100px); /* Ubah tinggi sesuai kebutuhan */
+  width: 250px; /* Ubah lebar sesuai kebutuhan */
+  height: auto; /* Ubah tinggi sesuai kebutuhan */
   background-color: #f7fafc;
   box-shadow: -2px 0 5px rgba(0,0,0,0.1);
-  padding: 20px;
+  padding: 15px; /* Kurangi padding */
   z-index: 1000;
   overflow-y: auto;
   display: none;
@@ -499,8 +499,8 @@ button:focus {
     position: fixed;
     bottom: 0;
     left: 0;
-    width: 100%;
-    height: 50%;
+    width: 100%; /* Sesuaikan lebar dengan sidebar */
+    height: 50%; /* Sesuaikan tinggi dengan sidebar */
     background-color: white;
     z-index: 1000;
     overflow-y: auto;

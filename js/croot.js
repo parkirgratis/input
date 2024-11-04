@@ -241,6 +241,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function showDataPopup(item) {
+        const dataPopup = document.getElementById('dataPopup');
         const dataPopupContent = document.getElementById('dataPopup-content');
 
         dataPopupContent.innerHTML = `
@@ -248,10 +249,10 @@ document.addEventListener('DOMContentLoaded', function() {
             <p class="text-sm text-gray-600 mb-1">Lokasi: ${item.lokasi}</p>
             <p class="text-sm text-gray-600 mb-3">Fasilitas: ${item.fasilitas}</p>
             <img src="${item.gambar || 'default.jpg'}" alt="${item.nama_tempat}" class="w-full h-auto rounded mb-3">
+            <!-- <button id="closeDataPopup" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Tutup</button> -->
         `;
 
         dataPopup.classList.add('active');
-        dataSidebar.style.display = 'none';
     }
 
     // document.getElementById('closeDataPopup').addEventListener('click', function() {

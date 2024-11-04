@@ -73,7 +73,7 @@ body {
 }
 
 .button-home {
-  position: fixed;
+  position: relative;
   left: 10px;
   bottom: 40px; /* Menggeser ke atas */
   padding: -5px 10px;
@@ -85,7 +85,7 @@ body {
 }
 
 .button-home:hover {
-  background-color: #3c3c3c; /* Mengubah warna hover */
+  background-color: blue; /* Mengubah warna hover */
 }
 
 .navbar {
@@ -133,11 +133,11 @@ body {
 
 .navbar-links {
   color: #fff;
-  text-decoration: none;
-  padding: 10px 15px;
+  text-decoration: double;
+  padding: 5px 15px;
   transition: all 0.3s ease;
   margin: 0 5px;
-  font-size: 0.9rem;
+  font-size: larger;
   line-height: 1;
 }
 
@@ -149,7 +149,7 @@ body {
 .navbar-links i {
   margin-right: 8px;
   font-size: 1rem;
-  vertical-align: middle;
+  vertical-align: auto;
   color: #fff;
 }
 

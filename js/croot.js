@@ -188,6 +188,10 @@ document.addEventListener('DOMContentLoaded', function() {
         event.preventDefault();
         console.log('Tombol TAMPILKAN DATA ditekan');
         dataSidebar.style.display = 'block';
+
+        if (window.innerWidth <= 768) { 
+            navbarMenu.classList.remove('active');
+        }
     });
 
     closeDataSidebar.addEventListener('click', function() {

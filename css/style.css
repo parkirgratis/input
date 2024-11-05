@@ -7,11 +7,14 @@ body {
 }
 
 #map {
-  position: absolute;
-  top: 100px; /* Sesuaikan dengan tinggi navbar */
+  position: fixed;
+  top: 0;
   bottom: 0;
+  left: 0;
+  right: 0;
   width: 100%;
-  z-index: 0; /* Pastikan peta berada di bawah elemen lain */
+  height: 100%;
+  z-index: 0;
 }
 
 .ol-popup {
@@ -94,8 +97,9 @@ body {
   width: 100%;
   background-color: rgba(0, 0, 0, 0.5); /* Warna abu-abu transparan */
   padding: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.726);
   z-index: 1000;
+  backdrop-filter: blur(10px); /* Menambahkan efek blur */
 }
 
 .navbar-container {
@@ -161,7 +165,7 @@ body {
   width: 30px;
   height: 25px;
   cursor: pointer;
-  background: transparent;
+  background-color:  rgba(0, 0, 0, 0.863);
   border: none;
   padding: 0;
   z-index: 1001;
@@ -183,7 +187,7 @@ body {
     position: absolute;
     top: 60px;
     right: 0;
-    background-color: rgba(24, 24, 27, 0.8);
+    background-color: rgba(0, 0, 0, 0.863);
     width: 100%;
     flex-direction: column;
     padding: 1rem;
@@ -221,13 +225,14 @@ body {
   top: 100px; /* Sesuaikan dengan tinggi navbar */
   width: 300px;
   height: calc(100% - 100px);
-  background-color: #ffffff; /* Warna latar belakang yang lebih cerah */
+  background-color: #00000096; /* Warna latar belakang yang lebih cerah */
   z-index: 1000;
   overflow-y: auto;
   box-shadow: 2px 0 5px rgba(0,0,0,0.1);
   padding: 20px; /* Tambahkan padding */
   border-right: 1px solid #e2e8f0; /* Tambahkan border */
   transition: transform 0.3s ease, opacity 0.3s ease; /* Tambahkan transisi */
+  background-image: url('https://static1.howtogeekimages.com/wordpress/wp-content/uploads/2022/08/Google-Maps-icon-on-map.png');
 }
 
 .sidebar.active {
@@ -261,7 +266,7 @@ body {
 
 .sidebar-title {
   font-weight: bold;
-  background-color: #3182ce; /* Warna biru yang lebih cerah */
+  background-color: #000000; /* Warna biru yang lebih cerah */
   color: white;
   padding: 8px 12px; /* Tambahkan padding */
   border-radius: 4px;

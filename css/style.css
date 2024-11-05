@@ -99,7 +99,7 @@ body {
   padding: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.726);
   z-index: 1000;
-  backdrop-filter: blur(10px); /* Menambahkan efek blur */
+  backdrop-filter: blur(5px); /* Menambahkan efek blur */
 }
 
 .navbar-container {
@@ -225,15 +225,18 @@ body {
   top: 100px; /* Sesuaikan dengan tinggi navbar */
   width: 300px;
   height: calc(100% - 100px);
-  background-color: #00000096; /* Warna latar belakang yang lebih cerah */
+  background-color: rgba(0, 0, 0, 0.6); /* Warna latar belakang dengan transparansi */
   z-index: 1000;
   overflow-y: auto;
   box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-  padding: 20px; /* Tambahkan padding */
-  border-right: 1px solid #e2e8f0; /* Tambahkan border */
-  transition: transform 0.3s ease, opacity 0.3s ease; /* Tambahkan transisi */
+  padding: 20px;
+  border-right: 1px solid #e2e8f0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
   background-image: url('https://static1.howtogeekimages.com/wordpress/wp-content/uploads/2022/08/Google-Maps-icon-on-map.png');
+  background-size: cover;
+  backdrop-filter: blur(5px); /* Menambahkan blur pada latar belakang */
 }
+
 
 .sidebar.active {
   transform: translateX(0);

@@ -10,8 +10,11 @@ import {
     getValue,
     getFileSize
   } from "https://cdn.jsdelivr.net/gh/jscroot/element@0.0.6/croot.js";
-  
-  import { postFile } from "https://cdn.jsdelivr.net/gh/jscroot/api@0.0.2/croot.js";
+import { postFile } from "https://cdn.jsdelivr.net/gh/jscroot/api@0.0.2/croot.js";
+import Swal from "https://cdn.jsdelivr.net/npm/sweetalert2@11/src/sweetalert2.js";
+import { addCSS } from "https://cdn.jsdelivr.net/gh/jscroot/lib@0.0.9/element.js";
+
+addCSS("https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.css");
 
 function enableSwipeUp(element) {
     let startY, currentY, isDragging = false;
@@ -141,16 +144,28 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    alert('Data berhasil disimpan!');
+                    Swal.fire({
+                        icon: "success",
+                        title: "Berhasil",
+                        text: "Data berhasil disimpan!"
+                    });
                     // Menambahkan koordinat ke database
                     tambahKoordinatKeDatabase(lon, lat);
                 } else {
-                    alert('Gagal menyimpan data');
+                    Swal.fire({
+                        icon: "error",
+                        title: "Gagal",
+                        text: "Gagal menyimpan data"
+                    });
                 }
             })
             .catch(error => {
                 console.error('Error:', error);
-                alert('Terjadi kesalahan saat mengirim data.');
+                Swal.fire({
+                    icon: "error",
+                    title: "Kesalahan",
+                    text: "Terjadi kesalahan saat mengirim data."
+                });
             });
 
             // Prepare coordinates data for koordinat endpoint
@@ -169,15 +184,26 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .then(response => response.json())
             .then(data => {
-                console.log('Coordinates saved successfully:', data);
-                alert('Coordinates added successfully!');
+                Swal.fire({
+                    icon: "success",
+                    title: "Berhasil",
+                    text: "Koordinat berhasil ditambahkan!"
+                });
             })
             .catch(error => {
                 console.error('Error:', error);
-                alert('Failed to add place or save coordinates!');
+                Swal.fire({
+                    icon: "error",
+                    title: "Kesalahan",
+                    text: "Gagal menambahkan tempat atau menyimpan koordinat!"
+                });
             });
         } else {
-            alert("Please select an image file");
+            Swal.fire({
+                icon: "error",
+                title: "Gagal",
+                text: "Silakan pilih file gambar terlebih dahulu"
+            });
         }
     });
 
@@ -337,7 +363,11 @@ const target_url = "https://asia-southeast2-awangga.cloudfunctions.net/parkirgra
 function uploadImage() {
     const imageInput = document.getElementById('imageInputSidebar');
     if (!imageInput || imageInput.files.length === 0) {
-        alert("Please select an image file");
+        Swal.fire({
+            icon: "error",
+            title: "Gagal",
+            text: "Silakan pilih file gambar terlebih dahulu"
+        });
         return;
     }
     const inputFileElement = document.getElementById('imageInputSidebar');
@@ -371,6 +401,7 @@ function renderToHtml(result) {
 //     show("imageInputSidebar");
 // }
 // ;
+
 
 document.getElementById('dataSidebar').style.display = 'none';
 

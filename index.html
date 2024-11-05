@@ -10,9 +10,13 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
+	
+	<div id="isi"></div>
+	<script src="js/croot.js" type="module"></script>
+
 	<nav class="navbar bg-black/40">
 		<div class="navbar-container">
-			<div class="navbar-logo" style="display: flex; align-items: center;">
+			<div class="navbar-logo" style="display: flex; ">
 				<a href="https://parkirgratis.if.co.id/index.html" style="display: flex; align-items: center;">
 					<img src="../img/logo.png" width="50" height="24" style="margin-right: 10px;">  
 					<h1 class="navbar-title">TEKAN MAP UNTUK MENAMBAH DATA</h1>
@@ -88,32 +92,6 @@
 		<button id="closeSidebar">Back</button>
 	</div>
 
-	<div id="popupinfo" class="ol-popup">
-		<b id="popupinfo-title"></b>
-		<div id="popupinfo-content"></div>
-		<div id="popupinfo-delete">
-			<!-- <input type="hidden" id="idmarker" name="idmarker" value=""> -->
-			<button id="hapusbutton" type="button">Hapus</button><br>
-		</div>
-		
-	</div>
-
-	<div id="popup" class="ol-popup">
-		<b id="popup-title" class="text-white bg-blue-500 rounded-md px-2 py-1">Input Tempat Parkir Gratis</b>
-		<a href="#" id="popup-closer" class="ol-popup-closer"></a><br><br>
-		<div id="popup-content"></div><br>
-		<div id="popup-input">
-			<!-- Nama Tempat : <input type="text" id="namatempat" class="ring-2" name="namatempat" required><br><br>
-			Lokasi : <input type="text" class="ring-2" id="lokasi" name="lokasi" required><br>
-			Fasilitas : <input type="text" class="ring-2" id="fasilitas" name="fasilitas" required><br>
-			Gambar : <input type="file" class="ring-2" id="imageInput" name="gambar" accept="image/*" required><br>
-			<input type="hidden" id="long" name="long" value="">
-			<input type="hidden" id="lat" name="lat" value="">
-			<button id="insertmarkerbutton" type="button">Input</button><br> -->
-		</div>
-	</div>
-	<div id="isi"></div>
-	<script src="js/croot.js" type="module"></script>
 	
 	
 	<div id="dataSidebar" class="sidebar" style="display: none;">

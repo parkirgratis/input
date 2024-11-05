@@ -69,12 +69,14 @@ function enableSwipeDownToHide(element) {
 
 document.addEventListener('DOMContentLoaded', function() {
     const sidebar = document.getElementById('sidebar');
+    const dataSidebar = document.getElementById('dataSidebar');
     const dataPopup = document.getElementById('dataPopup');
     const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
     const navbarMenu = document.querySelector('.navbar-menu');
 
     map.getTargetElement().addEventListener('click', function() {
         sidebar.classList.toggle('active');
+        dataSidebar.style.display = 'none';
     });
 
     mobileMenuToggle.addEventListener('click', function() {
@@ -180,7 +182,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     const showDataButton = document.getElementById('showDataButton');
-    const dataSidebar = document.getElementById('dataSidebar');
     const closeDataSidebar = document.getElementById('closeDataSidebar');
     const dataSidebarContent = document.getElementById('dataSidebar-content');
 

@@ -215,6 +215,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     const userLon = position.coords.longitude;
                     const sortedData = sortDataByProximity(data, userLat, userLon);
                     renderDataToSidebar(sortedData);
+                }, () => {
+                    // Jika gagal mendapatkan lokasi, tetap render data tanpa pengurutan
+                    renderDataToSidebar(data);
                 });
             })
             .catch(error => console.error('Gagal mengambil data lokasi:', error));
@@ -371,13 +374,15 @@ function renderToHtml(result) {
 
 document.getElementById('dataSidebar').style.display = 'none';
 
-function getUserLocation(callback) {
+function getUserLocation(successCallback, errorCallback) {
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(callback, (error) => {
+        navigator.geolocation.getCurrentPosition(successCallback, (error) => {
             console.error('Gagal mendapatkan lokasi pengguna:', error);
+            if (errorCallback) errorCallback();
         });
     } else {
         console.error('Geolokasi tidak didukung oleh browser ini.');
+        if (errorCallback) errorCallback();
     }
 }
 

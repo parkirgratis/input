@@ -14,60 +14,47 @@
 	<div id="isi"></div>
 	<script src="js/croot.js" type="module"></script>
 
-	<nav class="navbar bg-black/40">
-		<div class="navbar-container">
-			<div class="navbar-logo" style="display: flex;">
-				<a href="https://parkirgratis.if.co.id/index.html" style="display: flex; align-items: center;">
-					<img src="../img/logo.png" width="50" height="24" style="margin-right: 10px;">  
-					<h1 class="navbar-title">TEKAN MAP UNTUK MENAMBAH DATA</h1>
+	<nav class="navbar bg-black/40 p-4">
+		<div class="container mx-auto flex items-center">
+			<!-- Left: Logo and Title -->
+			<div class="flex items-center space-x-2">
+				<a href="https://parkirgratis.if.co.id/index.html" class="flex items-center">
+					<img src="../img/logo.png" width="50" height="24" alt="Logo" class="mr-2">  
+					<h1 class="text-white text-sm font-semibold">TEKAN MAP UNTUK MENAMBAH DATA</h1>
 				</a>  
 			</div>
-			<button id="mobile-menu-toggle" class="navbar-toggle" aria-label="Toggle navigation">
-				<span class="bar"></span>
-				<span class="bar"></span>
-				<span class="bar"></span>
-			</button>
-			<ul class="navbar-menu" style="display: flex; gap: 10px;">
-				<li>
-					<a href="https://parkirgratis.if.co.id/" class="navbar-links">
-						<button class="px-2 py-1 nav-title border-2 border-transparent border-b-white shadow-transparent hover:border-b-[#4DA6FF] hover:border-x-[#4DA6FF] transition transform hover:scale-105 text-white text-sm flex items-center ml-auto hover:shadow-lg hover:shadow-[#4D4DFF]/50 duration-200">
-							<span>HOME</span>
-						</button>
-					</a>
-				</li>
-				<li>
-					<a href="#" class="navbar-links" id="showDataButton">
-						<button class="px-2 py-1 nav-title border-2 border-transparent border-b-white shadow-transparent hover:border-b-[#4DA6FF] hover:border-x-[#4DA6FF] transition transform hover:scale-105 text-white text-sm flex items-center ml-auto hover:shadow-lg hover:shadow-[#4D4DFF]/50 duration-200">
-							<span>TAMPILKAN DATA</span>
-						</button>
-					</a>
-				</li>
-				<li>
-					<a href="https://parkirgratis.if.co.id/aboutus/aboutus.html" class="navbar-links">
-						<button class="px-2 py-1 nav-title border-2 border-transparent border-b-white shadow-transparent hover:border-b-[#4DA6FF] hover:border-x-[#4DA6FF] transition transform hover:scale-105 text-white text-sm flex items-center ml-auto hover:shadow-lg hover:shadow-[#4D4DFF]/50 duration-200">
-							<span>ABOUT US</span>
-						</button>
-					</a>
-				</li>
-				<li>
-					<a href="https://parkirgratis.if.co.id/pages/login/login.html" class="navbar-links">
-						<button class="border-2 border-transparent border-l-white shadow-transparent hover:border-l-[#4DA6FF] hover:border-b-[#4DA6FF] transition transform hover:scale-105 text-white text-sm flex items-center justify-center hover:shadow-xl hover:shadow-[#4D4DFF]/50 duration-200">
-							<span>
-								<img src="https://icons.veryicon.com/png/o/miscellaneous/two-color-icon-library/user-286.png" class="rounded-full" alt="" width="40px">
-							</span>
-							<div class="flex flex-wrap -m-2">
-								<div class="w-auto p-2">
-									<h2 class="text-sm text-center px-2 hidden md:block title">Apakah Anda admin?</h2>
-									<p class="text-sm font-semibold text-center text-sky-500 px-2 hidden md:block nav-title">Login Here</p>
-									<p class="text-sm text-center px-2 md:hidden nav-title">LOGIN</p>
-								</div>
-							</div>
-						</button>
-					</a>
-				</li>
-			</ul>
+			
+			<!-- Center: Navigation Links -->
+			<div class="flex items-center space-x-6 ml-auto">
+				<a href="https://parkirgratis.if.co.id/" class="text-white hover:text-blue-400 transition">
+					HOME
+				</a>
+				<a href="#" id="showDataButton" class="text-white hover:text-blue-400 transition">
+					TAMPILKAN DATA
+				</a>
+				<a href="https://parkirgratis.if.co.id/aboutus/aboutus.html" class="text-white hover:text-blue-400 transition">
+					ABOUT US
+				</a>
+			</div>
+			
+			<!-- Right: Login Section -->
+			<div class="flex items-center ml-20">
+				<a href="https://parkirgratis.if.co.id/pages/login/login.html" class="flex items-center text-white hover:text-blue-400 transition">
+					<img src="https://icons.veryicon.com/png/o/miscellaneous/two-color-icon-library/user-286.png" class="rounded-full mr-2" alt="User Icon" width="30">
+					<div class="hidden md:block">
+						<p class="text-xs">Apakah Anda admin?</p>
+						<p class="text-sm font-semibold text-sky-500">Login Here</p>
+					</div>
+					<p class="md:hidden">LOGIN</p>
+				</a>
+			</div>
 		</div>
 	</nav>
+	
+	
+	
+	
+	
 	
 	
 	<div id='map'></div>

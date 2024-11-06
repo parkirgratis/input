@@ -58,7 +58,9 @@ function enableSwipeDownToHide(element) {
 
     element.addEventListener('touchend', () => {
         isDragging = false;
-        if (currentY - startY > 50) {
+        const isAtTop = element.scrollTop === 0; // Cek apakah sudah di bagian atas
+
+        if (currentY - startY > 50 && isAtTop) { // Hanya izinkan swipe down jika di bagian atas
             swipeCount++;
             if (swipeCount >= 2) {
                 element.style.display = 'none';

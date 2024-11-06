@@ -196,6 +196,7 @@ body {
     align-items: center;
     backdrop-filter: blur(10px);
     background-color: rgba(24, 24, 27, 0.8);
+    z-index: 20000;
   }
 
   .navbar-menu.active {
@@ -207,7 +208,7 @@ body {
     text-align: center;
     width: 20%;
     margin: 5px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0);
   }
 
   .navbar-links:last-child {
@@ -288,11 +289,11 @@ body {
 
 .sidebar input[type="text"]:focus,
 .sidebar input[type="file"]:focus {
-  border-color: #3182ce; /* Warna border saat fokus */
+  border-color: #060716; /* Warna border saat fokus */
 }
 
 .sidebar button {
-  background-color: #3182ce; /* Warna tombol yang lebih cerah */
+  background-color: #2f58ca; /* Warna tombol yang lebih cerah */
   color: white;
   padding: 10px 20px; /* Tambahkan padding */
   margin: 10px;

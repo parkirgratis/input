@@ -165,7 +165,7 @@ body {
   width: 30px;
   height: 25px;
   cursor: pointer;
-  background-color:  rgba(0, 0, 0, 0.863);
+  background-color:  rgba(0, 0, 0, 0);
   border: none;
   padding: 0;
   z-index: 1001;

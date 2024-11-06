@@ -92,8 +92,8 @@ export function addUserLocationMarker() {
           new Style({
             image: new Icon({
               anchor: [0.5, 1],
-              src: 'https://www.pngall.com/wp-content/uploads/10/Map-Marker-PNG-Image-HD.png',
-              scale: 0.02
+              src: 'https://i.ibb.co.com/8dtr6zc/man.png',
+              scale: 1.0
             }),
           })
         );

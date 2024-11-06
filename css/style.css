@@ -175,7 +175,7 @@ body {
   width: 100%;
   height: 3px;
   background-color: #fff;
-  transition: all 0.3s ease;
+  transition: all 0.5s ease;
   border-radius: 2px;
 }
 
@@ -211,8 +211,16 @@ body {
     border-bottom: 1px solid rgba(255, 255, 255, 0);
   }
 
-  .navbar-links:last-child {
-    border-bottom: none;
+  .navbar-toggle.active .bar:nth-child(1) {
+    transform: rotate(45deg) translateY(8px);
+  }
+  
+  .navbar-toggle.active .bar:nth-child(2) {
+    opacity: 0;
+  }
+  
+  .navbar-toggle.active .bar:nth-child(3) {
+    transform: rotate(-45deg) translateY(-8px);
   }
 
   .navbar-toggle {
@@ -524,3 +532,9 @@ button:focus {
     height: 100%; /* Memperbesar ukuran saat aktif */
   }
 }
+
+.navbar-menu {
+  display: flex;
+  gap: 10px; /* Adjust spacing between items */
+}
+

@@ -531,3 +531,9 @@ button:focus {
     height: 100%; /* Memperbesar ukuran saat aktif */
   }
 }
+
+.navbar-menu {
+  display: flex;
+  gap: 10px; /* Adjust spacing between items */
+}
+

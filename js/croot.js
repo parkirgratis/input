@@ -149,7 +149,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     Swal.fire({
                         icon: "success",
                         title: "Berhasil",
-                        text: "Data berhasil disimpan!"
+                        text: "Data dan koordinat berhasil disimpan!"
                     });
                     // Menambahkan koordinat ke database
                     tambahKoordinatKeDatabase(lon, lat);
@@ -163,11 +163,6 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .catch(error => {
                 console.error('Error:', error);
-                Swal.fire({
-                    icon: "error",
-                    title: "Kesalahan",
-                    text: "Terjadi kesalahan saat mengirim data."
-                });
             });
 
             // Prepare coordinates data for koordinat endpoint
@@ -189,7 +184,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 Swal.fire({
                     icon: "success",
                     title: "Berhasil",
-                    text: "Koordinat berhasil ditambahkan!"
+                    text: "Data dan Koordinat berhasil ditambahkan!"
                 });
             })
             .catch(error => {

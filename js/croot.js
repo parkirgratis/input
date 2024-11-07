@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const sidebar = document.getElementById('sidebar');
     const dataSidebar = document.getElementById('dataSidebar');
     const dataPopup = document.getElementById('dataPopup');
-    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    // const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
     const navbarMenu = document.querySelector('.navbar-menu');
 
     map.getTargetElement().addEventListener('click', function() {
@@ -84,9 +84,9 @@ document.addEventListener('DOMContentLoaded', function() {
         dataSidebar.style.display = 'none';
     });
 
-    mobileMenuToggle.addEventListener('click', function() {
-        navbarMenu.classList.toggle('active');
-    });
+    // mobileMenuToggle.addEventListener('click', function() {
+    //     navbarMenu.classList.toggle('active');
+    // });
 
     // Pastikan sidebar tidak menutup ketika diklik
     sidebar.addEventListener('click', function(event) {

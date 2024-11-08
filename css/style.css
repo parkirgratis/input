@@ -575,3 +575,11 @@ button:focus {
 }
 
 
+.hidden.md\:block.ml-5 {
+  display: block; /* Pastikan elemen terlihat */
+  margin-left: 0; /* Hilangkan margin kiri */
+  position: absolute; /* Posisi absolut untuk mengontrol posisinya */
+  left: 0; /* Pindahkan ke ujung kiri */
+  top: 50%; /* Posisikan vertikal agar berada di tengah */
+  transform: translateY(-50%); /* Untuk benar-benar menengah secara vertikal */
+}

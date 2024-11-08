@@ -294,13 +294,36 @@ button img {
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 50%;
+    height: 0;
     background-color: white;
     z-index: 1000;
     overflow-y: auto;
-    transform: translateY(50%);
-    transition: transform 0.3s ease, height 0.3s ease;
+    transform: translateY(100%);
+    opacity: 0;
+    transition: transform 0.5s ease, height 0.5s ease, opacity 0.3s ease;
   }
+
+  /* Ketika sidebar aktif atau terbuka */
+  .sidebar.active {
+    transform: translateY(0);
+    height: 50%;
+    opacity: 1;
+  }
+
+  /* Menambahkan animasi untuk elemen di dalam sidebar */
+  .sidebar-content {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.4s ease 0.2s, transform 0.4s ease 0.2s;
+  }
+
+  /* Ketika sidebar aktif, elemen di dalam muncul bertahap */
+  .sidebar.active .sidebar-content {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 
   .sidebar.active {
     transform: translateY(0);
@@ -310,7 +333,7 @@ button img {
   /* footer {
     display: none; /* Sembunyikan footer pada mode mobile */
   
-}
+
 
 .sidebar-title {
   font-weight: bold;

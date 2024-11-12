@@ -280,8 +280,8 @@ body {
 
 .sidebar-title {
   font-weight: bold;
-  background-color: #000000; /* Warna biru yang lebih cerah */
-  color: white;
+  background-color: #ffffff; /* Warna biru yang lebih cerah */
+  color: #000000;
   padding: 8px 12px; /* Tambahkan padding */
   border-radius: 4px;
   margin-bottom: 16px;

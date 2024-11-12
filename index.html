@@ -133,12 +133,17 @@
 	<div id="sidebar" class="sidebar">
 		<div class="sidebar-title">Input Tempat Parkir Gratis</div>
 		<div id="sidebar-content">
-			Nama Tempat : <input type="text" id="namatempat" class="ring-2" name="namatempat" required><br><br>
-			Lokasi : <input type="text" class="ring-2" id="lokasi" name="lokasi" required><br>
-			Fasilitas : <input type="text" class="ring-2" id="fasilitas" name="fasilitas" required><br>
-			Gambar : <input type="file" class="ring-2" id="imageInputSidebar" name="gambar" accept="image/*" required><br>
+			<input type="text" id="namatempat" class="ring-2" name="namatempat" placeholder="Masukan nama tempat" required><br><br>
+	
+			<input type="text" class="ring-2" id="lokasi" name="lokasi" placeholder="Masukan lokasi tempat" required><br><br>
+	
+			<input type="text" class="ring-2" id="fasilitas" name="fasilitas" placeholder="Masukan fasilitas" required><br><br>
+	
+			<input type="file" class="ring-2" id="imageInputSidebar" name="gambar" accept="image/*" required><br><br>
+	
 			<input type="hidden" id="long" name="long" value="">
 			<input type="hidden" id="lat" name="lat" value="">
+	
 			<div class="button-container">
 				<button id="closeSidebar" type="button" class="bg-blue-500 text-white px-4 py-2 rounded transition-transform duration-300 hover:scale-110">
 					Back
@@ -149,6 +154,7 @@
 			</div>
 		</div>
 	</div>
+	
 	
 
 

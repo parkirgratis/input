@@ -607,9 +607,4 @@ button:focus {
   transform: translateY(-50%); /* Untuk benar-benar menengah secara vertikal */
 }
 
-.custom-button {
-  border: none !important; /* Remove any border */
-  border-bottom: 0 !important; /* Ensure no bottom border */
-  box-shadow: none !important; /* Remove shadow if necessary */
-}
 

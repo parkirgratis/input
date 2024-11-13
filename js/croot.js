@@ -120,6 +120,15 @@ document.addEventListener('DOMContentLoaded', function() {
         const facilities = document.getElementById('fasilitas').value;
         const imageInput = document.getElementById('imageInputSidebar');
 
+        if (!captchaVerified) {
+            Swal.fire({
+                icon: "warning",
+                title: "Verifikasi Captcha Gagal",
+                text: "Silakan verifikasi ulang captcha terlebih dahulu!"
+            });
+            return;
+        }
+
         if (imageInput.files.length > 0) {
             const image = imageInput.files[0].name; // Mengambil hanya nama file
 

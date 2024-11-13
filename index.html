@@ -14,7 +14,6 @@
 <body>
 
 	<div id="isi"></div>
-	<script src="js/croot.js" type="module"></script>
 	<nav
 		class="fixed top-0 z-20 backdrop-blur-lg bg-black/40 flex items-center md:justify-between sm:justify-end justify-end p-2 w-full h-16">
 		<div>
@@ -117,7 +116,10 @@
 
 			<input type="file" class="ring-2" id="imageInputSidebar" name="gambar" accept="image/*" required><br><br>
 
-			<div class="cf-turnstile" data-sitekey="0x4AAAAAAAz7--YqI6wtt7jq" data-callback="javascriptCallback"></div>
+			<div style="display: block; flex-flow: row;">
+				<div class="cf-turnstile" data-sitekey="0x4AAAAAAAz7--YqI6wtt7jq" data-size="flexible"
+					data-callback="verifyCaptcha"></div>
+			</div>
 
 			<input type="hidden" id="long" name="long" value="">
 			<input type="hidden" id="lat" name="lat" value="">
@@ -156,8 +158,15 @@
 			<!-- <button id="closeDataPopup" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Tutup</button> -->
 		</div>
 	</div>
-
+	<script src="js/croot.js" type="module"></script>
 	<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstileCallback" defer></script>
+	<script>
+		let captchaVerified = false;
+
+		function verifyCaptcha() {
+			captchaVerified = true;
+		}
+	</script>
 </body>
 
 </html>

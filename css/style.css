@@ -231,7 +231,7 @@ body {
   position: fixed;
   left: 0;
   top: 0; 
-  width: 300px;
+  width: 340px;
   height: 100%; 
   background-color: rgba(0, 0, 0, 0.6);
   z-index: 1000;

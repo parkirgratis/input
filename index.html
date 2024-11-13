@@ -22,52 +22,30 @@
 				<img src="../../img/logo.png" width="50" height="24">
 			</a>
 		</div>
-		<span class="flex gap-4 justify-center md:ml-auto md:pr-10 items-center">
-
-			<details class="md:hidden">
-				<summary class="text-white cursor-pointer desc">Menu</summary>
-
-				<div class=" flex-row bg-black/40  ">
-					<a href="https://parkirgratis.if.co.id/">
-						<button class="custom-button desc hover:border-b-[#4DA6FF] hover:border-x-[#4DA6FF] transition px-4 py-2 text-white text-sm flex items-center hover:shadow-lg hover:shadow-[#4D4DFF]/50">
-							<span>
-								<img src="../../img/about.png" class="nav-logo" alt="" width="15px">
-							</span>&nbsp;HOME
-						</button>
-					</a>
-					<a href="#" id="showDataButton">
-						<button class="custom-button desc hover:border-b-[#4DA6FF] hover:border-x-[#4DA6FF] transition px-4 py-2 text-white text-sm flex items-center hover:shadow-lg hover:shadow-[#4D4DFF]/50">
-							<span>
-								<img src="../../img/data.png" class="nav-logo" alt="" width="15px">
-							</span>&nbsp;TAMPILKAN DATA
-						</button>
-					</a>
-					<a href="https://parkirgratis.if.co.id/pages/aboutus/aboutus.html">
-						<button class="custom-button desc hover:border-b-[#4DA6FF] hover:border-x-[#4DA6FF] transition px-4 py-2 text-white text-sm flex items-center hover:shadow-lg hover:shadow-[#4D4DFF]/50">
-							<span>
-								<img src="../../img/aboutus.png" class="nav-logo" alt="" width="15px">
-							</span>&nbsp;ABOUT US
-						</button>
-					</a>
-					<a href="https://parkirgratis.if.co.id/pages/login/login.html">
-						<button class="desc bg-gray-700 transition mt-4 px-2 py-1 text-white text-sm flex justify-center items-center ml-auto hover:shadow-xl hover:shadow-[#4D4DFF]/50 rounded-lg hover:bg-sky-500 hover:text-black">
-
-					<a href="../login/login.html">
-						<button class="custom-button desc bg-gray-700 transition px-4 py-2 text-white text-sm flex items-center hover:shadow-xl hover:shadow-[#4D4DFF]/50 rounded-lg hover:bg-sky-500 hover:text-black">
-
-							<span>
-								<img src="https://icons.veryicon.com/png/o/miscellaneous/two-color-icon-library/user-286.png" class="grayscale rounded-full" alt="" width="40px">
-							</span>
-							<div class="flex flex-col text-left pl-2">
-								<h2 class="text-sm hidden md:block title">Are you admin?</h2>
-								<p class="text-sm font-semibold text-sky-500 hidden md:block desc">Login Here</p>
-								<p class="text-sm md:hidden desc">LOGIN</p>
-							</div>
-						</button>
-					</a>
-				</div>
-
+		<div class="relative flex gap-4 justify-center md:ml-auto md:pr-10 items-center">
+			<details class="md:hidden relative">
+			  <summary class="text-white cursor-pointer text-base py-2 px-4 bg-gray-800 rounded-md">Menu</summary>
+			  <div class="absolute top-full -left-10 flex flex-col bg-black/50 p-4 rounded-md mt-1 space-y-2 z-10"> <!-- Menggunakan -left-1 untuk sedikit menggeser ke kiri -->
+				<a href="https://parkirgratis.if.co.id/">
+				  <button class="w-full flex items-center justify-center text-white text-sm px-4 py-2 bg-gray-700 rounded-md hover:border-b-2 hover:border-blue-400 transition duration-200 hover:shadow-lg hover:shadow-blue-400/50">HOME</button>
+				</a>
+				<a href="#" id="showDataButton">
+				  <button class="w-full flex items-center justify-center text-white text-sm px-4 py-2 bg-gray-700 rounded-md hover:border-b-2 hover:border-blue-400 transition duration-200 hover:shadow-lg hover:shadow-blue-400/50">TAMPILKAN DATA</button>
+				</a>
+				<a href="https://parkirgratis.if.co.id/pages/aboutus/aboutus.html">
+				  <button class="w-full flex items-center justify-center text-white text-sm px-4 py-2 bg-gray-700 rounded-md hover:border-b-2 hover:border-blue-400 transition duration-200 hover:shadow-lg hover:shadow-blue-400/50">ABOUT US</button>
+				</a>
+				<a href="https://parkirgratis.if.co.id/pages/login/login.html">
+				  <button class="w-full flex items-center justify-center text-white text-sm px-4 py-2 bg-gray-800 rounded-lg hover:bg-sky-500 hover:text-black transition duration-200">LOGIN</button>
+				</a>
+			  </div>
 			</details>
+		  </div>
+		  
+		  
+		  
+			  
+			  
 
 			<a href="https://parkirgratis.if.co.id/" class="hidden md:block">
 				<button
@@ -79,7 +57,7 @@
 			</a>
 
 
-			<a href="#" id="showDataButton" class="hidden md:inline-flex">
+			<a id="showDataButton" class="hidden md:inline-flex">
 				<button
 					class="desc border-2 border-transparent border-b-white shadow-transparent hover:border-b-[#4DA6FF] hover:border-x-[#4DA6FF] transition px-4 py-2 text-white text-sm inline-flex items-center hover:shadow-lg hover:shadow-[#4D4DFF]/50">
 					<span>

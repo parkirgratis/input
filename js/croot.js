@@ -16,6 +16,8 @@ import { addCSS } from "https://cdn.jsdelivr.net/gh/jscroot/lib@0.0.9/element.js
 
 addCSS("https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.css");
 
+let currentMarker;
+
 function enableSwipeUp(element) {
     let startY, currentY, isDragging = false;
 
@@ -95,16 +97,38 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Tambahkan event listener untuk menangkap klik pada peta
     map.on('click', function(evt) {
-        // Dapatkan koordinat dari event klik
-        let tile = evt.coordinate;
-        let coordinate = toLonLat(tile); // Mengonversi koordinat ke lon dan lat
+        const tile = evt.coordinate;
+        const coordinate = toLonLat(tile);
 
-        // Simpan koordinat ke elemen input
-        setValue('long', coordinate[0]); // Menyimpan longitude
-        setValue('lat', coordinate[1]);  // Menyimpan latitude
+        if (currentMarker) {
+            map.removeLayer(currentMarker);
+        }
 
-        // Anda bisa menambahkan log atau notifikasi jika diperlukan
-        console.log('Koordinat disimpan:', coordinate);
+        const marker = new ol.Feature({
+            geometry: new ol.geom.Point(tile)
+        });
+
+        marker.setStyle(new ol.style.Style({
+            image: new ol.style.Icon({
+                src: '../img/marked_loc.gif',
+                scale: 0.1
+            })
+        }));
+
+        const vectorSource = new ol.source.Vector({
+            features: [marker]
+        });
+
+        currentMarker = new ol.layer.Vector({
+            source: vectorSource
+        });
+
+        map.addLayer(currentMarker);
+
+        setValue('long', coordinate[0]);
+        setValue('lat', coordinate[1]);
+
+        console.log('Coordinates saved:', coordinate);
     });
 
     document.getElementById('insertmarkerbutton').addEventListener('click', function() {

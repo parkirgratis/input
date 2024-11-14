@@ -7,6 +7,8 @@
 	<title>Parkir Gratis Bandung</title>
 	<link rel="stylesheet" href="./css/style.css" type="text/css" />
 	<link rel="shortcut icon" type="image/x-icon" href="logo.ico" />
+	<script src="https://cdn.jsdelivr.net/npm/ol@latest/dist/ol.js"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@latest/ol.css">
 	<script src="https://cdn.tailwindcss.com"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
@@ -52,28 +54,27 @@
 			</details>
 		</div>
 
-
 		<a href="https://parkirgratis.if.co.id/" class="hidden md:block">
 			<button
-				class="custom-button desc hover:border-b-[#4DA6FF] hover:border-x-[#4DA6FF] transition px-4 py-2 text-white text-sm flex items-center hover:shadow-lg hover:shadow-[#4D4DFF]/50">
+				class="desc border-2 border-transparent border-b-white shadow-transparent hover:border-b-[#4DA6FF] hover:border-x-[#4DA6FF] transition px-2 py-1 text-white text-sm flex items-center ml-auto hover:shadow-lg hover:shadow-[#4D4DFF]/50">
 				<span>
-					<img src="../../img/house-32.jpg" class="nav-logo" alt="" width="15px">
+					<img src="../../img/about.png" class="nav-logo" alt="" width="15px">
 				</span>&nbsp;HOME
 			</button>
 		</a>
 
 		<a id="showDataButton" class="hidden md:inline-flex">
 			<button
-				class="custom-button desc hover:border-b-[#4DA6FF] hover:border-x-[#4DA6FF] transition px-4 py-2 text-white text-sm flex items-center hover:shadow-lg hover:shadow-[#4D4DFF]/50">
+				class="desc border-2 border-transparent border-b-white shadow-transparent hover:border-b-[#4DA6FF] hover:border-x-[#4DA6FF] transition px-4 py-2 text-white text-sm inline-flex items-center hover:shadow-lg hover:shadow-[#4D4DFF]/50">
 				<span>
-					<img src="../../img/datatempat.png" class="nav-logo" alt="" width="15px">
+					<img src="../../img/data.png" class="nav-logo" alt="" width="15px">
 				</span>&nbsp;TAMPILKAN DATA
 			</button>
 		</a>
 
 		<a href="https://parkirgratis.if.co.id/pages/aboutus/aboutus.html" class="md:block sm:block hidden">
 			<button
-				class="custom-button desc hover:border-b-[#4DA6FF] hover:border-x-[#4DA6FF] transition px-4 py-2 text-white text-sm flex items-center hover:shadow-lg hover:shadow-[#4D4DFF]/50">
+				class="desc border-2 border-transparent border-b-white shadow-transparent hover:border-b-[#4DA6FF] hover:border-x-[#4DA6FF] transition px-2 py-1 text-white text-sm flex items-center ml-auto hover:shadow-lg hover:shadow-[#4DA6FF]/50">
 				<span>
 					<img src="../../img/about.png" class="nav-logo" alt="" width="15px">
 				</span>&nbsp;ABOUT US
@@ -118,9 +119,9 @@
 				required><br>
 
 			<label for="lokasi" class="text-gray-600 font-semibold">Foto pratinjau</label>
-			<input type="file" class="ring-2" id="imageInputSidebar" name="gambar" accept="image/*" required><br><br>
+			<input type="file" class="ring-2" id="imageInputSidebar" name="gambar" accept="image/*" required><br>
 
-			<div style="display: block; flex-flow: row;">
+			<div style="display: block; flex-flow: row;" class="pt-3">
 				<div class="cf-turnstile" data-sitekey="0x4AAAAAAAz7--YqI6wtt7jq" data-size="flexible"
 					data-callback="verifyCaptcha"></div>
 			</div>

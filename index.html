@@ -23,11 +23,14 @@
 				<img src="../../img/logo.png" width="50" height="24">
 			</a>
 		</div>
+		<span class=" flex items-center  text-white  ">
+			INPUT DATA TEMPAT PARKIR DENGAN KLIK MAP
+		</span>
 		<div class="relative flex gap-4 justify-center md:ml-auto md:pr-10 items-center">
 
 			<details class="md:hidden relative">
 				<summary class="text-white cursor-pointer text-base py-2 px-4 bg-gray-800 rounded-md">Menu</summary>
-				<div class="absolute top-full -left-10 flex flex-col bg-black/50 p-4 rounded-md mt-1 space-y-2 z-10">
+				<div class="absolute top-full -left-20 flex flex-col bg-black/50 p-4 rounded-md mt-1 space-y-2 z-10">
 
 					<div class="mb-4 flex justify-center items-center">
 						<img src="../../img/logo.png" width="50" height="24" alt="Logo">
@@ -54,32 +57,35 @@
 			</details>
 		</div>
 
-		<a href="https://parkirgratis.if.co.id/" class="hidden md:block">
-			<button
-				class="desc border-2 border-transparent border-b-white shadow-transparent hover:border-b-[#4DA6FF] hover:border-x-[#4DA6FF] transition px-2 py-1 text-white text-sm flex items-center ml-auto hover:shadow-lg hover:shadow-[#4D4DFF]/50">
-				<span>
-					<img src="../../img/about.png" class="nav-logo" alt="" width="15px">
-				</span>&nbsp;HOME
-			</button>
-		</a>
 
-		<a id="showDataButton" class="hidden md:inline-flex">
-			<button
-				class="desc border-2 border-transparent border-b-white shadow-transparent hover:border-b-[#4DA6FF] hover:border-x-[#4DA6FF] transition px-4 py-2 text-white text-sm inline-flex items-center hover:shadow-lg hover:shadow-[#4D4DFF]/50">
-				<span>
-					<img src="../../img/data.png" class="nav-logo" alt="" width="15px">
-				</span>&nbsp;TAMPILKAN DATA
+		<a href="https://parkirgratis.if.co.id/" class="hidden md:flex items-center">
+			<button class="custom-button desc transition px-4 py-2 text-white text-sm flex items-center hover:shadow-lg hover:shadow-[#4D4DFF]/25">
+				<span class="px-2 py-1 nav-title border-2 border-transparent border-b-white shadow-transparent hover:border-b-[#4DA6FF] hover:border-x-[#4DA6FF] transition px-2 text-white text-sm flex items-center ml-auto hover:shadow-lg hover:shadow-[#4D4DFF]/50">
+					<img src="../../img/" class="nav-logo mr-1" alt="" width="15px">
+					HOME
+				</span>
 			</button>
 		</a>
-
-		<a href="https://parkirgratis.if.co.id/pages/aboutus/aboutus.html" class="md:block sm:block hidden">
-			<button
-				class="desc border-2 border-transparent border-b-white shadow-transparent hover:border-b-[#4DA6FF] hover:border-x-[#4DA6FF] transition px-2 py-1 text-white text-sm flex items-center ml-auto hover:shadow-lg hover:shadow-[#4DA6FF]/50">
-				<span>
-					<img src="../../img/about.png" class="nav-logo" alt="" width="15px">
-				</span>&nbsp;ABOUT US
+		
+		<a id="showDataButton" class="hidden md:flex items-center">
+			<button class="custom-button desc transition px-4 py-2 text-white text-sm flex items-center hover:shadow-lg hover:shadow-[#4D4DFF]/50">
+				<span class="px-2 py-1 nav-title border-2 border-transparent border-b-white shadow-transparent hover:border-b-[#4DA6FF] hover:border-x-[#4DA6FF] transition px-2 text-white text-sm flex items-center ml-auto hover:shadow-lg hover:shadow-[#4D4DFF]/50">
+					<img src="../../img/" class="nav-logo mr-1" alt="" width="15px">
+					TAMPILKAN DATA
+				</span>
 			</button>
 		</a>
+		
+		<a href="https://parkirgratis.if.co.id/pages/aboutus/aboutus.html" class="hidden md:flex items-center">
+			<button class="custom-button desc transition px-4 py-2 text-white text-sm flex items-center hover:shadow-lg hover:shadow-[#4D4DFF]/50">
+				<span class="px-2 py-1 nav-title border-2 border-transparent border-b-white shadow-transparent hover:border-b-[#4DA6FF] hover:border-x-[#4DA6FF] transition px-2 text-white text-sm flex items-center ml-auto hover:shadow-lg hover:shadow-[#4D4DFF]/50">
+					<img src="../../img/about.png" class="nav-logo mr-1" alt="" width="15px">
+					ABOUT US
+				</span>
+			</button>
+		</a>
+		
+		
 
 		<a href="https://parkirgratis.if.co.id/pages/login/login.html" class="hidden md:block">
 			<button
@@ -141,6 +147,8 @@
 			</div>
 		</div>
 	</div>
+
+	
 
 	<div id="dataSidebar" class="sidebar" style="display: none;">
 		<div class="sidebar-title">Data Tempat Parkir</div>

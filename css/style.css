@@ -146,7 +146,7 @@ body {
 }
 
 .navbar-links:hover {
-  color: #63b3ed; /* Warna teks hover */
+  color: #63b3ed; 
   border-radius: 5px;
 }
 

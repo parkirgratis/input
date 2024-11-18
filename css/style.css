@@ -243,7 +243,10 @@ body {
   transition: transform 0.3s ease, opacity 0.3s ease;
   background-image: url('https://static1.howtogeekimages.com/wordpress/wp-content/uploads/2022/08/Google-Maps-icon-on-map.png');
   background-size: cover;
-
+  display: block; /* Pastikan selalu tampil */
+  transform: translateX(0);
+  opacity: 1;
+  
 }
 
 
@@ -528,5 +531,11 @@ button:focus {
 .navbar-menu {
   display: flex;
   gap: 10px; /* Adjust spacing between items */
+}
+
+.sidebar {
+  display: block; /* Pastikan selalu tampil */
+  transform: translateX(0);
+  opacity: 1;
 }
 

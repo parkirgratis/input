@@ -405,20 +405,20 @@ body {
 }
 
 .data-popup {
-  position: fixed;
-  left: 320px; /* Sesuaikan dengan lebar sidebar */
-  top: 100px;
-  width: 250px; /* Ubah lebar sesuai kebutuhan */
-  height: auto; /* Ubah tinggi sesuai kebutuhan */
-  background-color: #f7fafc;
-  box-shadow: -2px 0 5px rgba(0,0,0,0.1);
-  padding: 15px; /* Kurangi padding */
-  z-index: 1000;
-  overflow-y: auto;
   display: none;
-  transition: transform 0.3s ease, opacity 0.3s ease;
+  position: fixed;
+  left: 320px;
+  top: 100px;
+  width: 250px;
+  height: auto;
+  background-color: #f7fafc;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  z-index: 2000;
+  overflow-y: auto;
   transform: translateX(100%);
   opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
 .data-popup.active {
@@ -514,7 +514,7 @@ button:focus {
     width: 100%; /* Sesuaikan lebar dengan sidebar */
     height: 50%; /* Sesuaikan tinggi dengan sidebar */
     background-color: white;
-    z-index: 1000;
+    z-index: 2000;
     overflow-y: auto;
     transform: translateY(50%);
     transition: transform 0.3s ease, height 0.3s ease;

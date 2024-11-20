@@ -296,7 +296,6 @@ body {
 }
 
 .sidebar button {
-  background-color: #2f58ca; /* Warna tombol yang lebih cerah */
   color: white;
   padding: 10px 20px; /* Tambahkan padding */
   margin: 10px;
@@ -305,11 +304,6 @@ body {
   cursor: pointer;
   transition: background-color 0.3s ease; /* Tambahkan transisi */
 }
-
-.sidebar button:hover {
-  background-color: #2b6cb0; /* Warna hover tombol */
-}
-
 
 /* button tambah data */
 #placeForm {

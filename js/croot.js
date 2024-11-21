@@ -110,8 +110,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
         marker.setStyle(new ol.style.Style({
             image: new ol.style.Icon({
-                src: '../img/marked_loc.gif',
-                scale: 0.1
+                src: 'https://cdn4.iconfinder.com/data/icons/small-n-flat/24/map-marker-512.png',
+                scale: 0.05
             })
         }));
 

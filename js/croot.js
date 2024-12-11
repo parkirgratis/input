@@ -30,7 +30,7 @@ function enableSwipeUp(element) {
         if (!isDragging) return;
         currentY = e.touches[0].clientY;
         const translateY = Math.max(0, currentY - startY);
-        element.style.transform = `translateY(${translateY}px)`;
+        element.style.transform = `translateY(${translateY}px) `;
     });
 
     element.addEventListener('touchend', () => {
@@ -55,7 +55,7 @@ function enableSwipeDownToHide(element) {
         if (!isDragging) return;
         currentY = e.touches[0].clientY;
         const translateY = Math.max(0, currentY - startY);
-        element.style.transform = `translateY(${translateY}px)`;
+        element.style.transform = `translateY(${translateY}px) `;
     });
 
     element.addEventListener('touchend', () => {
@@ -78,17 +78,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const sidebar = document.getElementById('sidebar');
     const dataSidebar = document.getElementById('dataSidebar');
     const dataPopup = document.getElementById('dataPopup');
-    // const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
     const navbarMenu = document.querySelector('.navbar-menu');
 
     map.getTargetElement().addEventListener('click', function() {
         sidebar.classList.toggle('active');
         dataSidebar.style.display = 'none';
     });
-
-    // mobileMenuToggle.addEventListener('click', function() {
-    //     navbarMenu.classList.toggle('active');
-    // });
 
     // Pastikan sidebar tidak menutup ketika diklik
     sidebar.addEventListener('click', function(event) {
@@ -238,12 +233,23 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     const showDataButton = document.getElementById('showDataButton');
+    const showDataButtondc = document.getElementById('showDataButtondc');
     const closeDataSidebar = document.getElementById('closeDataSidebar');
     const dataSidebarContent = document.getElementById('dataSidebar-content');
 
     showDataButton.addEventListener('click', function(event) {
         event.preventDefault();
         console.log('Tombol TAMPILKAN DATA ditekan');
+        dataSidebar.style.display = 'block';
+
+        if (window.innerWidth <= 768) { 
+            navbarMenu.classList.remove('active');
+        }
+    });
+
+    showDataButtondc.addEventListener('click', function(event) {
+        event.preventDefault();
+        console.log('Tombol TAMPILKAN DATA (dc) ditekan');
         dataSidebar.style.display = 'block';
 
         if (window.innerWidth <= 768) { 
@@ -480,9 +486,6 @@ function myFunction() {
         if (openDropdown.classList.contains("show")) {
           openDropdown.classList.remove("show");
         }
-      }
-    }
-  };
-
-  
-  
+      }
+    }
+  };

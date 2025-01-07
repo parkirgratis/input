@@ -37,6 +37,12 @@ function enableSwipeUp(element) {
     const translateY = Math.max(0, currentY - startY);
     element.style.transform = `translateY(${translateY}px)`;
   });
+    element.addEventListener('touchmove', (e) => {
+        if (!isDragging) return;
+        currentY = e.touches[0].clientY;
+        const translateY = Math.max(0, currentY - startY);
+        element.style.transform = `translateY(${translateY}px) `;
+    });
 
   element.addEventListener("touchend", () => {
     isDragging = false;

@@ -1,148 +1,397 @@
-import Swal from "https://cdn.jsdelivr.net/npm/sweetalert2@11/src/sweetalert2.js";
-import { addCSS } from "https://cdn.jsdelivr.net/gh/jscroot/lib@0.0.9/element.js";
+import {map} from './config/peta.js';
+// import {onClosePopupClick,onDeleteMarkerClick,onMapClick,onMapPointerMove,disposePopover} from './controller/popup.js';
+import { onClick, setValue } from 'https://cdn.jsdelivr.net/gh/jscroot/element@0.1.7/croot.js';
+import { createMarker } from './controller/marker.js';
+import { fromLonLat, toLonLat } from 'https://cdn.skypack.dev/ol/proj.js';
 import {
     setInner,
     show,
     hide,
+    getValue,
     getFileSize
-} from "https://cdn.jsdelivr.net/gh/jscroot/element@0.0.6/croot.js";
+  } from "https://cdn.jsdelivr.net/gh/jscroot/element@0.0.6/croot.js";
+import { postFile } from "https://cdn.jsdelivr.net/gh/jscroot/api@0.0.2/croot.js";
+import Swal from "https://cdn.jsdelivr.net/npm/sweetalert2@11/src/sweetalert2.js";
+import { addCSS } from "https://cdn.jsdelivr.net/gh/jscroot/lib@0.0.9/element.js";
 
-// Add SweetAlert2 CSS
 addCSS("https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.css");
 
-document.addEventListener("DOMContentLoaded", function() {
-    // Cancel Button
-    const cancelButton = document.getElementById("cancelButton");
-    if (cancelButton) {
-        cancelButton.addEventListener("click", function() {
+let currentMarker;
+
+function enableSwipeUp(element) {
+    let startY, currentY, isDragging = false;
+
+    element.addEventListener('touchstart', (e) => {
+        startY = e.touches[0].clientY;
+        isDragging = true;
+    });
+
+    element.addEventListener('touchmove', (e) => {
+        if (!isDragging) return;
+        currentY = e.touches[0].clientY;
+        const translateY = Math.max(0, currentY - startY);
+        element.style.transform = `translateY(${translateY}px)`;
+    });
+
+    element.addEventListener('touchend', () => {
+        isDragging = false;
+        if (currentY - startY < -50) {
+            element.classList.add('active');
+        } else {
+            element.style.transform = 'translateY(50%)';
+        }
+    });
+}
+
+function enableSwipeDownToHide(element) {
+    let startY, currentY, isDragging = false, swipeCount = 0;
+
+    element.addEventListener('touchstart', (e) => {
+        startY = e.touches[0].clientY;
+        isDragging = true;
+    });
+
+    element.addEventListener('touchmove', (e) => {
+        if (!isDragging) return;
+        currentY = e.touches[0].clientY;
+        const translateY = Math.max(0, currentY - startY);
+        element.style.transform = `translateY(${translateY}px)`;
+    });
+
+    element.addEventListener('touchend', () => {
+        isDragging = false;
+        const isAtTop = element.scrollTop === 0; // Cek apakah sudah di bagian atas
+
+        if (currentY - startY > 50 && isAtTop) { // Hanya izinkan swipe down jika di bagian atas
+            swipeCount++;
+            if (swipeCount >= 2) {
+                element.style.display = 'none';
+                swipeCount = 0; // Reset swipe count
+            }
+        } else {
+            element.style.transform = 'translateY(0)';
+        }
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const sidebar = document.getElementById('sidebar');
+    const dataSidebar = document.getElementById('dataSidebar');
+    const dataPopup = document.getElementById('dataPopup');
+    // const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    const navbarMenu = document.querySelector('.navbar-menu');
+
+    map.getTargetElement().addEventListener('click', function() {
+        sidebar.classList.toggle('active');
+        dataSidebar.style.display = 'none';
+    });
+
+    // mobileMenuToggle.addEventListener('click', function() {
+    //     navbarMenu.classList.toggle('active');
+    // });
+
+    // Pastikan sidebar tidak menutup ketika diklik
+    sidebar.addEventListener('click', function(event) {
+        event.stopPropagation();
+    });
+
+    // Tambahkan event listener untuk menangkap klik pada peta
+    map.on('click', function(evt) {
+        const tile = evt.coordinate;
+        const coordinate = toLonLat(tile);
+
+        if (currentMarker) {
+            map.removeLayer(currentMarker);
+        }
+
+        const marker = new ol.Feature({
+            geometry: new ol.geom.Point(tile)
+        });
+
+        marker.setStyle(new ol.style.Style({
+            image: new ol.style.Icon({
+                src: 'https://cdn4.iconfinder.com/data/icons/small-n-flat/24/map-marker-512.png',
+                scale: 0.05
+            })
+        }));
+
+        const vectorSource = new ol.source.Vector({
+            features: [marker]
+        });
+
+        currentMarker = new ol.layer.Vector({
+            source: vectorSource
+        });
+
+        map.addLayer(currentMarker);
+
+        setValue('long', coordinate[0]);
+        setValue('lat', coordinate[1]);
+
+        console.log('Coordinates saved:', coordinate);
+    });
+
+    document.getElementById('insertmarkerbutton').addEventListener('click', function() {
+        console.log('Tombol insertmarkerbutton ditekan'); 
+        uploadImage(); 
+
+        const lat = parseFloat(document.getElementById('lat').value);
+        const lon = parseFloat(document.getElementById('long').value);
+
+        // Mengambil data dari input di sidebar
+        const placeName = document.getElementById('namatempat').value;
+        const location = document.getElementById('lokasi').value;
+        const facilities = document.getElementById('fasilitas').value;
+        const imageInput = document.getElementById('imageInputSidebar');
+
+        if (!captchaVerified) {
             Swal.fire({
-                title: "Are you sure?",
-                text: "The change won't be saved",
-                showDenyButton: true,
-                confirmButtonText: "Yes",
-                denyButtonText: "Nevermind",
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    localStorage.setItem("cancelToast", "true");
-                    window.location.href = "index.html";
-                }
+                icon: "warning",
+                title: "Verifikasi Captcha Gagal",
+                text: "Silakan verifikasi ulang captcha terlebih dahulu!"
             });
-        });
-    }
+            return;
+        }
 
-    // Form Submit for Petapedia
-    const form = document.getElementById("locationForm");
-    if (form) {
-        form.addEventListener("submit", function(event) {
-            event.preventDefault();
+        if (imageInput.files.length > 0) {
+            const image = imageInput.files[0].name; 
 
-            const token = getCookie("login");
-            const longitude = parseFloat(document.getElementById("long").value);
-            const latitude = parseFloat(document.getElementById("lat").value);
-
-            if (isNaN(longitude) || isNaN(latitude) || longitude < -180 || longitude > 180 || latitude < -90 || latitude > 90) {
-                Swal.fire("Error", "Please enter valid longitude and latitude values within valid ranges.", "error");
-                return;
-            }
-
-            const requestData = { long: longitude, lat: latitude };
-
-            fetch("https://asia-southeast2-awangga.cloudfunctions.net/petabackend/data/gis/lokasi", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "login": token,
-                },
-                body: JSON.stringify(requestData),
-            }).then((response) => {
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    return response.json().then((error) => {
-                        Swal.fire("Error", `Failed to fetch data: ${JSON.stringify(error)}`, "error");
-                    });
-                }
-            }).then((result) => {
-                if (result) {
-                    document.getElementById("province").value = result.province || "";
-                    document.getElementById("district").value = result.district || "";
-                    document.getElementById("sub_district").value = result.sub_district || "";
-                    document.getElementById("village").value = result.village || "";
-                    Swal.fire("Success", "Data successfully fetched from GIS.", "success");
-                }
-            }).catch((error) => {
-                Swal.fire("Error", "An unexpected error occurred. Please try again.", "error");
-            });
-        });
-    }
-
-    // Save Button for Region Data
-    const saveButton = document.getElementById("saveButton");
-    if (saveButton) {
-        saveButton.addEventListener("click", function() {
-            uploadImage();
-
-            const province = document.getElementById("province").value;
-            const district = document.getElementById("district").value;
-            const sub_district = document.getElementById("sub_district").value;
-            const village = document.getElementById("village").value;
-            const lat = parseFloat(document.getElementById("lat").value);
-            const lon = parseFloat(document.getElementById("long").value);
-            const nama_tempat = document.getElementById("nama_tempat").value;
-            const lokasi = document.getElementById("lokasi").value;
-            const fasilitas = document.getElementById("fasilitas").value;
-            const imageInput = document.getElementById("gambar");
-
-            if (!province || !district || !sub_district || !village || isNaN(lon) || isNaN(lat) || !nama_tempat || !lokasi || !fasilitas) {
-                Swal.fire("Error", "All fields are required.", "error");
-                return;
-            }
-
-            const regionData = {
-                province: province,
-                district: district,
-                sub_district: sub_district,
-                village: village,
+            
+            const data = {
+                nama_tempat: placeName,
+                lokasi: location,
+                fasilitas: facilities,
                 lat: lat,
                 lon: lon,
-                nama_tempat: nama_tempat,
-                lokasi: lokasi,
-                fasilitas: fasilitas,
-                imageInput: imageInput
+                gambar: image
             };
 
-            fetch("https://asia-southeast2-awangga.cloudfunctions.net/parkirgratis/data/gis/lokasi", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(regionData),
-            }).then((response) => {
-                if (response.ok) {
-                    return response.json();
+            console.log('Data yang akan dikirim:', data);
+           
+            fetch('https://asia-southeast2-awangga.cloudfunctions.net/parkirgratis/tempat-parkir', { 
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    Swal.fire({
+                        icon: "success",
+                        title: "Berhasil",
+                        text: "Data dan koordinat berhasil disimpan!"
+                    });
+                    // Menambahkan koordinat ke database
+                    tambahKoordinatKeDatabase(lon, lat);
                 } else {
-                    Swal.fire("Error", "Failed to save data.", "error");
+                    Swal.fire({
+                        icon: "error",
+                        title: "Gagal",
+                        text: "Gagal menyimpan data"
+                    });
                 }
-            }).then((result) => {
-                if (result) {
-                    Swal.fire("Success", `Data successfully saved: ${JSON.stringify(result)}`, "success");
-                }
-            }).catch((error) => {
-                Swal.fire("Error", `An error occurred: ${error.message}`, "error");
+            })
+            .catch(error => {
+                console.error('Error:', error);
             });
+
+            // Prepare coordinates data for koordinat endpoint
+            const coordData = {
+                markers: [
+                    [lon, lat]
+                ]
+            };
+
+            fetch('https://asia-southeast2-awangga.cloudfunctions.net/parkirgratis/koordinat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(coordData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                Swal.fire({
+                    icon: "success",
+                    title: "Berhasil",
+                    text: "Data dan Koordinat berhasil ditambahkan!"
+                });
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                Swal.fire({
+                    icon: "error",
+                    title: "Kesalahan",
+                    text: "Gagal menambahkan tempat atau menyimpan koordinat!"
+                });
+            });
+        } else {
+            Swal.fire({
+                icon: "error",
+                title: "Gagal",
+                text: "Silakan pilih file gambar terlebih dahulu"
+            });
+        }
+    });
+
+    const showDataButton = document.getElementById('showDataButton');
+    const closeDataSidebar = document.getElementById('closeDataSidebar');
+    const dataSidebarContent = document.getElementById('dataSidebar-content');
+
+    showDataButton.addEventListener('click', function(event) {
+        event.preventDefault();
+        console.log('Tombol TAMPILKAN DATA ditekan');
+        dataSidebar.style.display = 'block';
+
+        if (window.innerWidth <= 768) { 
+            navbarMenu.classList.remove('active');
+        }
+    });
+
+    closeDataSidebar.addEventListener('click', function() {
+        console.log('Tombol Kembali ditekan');
+        dataSidebar.style.display = 'none';
+    });
+
+    function fetchDataAndRender() {
+        fetch('https://asia-southeast2-awangga.cloudfunctions.net/parkirgratis/data/lokasi')
+            .then(response => response.json())
+            .then(data => {
+                if (!Array.isArray(data)) {
+                    console.error('Data lokasi bukan array:', data);
+                    return;
+                }
+                
+                // Dapatkan lokasi pengguna dan urutkan data berdasarkan jarak
+                getUserLocation((position) => {
+                    const userLat = position.coords.latitude;
+                    const userLon = position.coords.longitude;
+                    const sortedData = sortDataByProximity(data, userLat, userLon);
+                    renderDataToSidebar(sortedData);
+                }, () => {
+                    // Jika gagal mendapatkan lokasi, tetap render data tanpa pengurutan
+                    renderDataToSidebar(data);
+                });
+            })
+            .catch(error => console.error('Gagal mengambil data lokasi:', error));
+    }
+
+    function renderDataToSidebar(lokasiData) {
+        dataSidebarContent.innerHTML = ''; 
+        lokasiData.forEach(item => {
+            const itemElement = document.createElement('div');
+            itemElement.className = 'lokasi-item flex items-center gap-2 p-2 border-b';
+
+            itemElement.innerHTML = `
+                <img src="${item.gambar || 'default.jpg'}" alt="${item.nama_tempat || 'Nama Tempat'}" class="w-16 h-16 object-cover rounded">
+                <div>
+                    <h3 class="font-semibold">${item.nama_tempat || 'Nama Tempat'}</h3>
+                    <p>${item.lokasi || 'Lokasi'}</p>
+                    <p>${item.fasilitas || 'Fasilitas'}</p>
+                </div>
+                
+            `;
+
+            itemElement.addEventListener('click', () => {
+                focusOnMarker(item.lon, item.lat);
+                showDataPopup(item);
+            });
+
+            dataSidebarContent.appendChild(itemElement);
         });
     }
 
-    // Image Upload
-    const gambarInput = document.getElementById('gambar');
-    if (gambarInput) {
-        gambarInput.addEventListener("change", function() {
-            uploadImage();
+    function showDataPopup(item) {
+        const dataPopup = document.getElementById('dataPopup');
+        const dataPopupContent = document.getElementById('dataPopup-content');
+
+        dataPopupContent.innerHTML = `
+            <h3 class="text-lg font-bold mb-2">${item.nama_tempat}</h3>
+            <p class="text-sm text-gray-600 mb-1">Lokasi: ${item.lokasi}</p>
+            <p class="text-sm text-gray-600 mb-3">Fasilitas: ${item.fasilitas}</p>
+            <img src="${item.gambar || 'default.jpg'}" alt="${item.nama_tempat}" class="w-full h-auto rounded mb-3">
+            <!-- <button id="closeDataPopup" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Tutup</button> -->
+        `;
+
+        dataPopup.classList.add('active');
+    }
+
+    // document.getElementById('closeDataPopup').addEventListener('click', function() {
+    //     const dataPopup = document.getElementById('dataPopup');
+    //     dataPopup.classList.remove('active');
+    // });
+
+    function focusOnMarker(long, lat) {
+        const view = map.getView(); 
+        const coordinate = fromLonLat([long, lat]);
+        view.animate({
+            center: coordinate,
+            duration: 1000,
+            zoom: 18 
         });
     }
+
+    // Panggil fungsi untuk mengambil dan menampilkan data
+    fetchDataAndRender();
+
+    if (sidebar) enableSwipeUp(sidebar);
+    if (dataSidebar) enableSwipeUp(dataSidebar);
+    if (dataPopup) enableSwipeUp(dataPopup);
+    if (sidebar) enableSwipeDownToHide(sidebar);
+    if (dataSidebar) enableSwipeDownToHide(dataSidebar);
+    if (dataPopup) enableSwipeDownToHide(dataPopup);
 });
 
+// onClick('popup-closer',onClosePopupClick);
+// onClick('insertmarkerbutton',onSubmitMarkerClick);
+// onClick('hapusbutton',onDeleteMarkerClick);
+
+// map.on('click', onMapClick);
+// map.on('pointermove', onMapPointerMove);
+// map.on('movestart', disposePopover);
+
+fetch('https://asia-southeast2-awangga.cloudfunctions.net/parkirgratis/data/marker')
+    .then(response => response.json())
+    .then(data => {
+        if (!Array.isArray(data.markers)) {
+            console.error('Data marker bukan array:', data);
+            return;
+        }
+        console.log('Koordinat Marker:', data.markers);
+        createMapMarkers(data.markers);
+    })
+    .catch(error => console.error('Gagal mengambil data marker:', error));
+
+function createMapMarkers(markerCoords) {
+    const markers = markerCoords.map(coord => createMarker(map, coord));
+
+    markers.forEach((marker, index) => {   
+    });
+}
+
+    
+
+    // document.getElementById('showFormButton').addEventListener('click', function() {
+    //     const form = document.getElementById('placeForm');
+    //     if (form.style.display === 'block') {
+    //         form.style.display = 'none';
+    //     } else {
+    //         form.style.display = 'block';
+    //     }
+    // });
+
+    // const imageInput = document.getElementById('imageInputSidebar');
+    // console.log(imageInput.files);
+
+window.uploadImage = uploadImage;       
+
+const target_url = "https://asia-southeast2-awangga.cloudfunctions.net/parkirgratis/upload/img";
+
 function uploadImage() {
-    const gambar = document.getElementById('gambar');
-    if (!gambar || gambar.files.length === 0) {
+    const imageInput = document.getElementById('imageInputSidebar');
+    if (!imageInput || imageInput.files.length === 0) {
         Swal.fire({
             icon: "error",
             title: "Gagal",
@@ -150,33 +399,89 @@ function uploadImage() {
         });
         return;
     }
-
-    const gambarinput = document.getElementById('gambar');
-    if (gambarinput) {
-        hide("gambar");
+    const inputFileElement = document.getElementById('imageInputSidebar');
+    if (inputFileElement) {
+        hide("imageInputSidebar");
     } else {
-        console.error("Element with ID 'gambar' not found");
+        console.error("Element with ID 'imageInputSidebar' not found");
     }
-
-    let besar = getFileSize("gambar");
+    let besar = getFileSize("imageInputSidebar");
     setInner("isi", besar);
-
-    postFile(target_url, "gambar", "img", renderToHtml);
+    
+    postFile(target_url, "imageInputSidebar", "img", renderToHtml);
 }
 
+// Fungsi untuk menangani respons unggahan
 function renderToHtml(result) {
     console.log(result);
     setInner("isi", "https://parkirgratis.github.io/filegambar/" + result.response);
-    show("gambar");
+    show("imageInputSidebar");
 }
 
-function getCookie(name) {
-    const cookies = document.cookie.split("; ");
-    for (const cookie of cookies) {
-        const [key, value] = cookie.split("=");
-        if (key === name) {
-            return value;
-        }
+
+// // Fungsi untuk menangani kesalahan unggahan
+// function handleUploadError(error) {
+//     console.error(error);
+//     if (error.status === 409) {
+//         alert("File already exists or there is a conflict. Please try again with a different file.");
+//     } else {
+//         alert("An error occurred during the upload. Please try again.");
+//     }
+//     show("imageInputSidebar");
+// }
+// ;
+
+
+document.getElementById('dataSidebar').style.display = 'none';
+
+function getUserLocation(successCallback, errorCallback) {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(successCallback, (error) => {
+            console.error('Gagal mendapatkan lokasi pengguna:', error);
+            if (errorCallback) errorCallback();
+        });
+    } else {
+        console.error('Geolokasi tidak didukung oleh browser ini.');
+        if (errorCallback) errorCallback();
     }
-    return null;
 }
+
+function calculateDistance(lat1, lon1, lat2, lon2) {
+    const R = 6371; // Radius bumi dalam kilometer
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const a = 
+        0.5 - Math.cos(dLat)/2 + 
+        Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
+        (1 - Math.cos(dLon)) / 2;
+
+    return R * 2 * Math.asin(Math.sqrt(a));
+}
+
+function sortDataByProximity(data, userLat, userLon) {
+    return data.sort((a, b) => {
+        const distanceA = calculateDistance(userLat, userLon, a.lat, a.lon);
+        const distanceB = calculateDistance(userLat, userLon, b.lat, b.lon);
+        return distanceA - distanceB;
+    });
+}
+
+function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+  }
+  
+  window.onclick = function (event) {
+    if (!event.target.matches(".dropbtn")) {
+      var dropdowns = document.getElementsByClassName("dropdown-content");
+      var i;
+      for (i = 0; i < dropdowns.length; i++) {
+        var openDropdown = dropdowns[i];
+        if (openDropdown.classList.contains("show")) {
+          openDropdown.classList.remove("show");
+        }
+      }
+    }
+  };
+
+  
+  

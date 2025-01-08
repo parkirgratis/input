@@ -533,3 +533,7 @@ button:focus {
   opacity: 1;
 }
 
+#dataSidebar {
+	display: none;
+	background-color: white; /* Mengatur background menjadi putih */
+}

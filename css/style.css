@@ -283,8 +283,7 @@ body {
 .sidebar input[type="text"],
 .sidebar input[type="file"] {
   width: 100%;
-  padding: 8px; /* Tambahkan padding */
-  margin-bottom: 12px; /* Tambahkan margin */
+  padding: 8px; /* Tambahkan padding */ /* Tambahkan margin */
   border: 2px solid #e5e7eb;
   border-radius: 4px;
   transition: border-color 0.3s ease; /* Tambahkan transisi */
